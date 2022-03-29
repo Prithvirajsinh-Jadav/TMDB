@@ -1,0 +1,97 @@
+/* @import  url("../../assets/fonts/consensus/otf/Consensus-Bold.otf"); */
+
+@font-face {
+    font-family: Consensus;
+    src: url("../../assets/fonts/consensus/otf/Consensus-SemiBold.otf") format("opentype");
+}
+
+
+
+
+.card {
+  /* margin-left: 20px; */
+  width: 150px;
+  min-width: 150px;
+  height: 350px;
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none;
+  margin-top: 0;
+  overflow: visible;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.card img {
+  height: 225px;
+  border: none;
+  border-radius: 8px;
+}
+
+.card h2 {
+  font-size: 1em;
+  margin: 0;
+  width: 100%;
+  word-wrap: normal;
+  overflow-wrap: break-word;
+}
+
+.card h2 a {
+        font-weight: 700;
+  color: #000000 !important;
+}
+
+.card h2 a:hover {
+  color: #01b4e4 !important;
+}
+
+.card p {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+/* #666666 */
+
+.circular_progress_bar{
+    height: 35px;
+    width:35px;
+    position: absolute;
+    margin-left: .6rem;
+    margin-top: -1.2rem;
+}
+
+.circular_progress_bar_data span {
+  color: #ffffff;
+  font-family: "Consensus";
+  font-size: .8rem;
+}
+.circular_progress_bar_data sup {
+  color: #ffffff;
+  font-size:.5rem
+}
+
+.CircularProgressbar{
+    background:#081c22 !important;
+    border-radius: 50%;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill:#fff !important;
+    font-size: 2.5rem  !important;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: #20c575 !important;
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+    stroke: #423d0f !important;
+}
+
+.movie-title{
+    margin-top:1.5rem;
+    margin-left: .6rem;
+}
+

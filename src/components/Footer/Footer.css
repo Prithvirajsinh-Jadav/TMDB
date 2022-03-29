@@ -1,0 +1,97 @@
+footer {
+    width: 100vw;
+    max-width: 100%;
+    padding: 0;
+    background-image: radial-gradient(at 30% top, #031d33 0%, rgba(3, 37, 65, 1) 70%);
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-between;
+    justify-content: center;
+}
+
+footer nav{
+    display: flex;
+    flex-direction: row;
+    padding: 80px 0;
+    font-size:.9rem;
+    color: #fff;
+    justify-content: space-between;
+}
+
+footer nav a{
+    color: #fff;
+}
+
+footer nav div {
+    margin-right: 40px;
+  
+}
+
+.join{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    position: relative;
+    top: -1.8rem;
+    right: 0;
+}
+
+
+.join img {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.join a{
+    
+    position: relative;
+    top: 146px;
+    border-color: #fff;
+    background-color: #fff;
+    color: rgb(1,180,228);
+    font-size: 1.3em;
+    font-weight: bold;
+    word-wrap: break-word;
+    white-space: normal;
+    text-transform: uppercase;
+        border-radius: 5px;
+    padding: 8px 16px;
+    transition: linear .1s;
+
+}
+
+
+footer nav h3 {
+    font-weight: bold;
+    font-size: 1.4em;
+    line-height: 1.4em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+footer div ul{
+    padding: 0;
+
+}
+
+footer nav ul li {
+    line-height: 1.6em;
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+footer nav ul li a {
+    font-size: 1.2em;
+}
+
+footer nav ul li a:hover {
+    color: #fff;
+}

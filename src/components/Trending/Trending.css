@@ -1,0 +1,6 @@
+.trending {
+    background-image: url("../../assets/images/trending-bg.svg");
+    background-position: 50% 200px;
+    background-size: 1300px;
+    background-repeat: no-repeat;
+}

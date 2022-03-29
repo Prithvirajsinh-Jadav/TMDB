@@ -1,0 +1,50 @@
+https://api.themoviedb.org/3/movie/550?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
+
+https://api.themoviedb.org/3/movie/550?api_key=a192f556a534b82d1e2eb625272ad9aa&callback=test
+
+https://api.themoviedb.org/3/movie/157336?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+https://api.themoviedb.org/3/movie/157336/videos?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+https://api.themoviedb.org/3/movie/157336?api_key=a192f556a534b82d1e2eb625272ad9aa&append_to_response=videos
+
+https://api.themoviedb.org/3/movie/157336?api_key=a192f556a534b82d1e2eb625272ad9aa&append_to_response=videos,images
+
+https://api.themoviedb.org/3/search/movie?api_key=a192f556a534b82d1e2eb625272ad9aa&query=Jack+Reacher
+
+https://api.themoviedb.org/3/movie/343611?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+
+https://api.themoviedb.org/3/genre/movie/list?api_key=a192f556a534b82d1e2eb625272ad9aa&language=en-US
+
+https://api.themoviedb.org/3/guest_session/{guest_session_id}/rated/movies?api_key=a192f556a534b82d1e2eb625272ad9aa&language=en-US&sort_by=created_at.asc
+
+https://api.themoviedb.org/3/keyword/500?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+https://api.themoviedb.org/3/network/{network_id}?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+https://api.themoviedb.org/3/movie/popular?api_key=a192f556a534b82d1e2eb625272ad9aa&language=en-US&page=1
+
+
+//used for the trending pages
+https://api.themoviedb.org/3/trending/movie/day?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+
+//discover
+
+https://api.themoviedb.org/3/discover/movie?api_key=a192f556a534b82d1e2eb625272ad9aa&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
+
+//genre
+https://api.themoviedb.org/3/genre/movie/list?api_key=a192f556a534b82d1e2eb625272ad9aa&language=en-US
+
+
+
+//Trending Page 
+
+//all today
+https://api.themoviedb.org/3/trending/all/day?api_key=a192f556a534b82d1e2eb625272ad9aa
+
+//all Week
+https://api.themoviedb.org/3/trending/all/week?api_key=a192f556a534b82d1e2eb625272ad9aa
