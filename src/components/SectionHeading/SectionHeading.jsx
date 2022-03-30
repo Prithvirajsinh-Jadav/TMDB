@@ -1,61 +1,54 @@
 import React from 'react'
 import "./SectionHeading.css"
-import HomePageCard from "../HomePageCard/HomePageCard";
-import { v4 as uuid } from "uuid";
 
 
-const SectionHeading = ({ selectors,section_heading,renderData }) => {
-  console.log(renderData);
+
+const SectionHeading = ({
+  tabData,
+  sectionHeading,
+  selectedTab,
+  setSelectedTab,
+}) => {
+
+  const toggleData = (e) => {
+    e.preventDefault();
+    // console.log(e.currentTarget.id);
+    setSelectedTab(e.currentTarget.id);
+   
+    
+    
+  };
   return (
-    <div className="container  px-0  pt-2">
-      <section className="content_section">
-        <div className="inner_content">
-          <div className="column_header ">
-            <h2 className="section_heading">{section_heading} </h2>
-            <div className="selector_wrap">
-              <div className="selector">
-                {selectors.map((element) => {
-                  return (
-                    <div className="anchor" key={element}>
-                      <h3>
-                        <a
-                          href="/"
-                          className="no_click "
-                          data-group="streaming"
-                        >
-                          {element}
-                        </a>
-                      </h3>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="movie_content">
-            <div className="section_scroll">
-              <div className="column_content">
-             
-              {
+    <>
+      <div className="column_header ">
+        <h2 className="section_heading">{sectionHeading} </h2>
+        <div className="selector_wrap">
+          <div className="selector position-relative">
+            <div className={"is_active " + (selectedTab==="tv" || selectedTab==="week" ? "slider" : "")}></div>
 
-                renderData.map((element) => {
-                  return (
-                    <HomePageCard
-                      key={uuid()}
-                      id={element.id}
-                      poster_path={element.poster_path}
-                      title={element.title}
-                      release_date={element.release_date}
-                    />
-                  );
-                })
-              }
-              </div>
-            </div>
+            {tabData.map((tab) => {
+              return (
+                <div
+                  key={tab.id}
+                  className={
+                    "anchor " +
+                    (selectedTab === tab.id 
+                      ? "active"
+                      : "non_active")
+                  }
+                  id={tab.id}
+                  onClick={toggleData}
+                >
+                  <h3>
+                    <a href="/">{tab.tabValue}</a>
+                  </h3>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </>
   );
 };
 

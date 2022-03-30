@@ -1,0 +1,21 @@
+.should_fade:after {
+    content: '';
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    right: -2px;
+    z-index: 1;
+    background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%);
+    will-change: opacity;
+    /* opacity:1; */
+    pointer-events: none;
+    /* background-color: red; */
+}
+
+ /* .is_fading .should_fade:after {
+    transition: linear 0.3s;
+    opacity: 1;
+} */

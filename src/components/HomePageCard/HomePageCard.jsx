@@ -1,12 +1,21 @@
-import React from 'react';
-import './HomePageCard.css';
-import red from "../../assets/images/turning_red.jpg";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-                //       id={element.id}
-                //       poster_path={element.poster_path}
-                //       title={element.title}
-                //       release_date={element.release_date}
-const HomePageCard = ({id,title,poster_path,release_date}) => {
+import React from "react";
+import "./HomePageCard.css";
+
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+
+const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
+  let pColor;
+  if (popularity >= 70) {
+    pColor = "green";
+  } else if (popularity >= 35 && popularity < 70) {
+    pColor = "yellow";
+  }else{
+    pColor = "red";
+  }
+
   return (
     <>
       <div className="card">
@@ -19,9 +28,16 @@ const HomePageCard = ({id,title,poster_path,release_date}) => {
         </div>
         <div className="content">
           <div className="circular_progress_bar">
-            <CircularProgressbarWithChildren value={50}>
+            <CircularProgressbarWithChildren
+              value={popularity}
+              styles={buildStyles({
+                pathColor: pColor,
+                trailColor: "rgb(28 97 147)",
+                backgroundColor: "#032b48",
+              })}
+            >
               <div className="circular_progress_bar_data">
-                <span>66</span>
+                <span>{popularity}</span>
                 <sup>%</sup>
               </div>
             </CircularProgressbarWithChildren>
@@ -29,8 +45,8 @@ const HomePageCard = ({id,title,poster_path,release_date}) => {
 
           <div className="movie-title">
             <h2>
-              <a href="/" title="Turning Red">
-               {title}
+              <a href="/" title={title}>
+                {title}
               </a>
             </h2>
             <p> {release_date} </p>
@@ -39,6 +55,6 @@ const HomePageCard = ({id,title,poster_path,release_date}) => {
       </div>
     </>
   );
-}
+};
 
-export default HomePageCard
+export default HomePageCard;

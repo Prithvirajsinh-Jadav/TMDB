@@ -19,7 +19,7 @@ const App = () => {
     <>
       <NavBar />
       <Poster />
-      {/* <Popular /> */}
+      <Popular />
       <Trending />
       <Community/>
       <Footer />

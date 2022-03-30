@@ -1,47 +1,59 @@
-import React,{useState, useEffect} from "react";
-import "./Trending.css";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import TrendingDay from "./TrendingDay";
+import TrendingWeek from "./TrendingWeek";
+// import HomePageCard from "../HomePageCard/HomePageCard";
 import SectionHeading from "../SectionHeading/SectionHeading";
 
+import "./Trending.css";
+
 const Trending = () => {
-  const section_element = ["Today", "This Week"];
-  const section_heading = "Trending";
-
-   let [trendingData, setTrendingData] = useState([]);
-
-   useEffect(() => {
-     axios
-       .get(
-         "https://api.themoviedb.org/3/trending/movie/day?api_key=a192f556a534b82d1e2eb625272ad9aa"
-       )
-       .then((response) => response.data.results)
-       .then((data) => {
-         data.forEach((element) => {
-           setTrendingData((prevData) => [
-             ...prevData,
-             {
-               id: element.id,
-               poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face" + element.poster_path,
-               title: element.title,
-               release_date: element.release_date,
-             },
-           ]);
-         });
-       });
-   }, []);
-
+  const tabData = [
+    { id: "day", tabValue: "Today" },
+    { id: "week", tabValue: "This Week" },
+  ];
+  const sectionHeading = "Trending";
+  const [selectedTab, setSelectedTab] = useState("day");
+  const [isScroll, setIsScroll] = useState(false);
   
+
+  const scrollHandler = (e) => {
+
+    if(e.target.scrollLeft < 200){
+      setIsScroll(false);
+    }else{
+      setIsScroll(true);
+    }
+    
+  }
+
   return (
     <>
-    <div className="trending">
-      {console.log(trendingData)}
-      <SectionHeading
-        
-        selectors={section_element}
-        section_heading={section_heading}
-        renderData={trendingData}
-        />
-        </div>
+      {/* {console.log(trendingData)} */}
+
+      <div className="container  px-0  pt-2 trending">
+        <section className="content_section ">
+          <div className="inner_content ">
+            <SectionHeading
+              tabData={tabData}
+              sectionHeading={sectionHeading}
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
+            <div
+              className={
+                "movie_content " + (isScroll ? "" : "should_fade  is_fading")
+              }
+              onScroll={scrollHandler}
+            >
+              <div className="scroll_content">
+                <div className="column_content">
+                  {selectedTab === "day" ? <TrendingDay /> : <TrendingWeek />}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
   );
 };
