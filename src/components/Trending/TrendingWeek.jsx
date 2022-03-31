@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import HomePageCard from "../HomePageCard/HomePageCard";
 import axios from "axios";
 
@@ -33,14 +33,16 @@ const TrendingWeek = () => {
     <>
       {trendingData.map((movie) => {
         return (
-          <HomePageCard
-            key={movie.id}
-            id={movie.id}
-            poster_path={movie.poster_path}
-            title={movie.title}
-            release_date={movie.release_date}
-            popularity={movie.popularity}
-          />
+         
+            <HomePageCard
+              key={movie.id}
+              id={movie.id}
+              poster_path={movie.poster_path}
+              title={movie.title}
+              release_date={movie.release_date}
+              popularity={movie.popularity}
+            />
+         
         );
       })}
     </>

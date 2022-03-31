@@ -122,17 +122,17 @@ const NavBar = () => {
                         <i className="fa-solid fa-plus "></i>
                       </a>
                     </li>
-                    <li className="nav-item active nav-lan">
+                    <li className="nav-item  nav-lan">
                       <a className="nav-link  language" href="/">
                         EN
                       </a>
                     </li>
-                    <li className="nav-item active">
+                    <li className="nav-item ">
                       <a className="nav-link  " href="/">
                         Login
                       </a>
                     </li>
-                    <li className="nav-item active">
+                    <li className="nav-item ">
                       <a className="nav-link  " href="/">
                         Join TMDB
                       </a>

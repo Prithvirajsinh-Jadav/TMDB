@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect,useRef } from "react";
 import "./HomePageCard.css";
 
 import {
@@ -12,15 +12,109 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
     pColor = "green";
   } else if (popularity >= 35 && popularity < 70) {
     pColor = "yellow";
-  }else{
+  } else {
     pColor = "red";
   }
 
+  // const initialValue = {
+  //   selectedMiniModalId: 0,
+  //   showMiniModal: false,
+  // };
+
+  const [miniModal, setMiniModal] = useState(false);
+
+  const allMiniModal = () => {
+    document.addEventListener("click", () => {
+      // console.log("i m clicking");
+      if (id === miniModal.selectedMiniModalId) {
+        // console.log("i m executing inside if loop");
+        setMiniModal(false);
+      }
+    });
+  };
+
+  // allMiniModal();
+
+  // console.log(miniModal);
+
+
+
+  const toolTipRef = useRef();
+
+  useEffect(()=>{
+    document.addEventListener('click',(event)=>{
+      // console.log("i m clicking");
+      if(toolTipRef && toolTipRef.current && toolTipRef.current.contains(event.target)){
+
+        console.log(id + " clicked me");
+        console.log(miniModal);
+        setMiniModal((prevState)=>!prevState);
+
+    
+      }else{
+        setMiniModal(false);
+      }
+    })
+  },[])
+
+
   return (
     <>
-      <div className="card">
+      <div className="card" id={id}>
         <div className="image">
           <div className="wrapper">
+            <div className="circle-more-icon">
+              <img
+                src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-947-circle-more-white-4c440dfc1b0e626c70f4853dbbce9c4d1f2c5d8f3e05a7d3df47881cbd816adf.svg"
+                alt="error"
+                ref={toolTipRef}
+                
+                // onClick={(e) => {
+                //   e.stopPropagation();
+                //   setMiniModal({
+                //     selectedMiniModalId: id,
+                //     showMiniModal: !miniModal.showMiniModal,
+                //   });
+                // }}
+                // onClick={(e) => {
+                //   // e.stopPropagation();
+                //   setMiniModal({
+                //     selectedMiniModalId: id,
+                //     previousMiniModalId: miniModal.selectedMiniModalId,
+                //     showMiniModal: !miniModal.showMiniModal,
+                //   });
+                // }
+              // }
+              />
+            </div>
+            <div>
+              {miniModal && (
+                <div className={"tooltip_content show"}>
+                  <div className="setting_content">
+                    <div className="group">
+                      <p className="no_hover">
+                        Want to rate or add this item to a list?
+                      </p>
+                      <p>
+                        <a href="/login">
+                          Login
+                          <i className="fa-solid fa-angle-right"></i>
+                        </a>
+                      </p>
+                    </div>
+                    <div className="group">
+                      <p className="no_hover">Not a member?</p>
+                      <p>
+                        <a href="/">
+                          Sign up and join the community
+                          <i className="fa-solid fa-angle-right"></i>
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             <a className="image" href="/" title={title}>
               <img className=" poster" src={poster_path} alt="Error occur " />
             </a>

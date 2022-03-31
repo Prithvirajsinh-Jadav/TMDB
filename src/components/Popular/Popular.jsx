@@ -1,8 +1,9 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "./Popular.css";
 import PopularMovie from "./PopularMovie";
 import PopularTV from "./PopularTV";
 import SectionHeading from "../SectionHeading/SectionHeading";
+// import { useTransition,animated } from "react-spring";
 
 const Popular = () => {
   const sectionHeading = "What's Popular";
@@ -15,9 +16,14 @@ const Popular = () => {
 
   const [isScroll, setIsScroll] = useState(false);
   const [selectedTab, setSelectedTab] = useState("movie");
+
+  // const transition = useTransition(selectedTab === "movie", {
+  //   from: { x: 0 , opacity: 0, backgroundColor: "green" },
+  //   enter: { opacity: 1, backgroundColor: "red" },
+  //   leave: { opacity: 0, backgroundColor: "blue" },
+  // });
+
   
-
-
 
   const scrollHandler = (e) => {
     if (e.target.scrollLeft < 200) {
@@ -54,13 +60,7 @@ const Popular = () => {
           </div>
         </section>
       </div>
-      {/* <div className="popular">
-        <SectionHeading
-          HomePageCard={HomePageCard}
-          selectors={section_element}
-          section_heading={section_heading}
-        />
-      </div> */}
+
     </>
   );
 };
