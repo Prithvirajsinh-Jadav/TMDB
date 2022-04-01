@@ -16,27 +16,12 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
     pColor = "red";
   }
 
-  // const initialValue = {
-  //   selectedMiniModalId: 0,
-  //   showMiniModal: false,
-  // };
+  
 
   const [miniModal, setMiniModal] = useState(false);
 
-  const allMiniModal = () => {
-    document.addEventListener("click", () => {
-      // console.log("i m clicking");
-      if (id === miniModal.selectedMiniModalId) {
-        // console.log("i m executing inside if loop");
-        setMiniModal(false);
-      }
-    });
-  };
 
-  // allMiniModal();
-
-  // console.log(miniModal);
-
+  
 
 
   const toolTipRef = useRef();
@@ -60,7 +45,7 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
 
   return (
     <>
-      <div className="card" id={id}>
+      <div className="card homepage-card" id={id}>
         <div className="image">
           <div className="wrapper">
             <div className="circle-more-icon">
@@ -68,23 +53,6 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
                 src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-947-circle-more-white-4c440dfc1b0e626c70f4853dbbce9c4d1f2c5d8f3e05a7d3df47881cbd816adf.svg"
                 alt="error"
                 ref={toolTipRef}
-                
-                // onClick={(e) => {
-                //   e.stopPropagation();
-                //   setMiniModal({
-                //     selectedMiniModalId: id,
-                //     showMiniModal: !miniModal.showMiniModal,
-                //   });
-                // }}
-                // onClick={(e) => {
-                //   // e.stopPropagation();
-                //   setMiniModal({
-                //     selectedMiniModalId: id,
-                //     previousMiniModalId: miniModal.selectedMiniModalId,
-                //     showMiniModal: !miniModal.showMiniModal,
-                //   });
-                // }
-              // }
               />
             </div>
             <div>
@@ -96,7 +64,7 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
                         Want to rate or add this item to a list?
                       </p>
                       <p>
-                        <a href="/login">
+                        <a href="/">
                           Login
                           <i className="fa-solid fa-angle-right"></i>
                         </a>

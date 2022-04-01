@@ -17,14 +17,6 @@ const Popular = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [selectedTab, setSelectedTab] = useState("movie");
 
-  // const transition = useTransition(selectedTab === "movie", {
-  //   from: { x: 0 , opacity: 0, backgroundColor: "green" },
-  //   enter: { opacity: 1, backgroundColor: "red" },
-  //   leave: { opacity: 0, backgroundColor: "blue" },
-  // });
-
-  
-
   const scrollHandler = (e) => {
     if (e.target.scrollLeft < 200) {
       setIsScroll(false);

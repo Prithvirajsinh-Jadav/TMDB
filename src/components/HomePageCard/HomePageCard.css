@@ -8,7 +8,7 @@
 
 
 
-.card {
+.homepage-card {
   /* margin-left: 20px; */
   width: 150px;
   min-width: 150px;
@@ -26,13 +26,13 @@
   animation: fade-in 3s linear 0s alternate;
 }
 
-.card img {
+.homepage-card img {
   height: 225px;
   border: none;
   border-radius: 8px;
 }
 
-.card h2 {
+.homepage-card  h2 {
   font-size: 1em;
   margin: 0;
   width: 100%;
@@ -40,16 +40,16 @@
   overflow-wrap: break-word;
 }
 
-.card h2 a {
+.homepage-card h2 a {
         font-weight: 700;
   color: #000000 !important;
 }
 
-.card h2 a:hover {
+.homepage-card h2 a:hover {
   color: #01b4e4 !important;
 }
 
-.card p {
+.homepage-card p {
   font-size: 1em;
   margin: 0;
   padding: 0;
