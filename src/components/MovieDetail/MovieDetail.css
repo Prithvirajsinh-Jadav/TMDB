@@ -1,6 +1,6 @@
 .movie-header-section {
     /* height: 100%; */
-    
+
   border-bottom: 1px solid var(--primaryColor);
   background-position: right top;
   width: 100%;
@@ -22,8 +22,52 @@ background: linear-gradient(
   
 }
 
+.poster_wrapper{
+    border-radius: 8px ;
+    /* border: 5px solid red; */
+    margin: 0;
+    padding: 0;
+}
+
 .movie-header-section .container{
     padding: 0 40px;
+}
+
+
+.image-hover-background{
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(20px);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.image-hover-background:hover{
+    opacity: 1;
+ 
+}
+.image-hover-background a{
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+}
+
+.image-hover-background a:hover{
+    color: #fff;
+}
+
+.expand-icon{
+    height: 20px;
+    margin-right: 5px;
 }
 
 .ott_offer{
@@ -62,6 +106,11 @@ background: linear-gradient(
 .watch-now a:hover,
 .movie-title-section a:hover{
     color: #fff;
+}
+
+.release_year{
+    opacity: 0.8;
+    font-weight: 400;
 }
 
 .w-20{
@@ -158,6 +207,20 @@ background: linear-gradient(
 .circular_progress_bar_large{
     height: 68px;
     width:68px;
+    transition: all 0.3s ease;
+}
+.circular_progress_bar_large:hover{
+    transform: scale(1.2);
+}
+.circular_progress_bar_large span{
+    font-size: 1.75rem;
+    /* background-color: red; */
+    line-height: 1.75rem;
+}
+.circular_progress_bar_large sup{
+    font-size: 0.75rem;
+    line-height: 1.75rem;
+    /* background-color: green; */
 }
 
 .icon-list{
@@ -197,6 +260,9 @@ background: linear-gradient(
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.play-trailer:hover{
+    opacity: 0.8;
 }
 
 .tagline {
@@ -242,9 +308,23 @@ background: linear-gradient(
     font-size: 0.9em;
 }
 
+.movie-detail-wrapper{
+    display: flex;
+    margin-top: 30px;
+}
+
+.movie-detail-left-section{
+    width: 80%;
+}
+
+.movie-detail-right-section{
+    width: 20%;
+  
+}
+
 .bill-section{
     padding: 0 40px !important;
-    margin: 30px 0 0 0;
+   
 }
 
 
@@ -254,13 +334,6 @@ background: linear-gradient(
     font-size: 1.4em;
     margin-bottom: 20px;
 }
-
-
-
-/* .cast-scroll-section .card a{
-     height: 200px;
-    width: 138px;
-} */
 
 .cast-section{
     display: flex;
@@ -281,7 +354,8 @@ background: linear-gradient(
     margin-right: 4px;
     width: 138px;
     /* height: 273px; */
-    border: 1px solid rgba(227,227,227, 1);
+    border: 1px solid rgba(227,227,227, 1) ;
+    border-radius: 8px ;
     padding-bottom: 10px;
     overflow: hidden;
 }
@@ -290,7 +364,6 @@ background: linear-gradient(
     /* width: 138px ; */
     width: 138px;
     height: 175px;
-     border-top-right-radius: 8px;
 }
 .person-name{
     padding: 10px 10px 0;
@@ -304,9 +377,272 @@ background: linear-gradient(
     color: #000;
 
 }
-
+.person-name a:hover {
+    color: rgba(0,0,0,0.5);
+}
 .character-name{
     padding: 0 10px;
     font-size: 00.9em;
     margin: 0;
+}
+
+.social-section{
+    padding: 30px 40px 0 40px !important;
+    
+}
+
+.social-menu{
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+}
+
+.social-menu ul{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-menu-active {
+    /* border-bottom-color: #000000; */
+    border-bottom: 4px solid #000000;
+}
+
+.social-menu ul li a{
+    color: #000;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.social-menu ul li a span {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.review-section .inner-content .card{
+    padding: 1.5rem ;
+}
+
+.review-top-section {
+    display: flex;
+}
+
+.avatar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar img{
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+.review-info{
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+    
+}
+.review-info h3 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.review-info h3 a,
+.review-info h5 a{
+    color: #000000;
+}
+
+.review-info h5{
+    font-weight: 300;
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+.review-bottom-section{
+    padding-left: 5rem;
+}
+
+.review-bottom-section::before{
+    clear: both;
+    content: "";
+    display: inline-flex;
+}
+
+.underline{
+    color: #000000;
+    text-decoration: underline !important;
+}
+
+.underline:hover{
+    color: rgba(0,0,0,0.5);
+}
+
+.new_button{
+    margin: 1rem 0 0 0;
+}
+
+.new_button a {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #000000;
+}
+
+.panel{
+    border-top: 1px solid #d7d7d7;
+    padding: 30px 0;
+}
+
+.recommendation-section{
+    padding: 0 40px !important;
+    position: relative;
+}
+
+.recommendation-content{
+    border-top: 1px solid #d7d7d7;
+    padding: 30px 0;
+
+}
+
+.section-heading{
+    font-weight: 600;
+    font-size: 1.4em;
+}
+
+.recommendation-card{
+    margin-top: 20px;
+    width: 250px;
+}
+
+.recommendation-card .image_content{
+    position: relative;
+}
+.recommendation-card .image_content img{
+ border-radius: 8px;   
+}
+
+.meta-data{
+    position: absolute;
+    background-color: rgba(255,255,255,0.9);
+    color: #000000;
+    bottom: 0;
+    width: 100%;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+.image_content  a:hover .meta-data{
+    opacity: 1;
+}
+
+.release_date{
+    
+    display: flex;
+    align-items: center;
+}
+
+.recommendation-icon{
+    display: flex;
+    height: 1.15rem;
+    margin:  4px;
+
+}
+.movie-heading{
+    margin: 0;
+}
+.movie-heading a{
+
+    font-weight: 400;
+    font-size: 1em;
+    color: #000000;
+    margin-bottom: 5px;
+}
+.movie-heading a:hover{
+    color: #000000;
+}
+
+.recommendation-content .column-content{
+    display: flex;
+    overflow-x: scroll;
+    flex-direction: row;
+    gap: 20px;
+    height: fit-content;
+}
+
+
+.calender{
+    width: 1.5rem;
+}
+
+.social_link svg{
+    width: 2rem;
+    height: 2rem;
+}
+
+.social-link-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.justwatch{
+     background-image: url("https://www.themoviedb.org/assets/2/v4/logos/justwatch-small-grey-b589701cfd61de942e17ae33c34a7c939a1218595df3d8744c16a5612f0fd6f7.svg");
+    background-size: 21px;
+}
+
+.glyphicons_v2 {
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    line-height: inherit;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+.justwatch-wrapper{
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+    padding: 0 10px;
+}
+
+.keyword-container  h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.keyword-container ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 0 30px 0;
+}
+
+.keyword-container ul li {
+    margin-right: 5px;
+    margin-bottom: 10px;
+    line-height: 24px;
+    font-size: 0.9em;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+
+.keyword-container  ul li a {
+    background-color: rgba(0,0,0,0.1);
+    border: 1px solid #d7d7d7;
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 4px;
 }
