@@ -1,15 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-const RecommendationCard = () => {
+
+const RecommendationCard = ({poster_path,title,release_date,id,popularity}) => {
+
+
+
+ 
+
   return (
     <>
       <div className="recommendation-card">
         <div className="image_content ">
-          <a href="/movie/646380" title="Don't Look Up" alt="Don't Look Up">
-            <img
-              src="https://www.themoviedb.org/t/p/w250_and_h141_face/nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg"
-              alt="Don't Look Up"
-            />
+          <a href="/" title={title} alt={title}>
+            <img src={poster_path} alt="Don't Look Up" />
 
             <div className="meta-data">
               <span className="release_date">
@@ -23,7 +26,7 @@ const RecommendationCard = () => {
                     d="M15,18.5v1a.5.5,0,0,1-.5.5h-1a.5.5,0,0,1-.5-.5v-1a.5.5,0,0,1,.5-.5h1A.5.5,0,0,1,15,18.5ZM14.5,22h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,14.5,22Zm0-8h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,14.5,14Zm4,8h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,18.5,22Zm-8-4h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,10.5,18Zm0,4h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,10.5,22Zm12-8h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,22.5,14Zm0,4h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,22.5,18Zm-4,0h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,18.5,18Zm0-4h-1a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1A.5.5,0,0,0,18.5,14ZM27,7V26a2.00006,2.00006,0,0,1-2,2H7a2.00006,2.00006,0,0,1-2-2V7A2.002,2.002,0,0,1,7,5V6.5a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,9,6.5v-1A.5.5,0,0,1,9.5,5h1a.5.5,0,0,1,.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,1,.5-.5h1a.5.5,0,0,1,.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,1,.5-.5h1a.5.5,0,0,1,.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,1,.5-.5h1a.5.5,0,0,1,.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5V5A2.002,2.002,0,0,1,27,7ZM25.00146,26l-.00109-14H7V26Z"
                   />
                 </svg>
-                12/07/2021
+                {release_date}
               </span>
               <span className="d-flex">
                 <svg
@@ -64,9 +67,9 @@ const RecommendationCard = () => {
             title="Don't Look Up"
             alt="Don't Look Up"
           >
-            <bdi>Don't Look Up</bdi>
+            <bdi>{release_date} </bdi>
           </a>
-          <span className="vote_average">72%</span>
+          <span className="vote_average"> {Math.floor(popularity)}%</span>
         </p>
       </div>
     </>

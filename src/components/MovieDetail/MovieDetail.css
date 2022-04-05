@@ -8,7 +8,7 @@
   z-index: 1;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/t7I942V5U1Ggn6OevN75u3sNYH9.jpg);
+  /* background-image: url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/t7I942V5U1Ggn6OevN75u3sNYH9.jpg); */
 }
 
 /* https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/t7I942V5U1Ggn6OevN75u3sNYH9.jpg */
@@ -30,7 +30,7 @@ background: linear-gradient(
 }
 
 .movie-header-section .container{
-    padding: 0 40px;
+    padding: 0;
 }
 
 
@@ -311,10 +311,12 @@ background: linear-gradient(
 .movie-detail-wrapper{
     display: flex;
     margin-top: 30px;
+    padding: 0;
 }
 
 .movie-detail-left-section{
     width: 80%;
+    padding-right: 30px;
 }
 
 .movie-detail-right-section{
@@ -323,7 +325,7 @@ background: linear-gradient(
 }
 
 .bill-section{
-    padding: 0 40px !important;
+    padding: 0  ;
    
 }
 
@@ -348,11 +350,12 @@ background: linear-gradient(
 }
 
 .cast-scroll-section .card {
-    margin-top: 10px;
+    /* margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
-    margin-right: 4px;
+    margin-right: 4px; */
     width: 138px;
+    margin-bottom: 10px;
     /* height: 273px; */
     border: 1px solid rgba(227,227,227, 1) ;
     border-radius: 8px ;
@@ -364,6 +367,7 @@ background: linear-gradient(
     /* width: 138px ; */
     width: 138px;
     height: 175px;
+    background-color: rgba(227,227,227,0.7)
 }
 .person-name{
     padding: 10px 10px 0;
@@ -387,7 +391,7 @@ background: linear-gradient(
 }
 
 .social-section{
-    padding: 30px 40px 0 40px !important;
+    padding: 30px 0 0 0!important;
     
 }
 
@@ -496,7 +500,7 @@ background: linear-gradient(
 }
 
 .recommendation-section{
-    padding: 0 40px !important;
+    padding: 0 ;
     position: relative;
 }
 

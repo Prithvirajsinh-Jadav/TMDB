@@ -1,6 +1,6 @@
 import React from "react";
-import { NavBar,Poster,Popular,Trending,Community,Footer,MovieDetail } from "./components/Components.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { NavBar,Poster,Popular,Trending,Community,Footer,MovieDetail,CategorySection } from "./components/Components.jsx";
+import { BrowserRouter as Router, Route,Routes } from "react-router-dom";
 
 import "./App.css";
 
@@ -32,12 +32,10 @@ const App = () => {
                 <Community />
               </>
             }
-         />
-         <Route exact path="/movie-detail" element={
-           <>
-            <MovieDetail/>
-           </>
-         } />
+          />
+          <Route exact path="/details/:id" element={<MovieDetail />} />
+
+          <Route path="/movie/:category" element={<CategorySection/>} />
         </Routes>
         <Footer />
       </Router>

@@ -25,7 +25,6 @@ const Popular = () => {
     }
   };
 
-  // console.log(popularData);
   return (
     <>
       <div className="container  px-0  pt-2 popular">

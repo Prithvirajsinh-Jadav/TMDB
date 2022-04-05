@@ -1,28 +1,140 @@
-import React from "react";
-import "./MovieDetail.css";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import CastCard from "../CastCard/CastCard";
 import ReviewCard from "../ReviewCard/ReviewCard";
-import RecommendationCard from "../RecommendationCard/RecommendationCard"
+import RecommendationCard from "../RecommendationCard/RecommendationCard";
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
+import axios from "axios";
+import "./MovieDetail.css";
 
 const MovieDetail = () => {
+  const params = useParams();
+  // console.log(params.id);
+
+  // const initialValue = {
+  //   poster_path: "https://www.themoviedb.org/t/p/w300_and_h450_bestv2",
+  //   backdrop_path:
+  //     "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces",
+  //   homepage: "",
+  //   budget: 0,
+  //   genres: [],
+  //   original_title: "",
+  //   overview: "",
+  //   revenue: "",
+  //   status: "",
+  //   tagline: "",
+  //   release_date: "",
+  //   runtime:"",
+  //   popularity: "vote_average" * 10,
+  // };
+
+  const [currentMovieData, setCurrentMovieData] = useState({});
+  const [keywords, setKeywords] = useState([]);
+  const [recommendationData, setRecommendationData] = useState([]);
+  const [castData, setCastData] = useState([]);
+  const [watchProvider, setWatchProvider] = useState({});
+
+  useEffect(() => {
+    const API_KEY = "a192f556a534b82d1e2eb625272ad9aa";
+
+    const detailsURL = `https://api.themoviedb.org/3/movie/${params.id}?api_key=${API_KEY}`;
+
+    const keywordURL = `https://api.themoviedb.org/3/movie/${params.id}/keywords?api_key=${API_KEY}`;
+
+    const recommendationURL = `https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=${API_KEY}`;
+
+    const castURL = `https://api.themoviedb.org/3/movie/${params.id}/credits?api_key=${API_KEY}`;
+
+    const watchProvider = `https://api.themoviedb.org/3/movie/${params.id}/watch/providers?api_key=${API_KEY}`;
+
+    axios
+      .get(detailsURL)
+      .then((response) => response.data)
+      .then((movie) =>
+        setCurrentMovieData({
+          poster_path:
+            "https://www.themoviedb.org/t/p/w300_and_h450_bestv2" +
+            movie.poster_path,
+          backdrop_path:
+            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+            movie.backdrop_path,
+          title: movie.title,
+          homepage: movie.homepage,
+          budget: movie.budget,
+          genres: movie.genres,
+          original_title: movie.original_title,
+          overview: movie.overview,
+          revenue: movie.revenue,
+          status: movie.status,
+          tagline: movie.tagline,
+          release_date: movie.release_date,
+          runtime: movie.runtime,
+          popularity: movie.vote_average * 10,
+        })
+      );
+
+    axios
+      .get(keywordURL)
+      .then((response) => setKeywords(response.data.keywords));
+
+    axios
+      .get(recommendationURL)
+      .then((response) => setRecommendationData(response.data.results));
+
+    axios.get(castURL).then((response) => setCastData(response.data.cast));
+
+    axios
+      .get(watchProvider)
+      .then((response) => {
+        return response.data.results["IN"]})
+      .then((data) => {
+        console.log(data);
+        if (data && data.flatrate) {
+          console.log("i m exe");
+          setWatchProvider({
+            providerName: data.flatrate[0].provider_name,
+            providerLogo: `https://www.themoviedb.org/t/p/original${data.flatrate[0].logo_path}`,
+            watchText : "Now Streaming",
+          });
+        }
+        else if(data && data.buy){
+           setWatchProvider({
+             providerName:data.buy[0].provider_name,
+             providerLogo: `https://www.themoviedb.org/t/p/original${data.buy[0].logo_path}`,
+             watchText : "Available to Rent or Buy"
+           });
+        }
+        
+        else {
+          setWatchProvider({});
+        }
+      });
+  }, [params.id]);
+
+  // console.log(watchProvider);
+
   return (
     <>
-      <div className="movie-header-section">
+      <div
+        className="movie-header-section"
+        style={{
+          backgroundImage: `url(${currentMovieData.backdrop_path})`,
+        }}
+      >
         <div className="container-fluid">
           <div className="container d-flex text-white py-4">
             <div className="left-section ">
-              <div className="content_wrapper ">
+            
                 <div className="poster_wrapper">
                   <div className="poster position-relative ">
                     <div className="image_content">
                       <img
                         className="poster image-hover"
-                        src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/mcIYHZYwUbvhvUt8Lb5nENJ7AlX.jpg"
-                        alt="Black Crab"
+                        src={currentMovieData.poster_path}
+                        alt={currentMovieData.title}
                       />
                       <div className="image-hover-background">
                         <a href="/">
@@ -42,53 +154,68 @@ const MovieDetail = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="ott_offer">
-                    <div className="text_wrapper">
-                      <div className="movie-provider">
-                        <img
-                          src="https://www.themoviedb.org/t/p/original/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg"
-                          width="36"
-                          height="36"
-                          alt="Now Streaming on Netflix"
-                        />
-                      </div>
-                      <div className="text">
-                        <span>
-                          <h6 className="now-streaming">Now Streaming</h6>
-                          <h6 className="watch-now">
-                            <a
-                              className="no_click"
-                              href="/"
-                              title="Now Streaming on Netflix"
-                            >
-                              Watch Now
-                            </a>
-                          </h6>
-                        </span>
+                  {Object.keys(watchProvider).length !== 0 && (
+                    <div className="ott_offer">
+                      <div className="text_wrapper">
+                        <div className="movie-provider">
+                          <img
+                            src={watchProvider.providerLogo}
+                            width="36"
+                            height="36"
+                            alt={`Now streaming on ${watchProvider.providerName}`}
+                          />
+                        </div>
+                        <div className="text">
+                          <span>
+                            <h6 className="now-streaming"> {watchProvider.watchText} </h6>
+                            <h6 className="watch-now">
+                              <a
+                                className="no_click"
+                                href="/"
+                                title={`Now streaming on ${watchProvider.providerName}`}
+                              >
+                                Watch Now
+                              </a>
+                            </h6>
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
-              </div>
+             
             </div>
             <div className="right-section px-5 ">
               <div className="movie-title-section">
                 <h2>
-                  <a href="/">Black Crab</a>
-                  <span className="release_year">(2022)</span>
+                  <a href="/">{currentMovieData.title}</a>
+                  <span className="release_year">
+                    (
+                    {currentMovieData.release_date &&
+                      currentMovieData.release_date.slice(0, 4)}
+                    )
+                  </span>
                 </h2>
 
                 <div className="facts">
                   <span className="certification">R</span>
 
-                  <span className="release">03/18/2022 (US)</span>
-
-                  <span className="genres">
-                    <a href="/genre/28-action/movie">Action</a>,&nbsp;
-                    <a href="/genre/53-thriller/movie">Thriller</a>
+                  <span className="release">
+                    {currentMovieData.release_date} (US)
                   </span>
 
-                  <span className="runtime">1h 49m</span>
+                  <span className="genres">
+                    {currentMovieData.genres &&
+                      currentMovieData.genres.map((genreObj) => {
+                        return (
+                          <a key={genreObj.id} href="/">
+                            {genreObj.name},
+                          </a>
+                        );
+                      })}
+                  </span>
+
+                  <span className="runtime">{currentMovieData.runtime} m</span>
                 </div>
 
                 <ul className="actions">
@@ -103,7 +230,7 @@ const MovieDetail = () => {
                         })}
                       >
                         <div className="circular_progress_bar_data d-flex">
-                          <span>80</span>
+                          <span>{currentMovieData.popularity}</span>
                           <sup>%</sup>
                         </div>
                       </CircularProgressbarWithChildren>
@@ -194,18 +321,14 @@ const MovieDetail = () => {
                 </ul>
 
                 <div className="header_info">
-                  <h3 className="tagline">Hope burns brightest in the cold.</h3>
+                  <h3 className="tagline">{currentMovieData.tagline}</h3>
 
                   <h3>Overview</h3>
                   <div className="overview">
-                    <p>
-                      To end an apocalyptic war and save her daughter, a
-                      reluctant soldier embarks on a desperate mission to cross
-                      a frozen sea carrying a top-secret cargo.
-                    </p>
+                    <p>{currentMovieData.overview}</p>
                   </div>
 
-                  <ol className="people_section">
+                  {/* <ol className="people_section">
                     <li className="profile">
                       <p>
                         <a href="/">Adam Berg</a>
@@ -226,7 +349,7 @@ const MovieDetail = () => {
                       </p>
                       <p className="character">Writer</p>
                     </li>
-                  </ol>
+                  </ol> */}
                 </div>
               </div>
             </div>
@@ -234,15 +357,30 @@ const MovieDetail = () => {
         </div>
       </div>
 
-      <div className="movie-detail-wrapper container">
+      <div className="movie-detail-wrapper container p-0">
         <div className="movie-detail-left-section">
           <div className="bill-section ">
             <section className="bill-section-content position-relative">
               <h3>Top Bill Cast</h3>
               <div className="cast-section should_fade is_fading">
                 <div className="cast-scroll-section">
-                  <CastCard />
-                 
+                  {castData &&
+                    castData.slice(0, 9).map((cast) => {
+                      return (
+                        <CastCard
+                          key={cast.id}
+                          id={cast.id}
+                          cast_poster_path={
+                            cast.profile_path
+                              ? `https://www.themoviedb.org/t/p/w138_and_h175_face${cast.profile_path}`
+                              : null
+                          }
+                          cast_name={cast.name}
+                          cast_character={cast.character}
+                          gender={cast.gender}
+                        />
+                      );
+                    })}
                 </div>
               </div>
             </section>
@@ -256,20 +394,19 @@ const MovieDetail = () => {
                   <ul>
                     <li className="social-menu-active">
                       <a id="reviews" className="media_panel" href="/">
-                        Reviews <span>0</span>
+                        Reviews <span>1</span>
                       </a>
                     </li>
                     <li className="">
                       <a id="discussions" className="media_panel" href="/">
-                        Discussions <span>1</span>
+                        Discussions
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className="review-section">
                   <div className="inner-content">
-                  <ReviewCard/>
-                  
+                    <ReviewCard />
                   </div>
 
                   <p className="new_button ">
@@ -280,7 +417,7 @@ const MovieDetail = () => {
             </section>
           </div>
 
-          <div className="recommendation-section container ">
+          <div className="recommendation-section container p-0">
             <section className="recommendation-content">
               <div className="section-heading">
                 <h3>Recommendations</h3>
@@ -289,9 +426,25 @@ const MovieDetail = () => {
               <div className="scroll-wrapper position-relative">
                 <div className="scroll-content should_fade  is_fading">
                   <div className="column-content ">
-                   <RecommendationCard/>
-                
-
+                    {recommendationData.length !== 0 ? (
+                      recommendationData.map((recommendationMovie) => {
+                        return (
+                          <RecommendationCard
+                            id={recommendationMovie.id}
+                            key={recommendationMovie.id}
+                            title={recommendationMovie.title}
+                            release_date={recommendationMovie.release_date}
+                            poster_path={`https://www.themoviedb.org/t/p/w250_and_h141_face${recommendationMovie.backdrop_path}`}
+                            popularity={recommendationMovie.vote_average * 10}
+                          />
+                        );
+                      })
+                    ) : (
+                      <p>
+                        We don't have enough data to suggest any movies based on
+                        RRR. You can help by rating movies you've seen.
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -401,17 +554,17 @@ const MovieDetail = () => {
                   Status
                   <br />
                 </strong>
-                Released
+                {currentMovieData.status}
               </p>
             </div>
 
             <div className="movie-language d-flex">
               <p>
                 <strong>
-                  Original Language
+                  Original Title
                   <br />
                 </strong>
-                English
+                {currentMovieData.original_title}
               </p>
             </div>
             <div className="movie-budget d-flex">
@@ -420,7 +573,7 @@ const MovieDetail = () => {
                   Budget
                   <br />
                 </strong>
-                $500000000
+                {currentMovieData.budget}
               </p>
             </div>
             <div className="movie-revenue d-flex">
@@ -429,7 +582,7 @@ const MovieDetail = () => {
                   Revenue
                   <br />
                 </strong>
-                $2500000000
+                {currentMovieData.revenue}
               </p>
             </div>
           </div>
@@ -437,33 +590,13 @@ const MovieDetail = () => {
           <div className="keyword-container">
             <h4>Keywords</h4>
             <ul>
-              <li>
-                <a href="/keyword/2343-magic/movie">magic</a>
-              </li>
-
-              <li>
-                <a href="/keyword/4344-musical/movie">musical</a>
-              </li>
-
-              <li>
-                <a href="/keyword/5774-forest/movie">forest</a>
-              </li>
-
-              <li>
-                <a href="/keyword/10235-family-relationships/movie">
-                  family relationships
-                </a>
-              </li>
-
-              <li>
-                <a href="/keyword/11322-female-protagonist/movie">
-                  female protagonist
-                </a>
-              </li>
-
-              <li>
-                <a href="/keyword/285275-colombia/movie">colombia</a>
-              </li>
+              {keywords.map((keywordObj) => {
+                return (
+                  <li key={keywordObj.id}>
+                    <a href="/">{keywordObj.name}</a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

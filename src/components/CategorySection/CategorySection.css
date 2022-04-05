@@ -1,0 +1,24 @@
+.category-card{
+    
+    width: 180px;
+    border: 1px solid rgba(227,227,227,1);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    border-radius: 8px !important;
+}
+
+
+
+.category-card  .poster-image{
+    width: 180px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  
+}
+
+.category-card .movie-title{
+    padding-bottom: .5rem;
+}
+
+.right-category-section{
+    gap: 20px;
+}

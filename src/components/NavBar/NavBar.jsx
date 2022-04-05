@@ -14,7 +14,7 @@ const NavBar = () => {
             </ul>
           </div>
         </div> */}
-        <div className="container ">
+        <div className="container p-0">
           <div className="subMedia">
             <nav className="navbar navbar-expand-lg   ">
               <a className="navbar-brand" href="/">

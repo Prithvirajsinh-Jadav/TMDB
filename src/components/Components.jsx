@@ -5,4 +5,5 @@ export { default as Trending } from "./Trending/Trending";
 export { default as Community } from "./Community/Community";
 export { default as Footer } from "./Footer/Footer";
 export { default as MovieDetail } from "./MovieDetail/MovieDetail";
+export { default as CategorySection } from "./CategorySection/CategorySection";
 export { default as Dummy } from "./Dummy/Dummy";

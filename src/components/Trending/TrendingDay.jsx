@@ -13,38 +13,38 @@ const TrendingDay = () => {
       .get(url)
       .then((response) => response.data.results)
       .then((data) => {
-        data.map((movie) => {
-          return setTrendingData((prevData) => [
-            ...prevData,
-            {
-              id: movie.id,
-              poster_path:
-                "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                movie.poster_path,
-              title: movie.title,
-              release_date: movie.release_date,
-              popularity: movie.vote_average * 10,
-            },
-          ]);
-        });
+        setTrendingData(data);
+        // data.map((movie) => {
+        //   return setTrendingData((prevData) => [
+        //     ...prevData,
+        //     {
+        //       id: movie.id,
+        //       poster_path:
+        //         "https://www.themoviedb.org/t/p/w220_and_h330_face" +
+        //         movie.poster_path,
+        //       title: movie.title,
+        //       release_date: movie.release_date,
+        //       popularity: movie.vote_average * 10,
+        //     },
+        //   ]);
+        // });
       });
   }, []);
   return (
     <>
-      {trendingData.map((movie) => {
-        return (
-          
+      {trendingData &&
+        trendingData.map((movie) => {
+          return (
             <HomePageCard
               key={movie.id}
               id={movie.id}
-              poster_path={movie.poster_path}
+              poster_path={`https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`}
               title={movie.title}
               release_date={movie.release_date}
-              popularity={movie.popularity}
+              popularity={movie.vote_average * 10}
             />
-         
-        );
-      })}
+          );
+        })}
     </>
   );
 };

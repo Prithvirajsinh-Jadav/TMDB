@@ -1,12 +1,14 @@
 import React, { useState,useEffect,useRef } from "react";
 import "./HomePageCard.css";
+import { Link } from "react-router-dom";
+
 
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
 
-const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
+const HomePageCard = ({ id, title, poster_path, release_date, popularity,className }) => {
   let pColor;
   if (popularity >= 70) {
     pColor = "green";
@@ -21,7 +23,7 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
   const [miniModal, setMiniModal] = useState(false);
 
 
-  
+
 
 
   const toolTipRef = useRef();
@@ -34,7 +36,7 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
         console.log(id + " clicked me");
         console.log(miniModal);
         setMiniModal((prevState)=>!prevState);
-
+       
     
       }else{
         setMiniModal(false);
@@ -42,10 +44,13 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
     })
   },[])
 
+ 
 
   return (
     <>
-      <div className="card homepage-card" id={id}>
+      <div
+        className={"card homepage-card " + (className ? "category-card" : "")}
+      >
         <div className="image">
           <div className="wrapper">
             <div className="circle-more-icon">
@@ -83,9 +88,9 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
                 </div>
               )}
             </div>
-            <a className="image" href="/" title={title}>
-              <img className=" poster" src={poster_path} alt="Error occur " />
-            </a>
+            <Link to={`/details/${id}`} className="image" title={title}>
+              <img className="poster-image" src={poster_path} alt="Error occur" />
+            </Link>
           </div>
         </div>
         <div className="content">
@@ -107,7 +112,7 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity }) => {
 
           <div className="movie-title">
             <h2>
-              <a href="/" title={title}>
+              <a href="/movie-detail" title={title}>
                 {title}
               </a>
             </h2>

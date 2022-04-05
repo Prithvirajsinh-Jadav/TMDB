@@ -1,23 +1,25 @@
 import React from 'react'
+import MaleCastImage from "./../../assets/images/male-cast.svg"
+import FemaleCastImage from "./../../assets/images/female-cast.svg"
 
-const CastCard = () => {
+const CastCard = ({ id, cast_name, cast_poster_path, cast_character,gender }) => {
   return (
     <>
       <div className="card">
         <a href="/">
           <img
             className=""
-            src="https://www.themoviedb.org/t/p/w138_and_h175_face/zkg9wfbXZi9OqvwW2ku38zNC1Hk.jpg"
-            alt="Noomi Rapace"
+            src={cast_poster_path ? cast_poster_path : (gender === 1 ? FemaleCastImage : MaleCastImage )}
+            alt={cast_name}
           />
         </a>
         <p className="person-name">
-          <a href="/person/87722-noomi-rapace">Noomi Rapace</a>
+          <a href="/person/87722-noomi-rapace">{cast_name} </a>
         </p>
-        <p className="character-name">Caroline Edh</p>
+        <p className="character-name">{cast_character} </p>
       </div>
     </>
   );
-}
+};
 
 export default CastCard
