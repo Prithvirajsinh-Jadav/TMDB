@@ -67,7 +67,7 @@ const RecommendationCard = ({poster_path,title,release_date,id,popularity}) => {
             title="Don't Look Up"
             alt="Don't Look Up"
           >
-            <bdi>{release_date} </bdi>
+            <bdi>{title} </bdi>
           </a>
           <span className="vote_average"> {Math.floor(popularity)}%</span>
         </p>

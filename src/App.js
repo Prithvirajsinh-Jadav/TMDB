@@ -1,5 +1,5 @@
 import React from "react";
-import { NavBar,Poster,Popular,Trending,Community,Footer,MovieDetail,CategorySection } from "./components/Components.jsx";
+import { NavBar,Poster,Popular,Trending,Community,Footer,MovieDetail,CategorySection,Login,Signup } from "./components/Components.jsx";
 import { BrowserRouter as Router, Route,Routes } from "react-router-dom";
 
 import "./App.css";
@@ -36,6 +36,9 @@ const App = () => {
           <Route exact path="/details/:id" element={<MovieDetail />} />
 
           <Route path="/movie/:category" element={<CategorySection/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<Signup/>} />
+
         </Routes>
         <Footer />
       </Router>

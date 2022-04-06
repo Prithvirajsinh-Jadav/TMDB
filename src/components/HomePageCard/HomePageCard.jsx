@@ -103,9 +103,9 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity,classNa
                 backgroundColor: "#032b48",
               })}
             >
-              <div className="circular_progress_bar_data">
+              <div className="circular_progress_bar_data d-flex">
                 <span>{popularity}</span>
-                <sup>%</sup>
+                <sup className="d-flex align-items-center">%</sup>
               </div>
             </CircularProgressbarWithChildren>
           </div>

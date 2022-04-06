@@ -442,7 +442,7 @@ const MovieDetail = () => {
                     ) : (
                       <p>
                         We don't have enough data to suggest any movies based on
-                        RRR. You can help by rating movies you've seen.
+                        {currentMovieData.title}. You can help by rating movies you've seen.
                       </p>
                     )}
                   </div>
@@ -573,7 +573,7 @@ const MovieDetail = () => {
                   Budget
                   <br />
                 </strong>
-                {currentMovieData.budget}
+                {currentMovieData.budget >0 ? currentMovieData.budget : "-"}  
               </p>
             </div>
             <div className="movie-revenue d-flex">
@@ -582,7 +582,7 @@ const MovieDetail = () => {
                   Revenue
                   <br />
                 </strong>
-                {currentMovieData.revenue}
+                {currentMovieData.revenue > 0 ? currentMovieData.revenue : "-"}
               </p>
             </div>
           </div>

@@ -32,6 +32,12 @@
   border-radius: 8px;
 }
 
+.circle-more-icon img{
+  width: 20px;
+  height: 20px;
+  opacity: .7;
+}
+
 .homepage-card  h2 {
   font-size: 1em;
   margin: 0;
