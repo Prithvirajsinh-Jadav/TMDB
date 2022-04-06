@@ -89,32 +89,43 @@ const MovieDetail = () => {
     axios
       .get(watchProvider)
       .then((response) => {
-        return response.data.results["IN"]})
+        return response.data.results["IN"];
+      })
       .then((data) => {
-        console.log(data);
         if (data && data.flatrate) {
           console.log("i m exe");
           setWatchProvider({
             providerName: data.flatrate[0].provider_name,
             providerLogo: `https://www.themoviedb.org/t/p/original${data.flatrate[0].logo_path}`,
-            watchText : "Now Streaming",
+            watchText: "Now Streaming",
           });
-        }
-        else if(data && data.buy){
-           setWatchProvider({
-             providerName:data.buy[0].provider_name,
-             providerLogo: `https://www.themoviedb.org/t/p/original${data.buy[0].logo_path}`,
-             watchText : "Available to Rent or Buy"
-           });
-        }
-        
-        else {
+        } else if (data && data.buy) {
+          setWatchProvider({
+            providerName: data.buy[0].provider_name,
+            providerLogo: `https://www.themoviedb.org/t/p/original${data.buy[0].logo_path}`,
+            watchText: "Available to Rent or Buy",
+          });
+        } else {
           setWatchProvider({});
         }
       });
   }, [params.id]);
 
-  // console.log(watchProvider);
+  const pColor =
+    currentMovieData.popularity >= 70
+      ? "#21ce79"
+      : currentMovieData.popularity >= 35 && currentMovieData.popularity < 70
+      ? "#bec02d"
+      : "#db2360";
+
+  const tColor =
+    currentMovieData.popularity >= 70
+      ? "#204529"
+      : currentMovieData.popularity >= 35
+      ? "#423d0f"
+      : currentMovieData.popularity !== 0
+      ? "#ff000054"
+      : "#565a5b";
 
   return (
     <>
@@ -127,68 +138,68 @@ const MovieDetail = () => {
         <div className="container-fluid">
           <div className="container d-flex text-white py-4">
             <div className="left-section ">
-            
-                <div className="poster_wrapper">
-                  <div className="poster position-relative ">
-                    <div className="image_content">
-                      <img
-                        className="poster image-hover"
-                        src={currentMovieData.poster_path}
-                        alt={currentMovieData.title}
-                      />
-                      <div className="image-hover-background">
-                        <a href="/">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 32 32"
-                            className="expand-icon"
-                          >
-                            <path
-                              fill="#ffffff"
-                              id="fullscreen"
-                              d="M13.72156,12.06732a.5.5,0,0,1-.06812.62219l-.96374.96375a.5.5,0,0,1-.6222.06811L7.89624,11.064,6.19342,12.76642a.49983.49983,0,0,1-.847-.27521L4.10779,4.67969a.49976.49976,0,0,1,.57184-.57184L12.491,5.34619a.50011.50011,0,0,1,.27527.8476L11.06378,7.896Zm5.58874,1.58594a.5.5,0,0,0,.6222.06811L24.10376,11.064l1.70282,1.70246a.49983.49983,0,0,0,.847-.27521l1.23858-7.81152a.49976.49976,0,0,0-.57184-.57184L19.509,5.34619a.50011.50011,0,0,0-.27527.8476L20.93622,7.896l-2.65778,4.17132a.5.5,0,0,0,.06812.62219Zm-6.6206,4.69348a.5.5,0,0,0-.6222-.06811L7.89624,20.936,6.19342,19.23358a.49983.49983,0,0,0-.847.27521L4.10779,27.32031a.49976.49976,0,0,0,.57184.57184l7.8114-1.23834a.50011.50011,0,0,0,.27527-.8476L11.06378,24.104l2.65778-4.17132a.5.5,0,0,0-.06812-.62219Zm13.11688.88684L24.10376,20.936,19.9325,18.27863a.5.5,0,0,0-.6222.06811l-.96374.96375a.5.5,0,0,0-.06812.62219L20.93622,24.104,19.2337,25.80621a.50011.50011,0,0,0,.27527.8476l7.8114,1.23834a.49976.49976,0,0,0,.57184-.57184l-1.23858-7.81152A.49983.49983,0,0,0,25.80658,19.23358Z"
-                            />
-                          </svg>
-                          Expand
-                        </a>
+              <div className="poster_wrapper ">
+                <div className="poster position-relative ">
+                  <div className="image_content">
+                    <img
+                      className="image-hover "
+                      src={currentMovieData.poster_path}
+                      alt={currentMovieData.title}
+                    />
+                    <div className="image-hover-background">
+                      <a href="/">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 32 32"
+                          className="expand-icon"
+                        >
+                          <path
+                            fill="#ffffff"
+                            id="fullscreen"
+                            d="M13.72156,12.06732a.5.5,0,0,1-.06812.62219l-.96374.96375a.5.5,0,0,1-.6222.06811L7.89624,11.064,6.19342,12.76642a.49983.49983,0,0,1-.847-.27521L4.10779,4.67969a.49976.49976,0,0,1,.57184-.57184L12.491,5.34619a.50011.50011,0,0,1,.27527.8476L11.06378,7.896Zm5.58874,1.58594a.5.5,0,0,0,.6222.06811L24.10376,11.064l1.70282,1.70246a.49983.49983,0,0,0,.847-.27521l1.23858-7.81152a.49976.49976,0,0,0-.57184-.57184L19.509,5.34619a.50011.50011,0,0,0-.27527.8476L20.93622,7.896l-2.65778,4.17132a.5.5,0,0,0,.06812.62219Zm-6.6206,4.69348a.5.5,0,0,0-.6222-.06811L7.89624,20.936,6.19342,19.23358a.49983.49983,0,0,0-.847.27521L4.10779,27.32031a.49976.49976,0,0,0,.57184.57184l7.8114-1.23834a.50011.50011,0,0,0,.27527-.8476L11.06378,24.104l2.65778-4.17132a.5.5,0,0,0-.06812-.62219Zm13.11688.88684L24.10376,20.936,19.9325,18.27863a.5.5,0,0,0-.6222.06811l-.96374.96375a.5.5,0,0,0-.06812.62219L20.93622,24.104,19.2337,25.80621a.50011.50011,0,0,0,.27527.8476l7.8114,1.23834a.49976.49976,0,0,0,.57184-.57184l-1.23858-7.81152A.49983.49983,0,0,0,25.80658,19.23358Z"
+                          />
+                        </svg>
+                        Expand
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {Object.keys(watchProvider).length !== 0 && (
+                  <div className="ott_offer">
+                    <div className="text_wrapper">
+                      <div className="movie-provider">
+                        <img
+                          src={watchProvider.providerLogo}
+                          width="36"
+                          height="36"
+                          alt={`Now streaming on ${watchProvider.providerName}`}
+                        />
+                      </div>
+                      <div className="text">
+                        <span>
+                          <h6 className="now-streaming">
+                            {watchProvider.watchText}
+                          </h6>
+                          <h6 className="watch-now">
+                            <a
+                              className="no_click"
+                              href="/"
+                              title={`Now streaming on ${watchProvider.providerName}`}
+                            >
+                              Watch Now
+                            </a>
+                          </h6>
+                        </span>
                       </div>
                     </div>
                   </div>
-                  {Object.keys(watchProvider).length !== 0 && (
-                    <div className="ott_offer">
-                      <div className="text_wrapper">
-                        <div className="movie-provider">
-                          <img
-                            src={watchProvider.providerLogo}
-                            width="36"
-                            height="36"
-                            alt={`Now streaming on ${watchProvider.providerName}`}
-                          />
-                        </div>
-                        <div className="text">
-                          <span>
-                            <h6 className="now-streaming"> {watchProvider.watchText} </h6>
-                            <h6 className="watch-now">
-                              <a
-                                className="no_click"
-                                href="/"
-                                title={`Now streaming on ${watchProvider.providerName}`}
-                              >
-                                Watch Now
-                              </a>
-                            </h6>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-             
+                )}
+              </div>
             </div>
-            <div className="right-section px-5 ">
+            <div className="right-section px-5 d-flex align-items-center">
               <div className="movie-title-section">
                 <h2>
-                  <a href="/">{currentMovieData.title}</a>
+                  <a href="/">{currentMovieData.title} </a>
                   <span className="release_year">
                     (
                     {currentMovieData.release_date &&
@@ -201,31 +212,38 @@ const MovieDetail = () => {
                   <span className="certification">R</span>
 
                   <span className="release">
-                    {currentMovieData.release_date} (US)
+                    {new Date(currentMovieData.release_date).toLocaleDateString(
+                      "en-IN"
+                    )}
+                    (IN)
                   </span>
 
                   <span className="genres">
                     {currentMovieData.genres &&
-                      currentMovieData.genres.map((genreObj) => {
-                        return (
-                          <a key={genreObj.id} href="/">
-                            {genreObj.name},
-                          </a>
-                        );
-                      })}
+                      currentMovieData.genres
+                        .map((genreObj) => genreObj.name)
+                        .join(", ")}
                   </span>
 
-                  <span className="runtime">{currentMovieData.runtime} m</span>
+                  <span className="runtime">
+                    {currentMovieData.runtime >= 60
+                      ? Math.floor(currentMovieData.runtime / 60) + "h "
+                      : ""}
+
+                    {currentMovieData.runtime % 60 < 60
+                      ? (currentMovieData.runtime % 60) + "m"
+                      : ""}
+                  </span>
                 </div>
 
                 <ul className="actions">
                   <li className="chart">
                     <div className="circular_progress_bar_large">
                       <CircularProgressbarWithChildren
-                        value={80}
+                        value={currentMovieData.popularity}
                         styles={buildStyles({
-                          pathColor: "green",
-                          trailColor: "rgb(28 ,97 ,147)",
+                          pathColor: pColor,
+                          trailColor: tColor,
                           backgroundColor: "#032b48",
                         })}
                       >
@@ -303,18 +321,7 @@ const MovieDetail = () => {
                   </li>
                   <li className="play-trailer">
                     <a className="d-flex" href="/">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="fa-play"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <span className="play"></span>
                       Play Trailer
                     </a>
                   </li>
@@ -323,7 +330,7 @@ const MovieDetail = () => {
                 <div className="header_info">
                   <h3 className="tagline">{currentMovieData.tagline}</h3>
 
-                  <h3>Overview</h3>
+                  <h3 className="overview-heading">Overview</h3>
                   <div className="overview">
                     <p>{currentMovieData.overview}</p>
                   </div>
@@ -362,7 +369,7 @@ const MovieDetail = () => {
           <div className="bill-section ">
             <section className="bill-section-content position-relative">
               <h3>Top Bill Cast</h3>
-              <div className="cast-section should_fade is_fading">
+              <div className="cast-section should_fade">
                 <div className="cast-scroll-section">
                   {castData &&
                     castData.slice(0, 9).map((cast) => {
@@ -424,7 +431,7 @@ const MovieDetail = () => {
               </div>
 
               <div className="scroll-wrapper position-relative">
-                <div className="scroll-content should_fade  is_fading">
+                <div className="scroll-content should_fade">
                   <div className="column-content ">
                     {recommendationData.length !== 0 ? (
                       recommendationData.map((recommendationMovie) => {
@@ -442,7 +449,9 @@ const MovieDetail = () => {
                     ) : (
                       <p>
                         We don't have enough data to suggest any movies based on
-                        {currentMovieData.title}. You can help by rating movies you've seen.
+                        &nbsp;
+                        {currentMovieData.title}. You can help by rating movies
+                        you've seen.
                       </p>
                     )}
                   </div>
@@ -573,7 +582,12 @@ const MovieDetail = () => {
                   Budget
                   <br />
                 </strong>
-                {currentMovieData.budget >0 ? currentMovieData.budget : "-"}  
+                {currentMovieData.budget > 0
+                  ? currentMovieData.budget.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })
+                  : "-"}
               </p>
             </div>
             <div className="movie-revenue d-flex">
@@ -582,7 +596,12 @@ const MovieDetail = () => {
                   Revenue
                   <br />
                 </strong>
-                {currentMovieData.revenue > 0 ? currentMovieData.revenue : "-"}
+                {currentMovieData.revenue > 0
+                  ? currentMovieData.revenue.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })
+                  : "-"}
               </p>
             </div>
           </div>

@@ -1,50 +1,53 @@
-import React, { useState,useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./HomePageCard.css";
 import { Link } from "react-router-dom";
-
 
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
 
-const HomePageCard = ({ id, title, poster_path, release_date, popularity,className }) => {
-  let pColor;
-  if (popularity >= 70) {
-    pColor = "green";
-  } else if (popularity >= 35 && popularity < 70) {
-    pColor = "yellow";
-  } else {
-    pColor = "red";
-  }
+const HomePageCard = ({
+  id,
+  title,
+  poster_path,
+  release_date,
+  popularity,
+  className,
+}) => {
+  const pColor =
+    popularity >= 70
+      ? "#21ce79"
+      : popularity >= 35 && popularity < 70
+      ? "#bec02d"
+      : "#db2360";
 
-  
+  const tColor =
+    popularity >= 70
+      ? "#204529"
+      : popularity >= 35
+      ? "#423d0f"
+      : popularity !== 0
+      ? "#ff000054"
+      : "#565a5b";
 
   const [miniModal, setMiniModal] = useState(false);
 
-
-
-
-
   const toolTipRef = useRef();
 
-  useEffect(()=>{
-    document.addEventListener('click',(event)=>{
-      // console.log("i m clicking");
-      if(toolTipRef && toolTipRef.current && toolTipRef.current.contains(event.target)){
-
-        console.log(id + " clicked me");
-        console.log(miniModal);
-        setMiniModal((prevState)=>!prevState);
-       
-    
-      }else{
+  useEffect(() => {
+    document.addEventListener("click", (event) => {
+      if (
+        toolTipRef &&
+        toolTipRef.current &&
+        toolTipRef.current.contains(event.target)
+      ) {
+        setMiniModal((prevState) => !prevState);
+      } else {
         setMiniModal(false);
       }
-    })
-  },[])
-
- 
+    });
+  }, []);
 
   return (
     <>
@@ -89,7 +92,11 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity,classNa
               )}
             </div>
             <Link to={`/details/${id}`} className="image" title={title}>
-              <img className="poster-image" src={poster_path} alt="Error occur" />
+              <img
+                className="poster-image"
+                src={poster_path}
+                alt="Error occur"
+              />
             </Link>
           </div>
         </div>
@@ -99,7 +106,7 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity,classNa
               value={popularity}
               styles={buildStyles({
                 pathColor: pColor,
-                trailColor: "rgb(28 97 147)",
+                trailColor: tColor,
                 backgroundColor: "#032b48",
               })}
             >
@@ -116,7 +123,15 @@ const HomePageCard = ({ id, title, poster_path, release_date, popularity,classNa
                 {title}
               </a>
             </h2>
-            <p> {release_date} </p>
+            <p>
+              {" "}
+              {new Date(release_date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            {/* format('{Weekday} {Month} {dd}, {yyyy}'); */}
           </div>
         </div>
       </div>

@@ -1,32 +1,125 @@
-.category-card{
-    
-    width: 180px;
-    border: 1px solid rgba(227,227,227,1);
-    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
-    border-radius: 8px !important;
+.category-card {
+  width: 180px;
+  border: 1px solid rgba(227, 227, 227, 1);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  border-radius: 8px !important;
 }
 
+.category-title h2 {
+  font-size: 1.6rem !important;
+  font-weight: 600;
+}
 
+.category-card .poster-image {
+  width: 180px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
 
-.category-card  .poster-image{
-    width: 180px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.category-card .movie-title {
+  padding-bottom: 0.5rem;
+}
+
+.right-category-section {
+  gap: 25px;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.filter-panel {
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+.filter-name {
+  padding: 14px 16px;
+
+  border-bottom: 1px solid rgba(227, 227, 227, 1);
+}
+
+.filter-name h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.chevron-right {
+  background-image: url("./../../assets/images/chevron-right.svg");
+  display: inline-flex;
+  min-width: 1rem;
+  min-height: 1rem;
+  position: relative;
+  align-self: center;
+  background-repeat: no-repeat;
+  justify-content: center;
+}
+
+.filter {
+  padding: 0 16px;
+  transition: all .3s ease-in;
   
 }
 
-.category-card .movie-title{
-    padding-bottom: .5rem;
+.filter h3 {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1em;
+  font-weight: 300;
+  margin-bottom: 10px;
 }
 
-.right-category-section{
-    gap: 25px;
+.filter-dropdown{
+    border: 1px solid #e4e7eb;
+    color: #212529;
+    background-color: #e4e7eb;
+    font-size: 0.9em;
+    padding: 5px;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    position: relative;
+    transition: all .1s ease;
+    cursor: pointer;
+    outline: 0;
 }
 
-.w-20{
-    width: 20%;
+
+.filter-dropdown option{
+    border-radius: 0.25rem;
+    color: #000;
+    background-color: #fff;
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 5px 10px !important;
+    height: 1.75rem;
 }
 
-.w-80{
-    width: 80%;
+
+.height-0{
+
+height: 0;
+
+}
+
+.height-100{
+  padding: 14px 16px 16px 16px; 
+  height: 100%;
+  /* display: block; */
+
 }

@@ -1,5 +1,53 @@
 .signup-heading {
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+.form-label {
+  margin: 0 !important;
+}
+
+.sign-up-left-section-content-wrapper {
+  display: block;
+  box-sizing: border-box;
+  min-width: 260px;
+  width: 260px;
+  border: 1px solid rgba(227, 227, 227, 1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.member-heading {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 20px;
+  color: #fff;
+  background-color: rgb(1, 180, 228);
+}
+
+.benefit-content {
+  padding: 8px 0;
+}
+
+.benefit-content li {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1em;
+  line-height: 1.4em;
+  margin: 0;
+}
+
+.check {
+  background-image: url("./../../assets/images/check.svg");
+  display: inline-flex;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  position: relative;
+ align-self: flex-start;
 }

@@ -38,7 +38,7 @@ const Popular = () => {
             />
             <div
               className={
-                "movie_content " + (isScroll ? "" : "should_fade  is_fading")
+                "movie_content " + (isScroll ? "" : "should_fade")
               }
               onScroll={scrollHandler}
             >

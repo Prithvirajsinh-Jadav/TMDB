@@ -16,6 +16,9 @@ ul {
   list-style-type: none;
 }
 
+body{
+  font-family: 'Source Sans Pro', Arial, sans-serif !important;
+}
 
 .darkBlue {
   background-color: var(--tmdbDarkBlue);
