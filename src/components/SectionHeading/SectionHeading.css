@@ -118,11 +118,3 @@
   -webkit-text-fill-color: rgb(3, 37, 65) !important;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}

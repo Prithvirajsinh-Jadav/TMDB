@@ -8,4 +8,5 @@ export { default as MovieDetail } from "./MovieDetail/MovieDetail";
 export { default as CategorySection } from "./CategorySection/CategorySection";
 export { default as Login } from "./Login/Login";
 export { default as Signup } from "./Signup/Signup";
+export { default as FullReview } from "./FullReview/FullReview";
 export { default as Dummy } from "./Dummy/Dummy";

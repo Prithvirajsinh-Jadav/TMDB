@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TrendingDay from "./TrendingDay";
 import TrendingWeek from "./TrendingWeek";
 // import HomePageCard from "../HomePageCard/HomePageCard";
