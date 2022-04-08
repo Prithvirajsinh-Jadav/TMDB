@@ -28,8 +28,6 @@ const Trending = () => {
 
   return (
     <>
-      {/* {console.log(trendingData)} */}
-
       <div className="container  px-0  pt-2 trending">
         <section className="content_section ">
           <div className="inner_content ">

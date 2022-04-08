@@ -1,5 +1,6 @@
 import React from 'react'
 import "./SectionHeading.css"
+import { Link } from "react-router-dom";
 
 
 
@@ -40,7 +41,7 @@ const SectionHeading = ({
                   onClick={toggleData}
                 >
                   <h3>
-                    <a href="/">{tab.tabValue}</a>
+                    <Link to="/">{tab.tabValue}</Link>
                   </h3>
                 </div>
               );

@@ -1,5 +1,7 @@
 import React from "react";
 import "./Community.css";
+import { Link } from "react-router-dom";
+
 
 const Community = () => {
   return (
@@ -23,12 +25,12 @@ const Community = () => {
                     Netflix, Hotstar, and Amazon Prime Video.
                   </p>
                   <p className="button">
-                    <a
-                      href="/"
+                    <Link
+                      to="/"
                       className="rounded background_color border_color purple"
                     >
                       Sign Up
-                    </a>
+                    </Link>
                   </p>
                 </div>
 

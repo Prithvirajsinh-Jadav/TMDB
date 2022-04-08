@@ -1,5 +1,7 @@
 import React from "react";
 import "./Login.css";
+import { Link } from "react-router-dom";
+
 
 const Login = () => {
   return (
@@ -10,11 +12,11 @@ const Login = () => {
           In order to use the editing and rating capabilities of TMDB, as well
           as get personal recommendations you will need to login to your
           account. If you do not have an account, registering for an account is
-          free and simple. <a href="/">Click here</a> to get started.
+          free and simple. <Link to="/">Click here</Link> to get started.
         </p>
         <p>
           If you signed up but didn't get your verification email,{" "}
-          <a href="/">click here</a> to have it resent.
+          <Link to="/">click here</Link> to have it resent.
         </p>
         <form>
           <div className="mb-3">

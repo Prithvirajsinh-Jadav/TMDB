@@ -1,29 +1,22 @@
 import React from "react";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <>
       <div className=" customNavBar darkBlue d-flex  ">
-        {/* <div className="container">
-          <div className="row">
-            <ul>
-              <li>
-                <a href="/">Navbar</a>
-              </li>
-            </ul>
-          </div>
-        </div> */}
+
         <div className="container p-0">
           <div className="subMedia">
             <nav className="navbar navbar-expand-lg   ">
-              <a className="navbar-brand" href="/">
+              <Link className="navbar-brand" to="/">
                 <img
                   src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
                   alt="unknown error"
                   className="d-flex align-items-center"
                 />
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -45,104 +38,104 @@ const NavBar = () => {
                 <div>
                   <ul className="navbar-nav mr-auto  ">
                     <li className="nav-item nav-movies ">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         Movies
-                      </a>
+                      </Link>
                       <div className="movie-items ">
                         <ul className="navbar-nav">
                           <li className="nav-item ">
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Popular
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Now Playing
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Upcoming
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Top Rated
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
                     </li>
                     <li className="nav-item nav-tv">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         TV Shows
-                      </a>
+                      </Link>
 
                       <div className="tv-items ">
                         <ul className="navbar-nav ">
                           <li className="nav-item ">
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Popular
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Now Playing
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Upcoming
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a className="nav-link  " href="/">
+                            <Link className="nav-link  " to="/">
                               Top Rated
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
                     </li>
                     <li className="nav-item ">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         Popular
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item ">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         More
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
                 <div>
                   <ul className="navbar-nav mr-auto  ">
                     <li className="nav-item active">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         <i className="fa-solid fa-plus "></i>
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item  nav-lan">
-                      <a className="nav-link  language" href="/">
+                      <Link className="nav-link  language" to="/">
                         EN
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item ">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         Login
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item ">
-                      <a className="nav-link  " href="/">
+                      <Link className="nav-link  " to="/">
                         Join TMDB
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link  nav-mag" href="/">
+                      <Link className="nav-link  nav-mag" to="/">
                         <i className="fa-solid fa-magnifying-glass"></i>
 
                         {/* https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-28-search-blue-177462d06db81ff2a02aa022c1c0be5ba4200d7bd3f51091ed9298980e3a26a1.svg */}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

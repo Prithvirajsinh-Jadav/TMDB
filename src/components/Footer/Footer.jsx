@@ -1,6 +1,8 @@
 import React from "react";
 import "./Footer.css";
 import FooterSvg from "../../assets/images/footer.svg"
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   return (
@@ -14,30 +16,30 @@ const Footer = () => {
             height="94"
           />
 
-          <a href="/">
+          <Link to="/">
             Join the Community
-          </a>
+          </Link>
         </div>
 
         <div >
           <h3>The Basics</h3>
           <ul>
             <li>
-              <a href="/">About TMDB</a>
+              <Link to="/">About TMDB</Link>
             </li>
             <li>
-              <a href="/">Contact Us</a>
+              <Link to="/">Contact Us</Link>
             </li>
             <li>
-              <a href="/">Support Forums</a>
+              <Link to="/">Support Forums</Link>
             </li>
             <li>
-              <a href="/">API</a>
+              <Link to="/">API</Link>
             </li>
             <li>
-              <a href="/" >
+              <Link to="/" >
                 System Status
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -45,15 +47,15 @@ const Footer = () => {
           <h3>Get Involved</h3>
           <ul >
             <li>
-              <a href="/">
+              <Link to="/">
                 Contribution Bible
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/">Add New Movie</a>
+              <Link to="/">Add New Movie</Link>
             </li>
             <li>
-              <a href="/">Add New TV Show</a>
+              <Link to="/">Add New TV Show</Link>
             </li>
           </ul>
         </div>
@@ -61,18 +63,18 @@ const Footer = () => {
           <h3>Community</h3>
           <ul>
             <li>
-              <a href="/">Guidelines</a>
+              <Link to="/">Guidelines</Link>
             </li>
             <li>
-              <a href="/">Discussions</a>
+              <Link to="/">Discussions</Link>
             </li>
             <li>
-              <a href="/">Leaderboard</a>
+              <Link to="/">Leaderboard</Link>
             </li>
             <li>
-              <a href="/" >
+              <Link to="/" >
                 Twitter
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -80,13 +82,13 @@ const Footer = () => {
           <h3>Legal</h3>
           <ul>
             <li>
-              <a href="/">Terms of Use</a>
+              <Link to="/">Terms of Use</Link>
             </li>
             <li>
-              <a href="/">API Terms of Use</a>
+              <Link to="/">API Terms of Use</Link>
             </li>
             <li>
-              <a href="/">Privacy Policy</a>
+              <Link to="/">Privacy Policy</Link>
             </li>
           </ul>
         </div>

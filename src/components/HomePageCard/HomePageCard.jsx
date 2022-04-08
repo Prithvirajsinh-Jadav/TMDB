@@ -72,19 +72,19 @@ const HomePageCard = ({
                         Want to rate or add this item to a list?
                       </p>
                       <p>
-                        <a href="/">
+                        <Link to="/">
                           Login
                           <i className="fa-solid fa-angle-right"></i>
-                        </a>
+                        </Link>
                       </p>
                     </div>
                     <div className="group">
                       <p className="no_hover">Not a member?</p>
                       <p>
-                        <a href="/">
+                        <Link to="/">
                           Sign up and join the community
                           <i className="fa-solid fa-angle-right"></i>
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -119,9 +119,9 @@ const HomePageCard = ({
 
           <div className="movie-title">
             <h2>
-              <a href="/movie-detail" title={title}>
+              <Link to="/movie-detail" title={title}>
                 {title}
-              </a>
+              </Link>
             </h2>
             <p>
               {" "}

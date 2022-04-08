@@ -4,6 +4,7 @@ import HomePageCard from "../HomePageCard/HomePageCard";
 import axios from "axios";
 import { languages } from "../language";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const CategorySection = () => {
   const [categoryData, setCategoryData] = useState([]);
@@ -14,7 +15,7 @@ const CategorySection = () => {
   const [watchProvider, setWatchProvider] = useState([]);
 
   useEffect(() => {
-    const API_KEY = "a192f556a534b82d1e2eb625272ad9aa";
+    const API_KEY = process.env.REACT_APP_API_KEY;
 
     const categoryURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
 
@@ -331,7 +332,7 @@ const CategorySection = () => {
                       {genreList.map((keyword) => {
                         return (
                           <li key={keyword.id}>
-                            <a href="/">{keyword.name}</a>
+                            <Link to="/">{keyword.name}</Link>
                           </li>
                         );
                       })}
@@ -344,13 +345,13 @@ const CategorySection = () => {
                   <div className="certificate-wrapper">
                     <ul>
                       <li>
-                        <a href="/">U</a>
+                        <Link to="/">U</Link>
                       </li>
                       <li>
-                        <a href="/">UA</a>
+                        <Link to="/">UA</Link>
                       </li>
                       <li>
-                        <a href="/">A</a>
+                        <Link to="/">A</Link>
                       </li>
                     </ul>
                   </div>
@@ -371,7 +372,7 @@ const CategorySection = () => {
                               key={currentLanguage.iso_639_1}
                               value={currentLanguage.iso_639_1}
                             >
-                              {" "}
+                             
                               {currentLanguage.english_name}{" "}
                             </option>
                           );
@@ -433,7 +434,7 @@ const CategorySection = () => {
                             }
                           >
                             <li>
-                              <a href="/" className="position-relative">
+                              <Link to="/" className="position-relative">
                                 <img
                                   src={`https://www.themoviedb.org/t/p/original/t/p/original${currentWatchProvider.logo_path}`}
                                   width="50"
@@ -444,7 +445,7 @@ const CategorySection = () => {
                                 <div>
                                   <span className="white-check check"></span>
                                 </div>
-                              </a>
+                              </Link>
                             </li>
                           </OverlayTrigger>
                         );
