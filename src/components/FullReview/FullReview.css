@@ -20,15 +20,17 @@
     opacity: 0.8;
     font-weight: 400;
 }
-.poster-right-section h6:hover {
+.poster-right-section a:hover {
   opacity: 0.3;
+  color: #fff;
 }
 
-.poster-right-section h6 {
+.poster-right-section a {
   opacity: 0.6;
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
+  color: #fff;
 }
 .review-movie-title:hover {
   opacity: 0.7;

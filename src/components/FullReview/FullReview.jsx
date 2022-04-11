@@ -1,34 +1,33 @@
-import React from "react";
-import "./FullReview.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {  useParams } from "react-router-dom";
 import ReviewCard from "../ReviewCard/ReviewCard";
-import { useParams } from "react-router-dom";
+import defaultImage from "./../../assets/images/defaultReviewImage.jpg";
+import "./FullReview.css";
+import MovieReviewHeading from "../MovieReviewHeading/MovieReviewHeading";
+import TvReviewHeading from "../TvReviewHeading/TvReviewHeading";
 
 const FullReview = () => {
-
   const params = useParams();
+  const [reviewData, setReviewData] = useState([]);
+
+  useEffect(() => {
+    const reviewURL = `https://api.themoviedb.org/3/${params.isMovie}/${params.reviewID}/reviews?api_key=${process.env.REACT_APP_API_KEY}`;
+    axios
+      .get(reviewURL)
+      .then((response) => setReviewData(response.data.results));
+
+   
+  }, []);
 
   return (
     <div className="fullreview-wrapper">
       <div className="container-fluid poster-section p-0">
-        <div className="poster-section-wrapper d-flex container py-3">
-          <div className="poster-left-section">
-            <span>
-              <Link to={"/details/579974"}>
-                <img
-                  src="https://www.themoviedb.org/t/p/w58_and_h87_face/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
-                  alt="..."
-                />
-              </Link>
-            </span>
-          </div>
-          <div className="poster-right-section ms-4">
-            <h2 className="review-movie-title">
-              Spider-Man: No Way Home <span>(2021)</span>
-            </h2>
-            <h6>← Back to main</h6>
-          </div>
-        </div>
+        {params.isMovie === "movie" ? (
+          <MovieReviewHeading id={params.reviewID} />
+        ) : (
+          <TvReviewHeading id={params.reviewID} />
+        )}
       </div>
 
       <div className="review-content-wrapper d-flex w-100 container p-4">
@@ -41,7 +40,31 @@ const FullReview = () => {
         <div className="review-content-right-section w-80">
           <div className="review-section">
             <div className="inner-content">
-              <ReviewCard id={params.reviewID} />
+              {reviewData.map((currentReview) => {
+                return (
+                  <ReviewCard
+                    key={currentReview.author}
+                    author={currentReview.author}
+                    authorImage={
+                      currentReview.author_details.avatar_path &&
+                      currentReview.author_details.avatar_path.startsWith(
+                        "/http"
+                      )
+                        ? currentReview.author_details.avatar_path.slice(1)
+                        : currentReview.author_details.avatar_path === null
+                        ? defaultImage
+                        : `https://www.themoviedb.org/t/p/w64_and_h64_face${currentReview.author_details.avatar_path}`
+                    }
+                    rating={currentReview.author_details.rating}
+                    userLink={`https://www.themoviedb.org/u/${currentReview.author_details.username}`}
+                    created_at={currentReview.created_at}
+                    content={currentReview.content}
+                    url={currentReview.url}
+                  />
+                );
+              })}
+              {/* <ReviewCard id={params.reviewID} /> */}
+              {/* author,authorImage,rating,userLink,created_at,content,url */}
             </div>
           </div>
         </div>

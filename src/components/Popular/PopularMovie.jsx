@@ -16,6 +16,8 @@ const PopularMovie = () => {
   return (
     <>
       {popularMovieData.map((movie) => {
+        // console.log(movie); this will tells us that the media_type does not always comes
+
         return (
           <HomePageCard
             key={movie.id}
@@ -24,6 +26,7 @@ const PopularMovie = () => {
             title={movie.title}
             release_date={movie.release_date}
             popularity={movie.vote_average * 10}
+            isMovie={movie.release_date ? "movie" : "tv"}
           />
         );
       })}

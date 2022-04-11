@@ -23,6 +23,7 @@ const TrendingWeek = () => {
             title={movie.title}
             release_date={movie.release_date}
             popularity={movie.vote_average * 10}
+            isMovie={movie.release_date ? "movie" : "tv"}
           />
         );
       })}

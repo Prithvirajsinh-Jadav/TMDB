@@ -24,6 +24,7 @@ const PopularTV = () => {
             title={tv.original_name}
             release_date={tv.first_air_date}
             popularity={tv.vote_average * 10}
+            isMovie={tv.release_date  ? "movie" : "tv"}
           />
         );
       })}

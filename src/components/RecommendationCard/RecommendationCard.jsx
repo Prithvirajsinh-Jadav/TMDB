@@ -2,16 +2,17 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const RecommendationCard = ({ id }) => {
+const RecommendationCard = ({ id, isMovie }) => {
   const [recommendationData, setRecommendationData] = useState([]);
 
   useEffect(() => {
-    const recommendationURL = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`;
+    const recommendationURL = `https://api.themoviedb.org/3/${isMovie}/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`;
 
     axios
       .get(recommendationURL)
       .then((response) => setRecommendationData(response.data.results));
-  });
+  }, []);
+
 
   return (
     <div className="recommendation-section container p-0">
@@ -33,7 +34,9 @@ const RecommendationCard = ({ id }) => {
                       <div className="image_content ">
                         <Link
                           to="/"
-                          title={recommendationMovie.title}
+                          title={
+                            recommendationMovie.title
+                          }
                           alt={recommendationMovie.title}
                         >
                           <img
@@ -96,7 +99,9 @@ const RecommendationCard = ({ id }) => {
                           title={recommendationMovie.title}
                           alt={recommendationMovie.title}
                         >
-                          <bdi>{recommendationMovie.title} </bdi>
+                          <bdi>
+                            {recommendationMovie.title }
+                          </bdi>
                         </Link>
                         <span className="vote_average">
                           {Math.floor(recommendationMovie.vote_average * 10)}%

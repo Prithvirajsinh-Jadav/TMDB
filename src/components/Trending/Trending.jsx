@@ -19,9 +19,14 @@ const Trending = () => {
   const scrollHandler = (e) => {
 
     if(e.target.scrollLeft < 200){
+
       setIsScroll(false);
+      
+      // return false;
     }else{
+     
       setIsScroll(true);
+      // return true;
     }
     
   }
@@ -39,7 +44,7 @@ const Trending = () => {
             />
             <div
               className={
-                "movie_content " + (isScroll ? "" : "should_fade")
+                "movie_content " + ( isScroll ? "" : "should_fade")
               }
               onScroll={scrollHandler}
             >

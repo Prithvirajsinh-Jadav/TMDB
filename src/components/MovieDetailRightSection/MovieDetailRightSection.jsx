@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import KeywordComponent from "../KeywordComponent/KeywordComponent";
+import MovieKeywordComponent from "../MovieKeywordComponent/MovieKeywordComponent";
 
 
 
-const DetailRightSection = ({id}) => {
+const MovieDetailRightSection = ({id}) => {
       const [currentMovieData, setCurrentMovieData] = useState({});
 
         useEffect(() => {
@@ -163,9 +163,9 @@ const DetailRightSection = ({id}) => {
         </div>
       </div>
 
-      <KeywordComponent id={id} />
+      <MovieKeywordComponent id={id} isMovie="movie" />
     </>
   );
 }
 
-export default DetailRightSection
+export default MovieDetailRightSection;

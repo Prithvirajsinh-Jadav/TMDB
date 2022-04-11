@@ -14,6 +14,7 @@ const HomePageCard = ({
   release_date,
   popularity,
   className,
+  isMovie,
 }) => {
   const pColor =
     popularity >= 70
@@ -72,7 +73,7 @@ const HomePageCard = ({
                         Want to rate or add this item to a list?
                       </p>
                       <p>
-                        <Link to="/">
+                        <Link to="/login">
                           Login
                           <i className="fa-solid fa-angle-right"></i>
                         </Link>
@@ -81,7 +82,7 @@ const HomePageCard = ({
                     <div className="group">
                       <p className="no_hover">Not a member?</p>
                       <p>
-                        <Link to="/">
+                        <Link to="/signup">
                           Sign up and join the community
                           <i className="fa-solid fa-angle-right"></i>
                         </Link>
@@ -91,7 +92,7 @@ const HomePageCard = ({
                 </div>
               )}
             </div>
-            <Link to={`/details/${id}`} className="image" title={title}>
+            <Link to={`/${isMovie}/details/${id}`} className="image" title={title}>
               <img
                 className="poster-image"
                 src={poster_path}
@@ -124,14 +125,12 @@ const HomePageCard = ({
               </Link>
             </h2>
             <p>
-              {" "}
               {new Date(release_date).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
                 year: "numeric",
               })}
             </p>
-            {/* format('{Weekday} {Month} {dd}, {yyyy}'); */}
           </div>
         </div>
       </div>

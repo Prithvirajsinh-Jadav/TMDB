@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const KeywordComponent = ({ id }) => {
+const MovieKeywordComponent = ({ id }) => {
   const [keywords, setKeywords] = useState([]);
 
   useEffect(() => {
@@ -11,8 +11,7 @@ const KeywordComponent = ({ id }) => {
     axios
       .get(keywordURL)
       .then((response) => setKeywords(response.data.keywords));
-  });
-
+  }, []);
   return (
     <>
       <div className="keyword-container">
@@ -31,4 +30,4 @@ const KeywordComponent = ({ id }) => {
   );
 };
 
-export default KeywordComponent;
+export default MovieKeywordComponent;

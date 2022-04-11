@@ -7,16 +7,12 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 
-const DetailHeaderSection = ({ id }) => {
+const MovieDetailHeaderSection = ({ id }) => {
   const [currentMovieData, setCurrentMovieData] = useState({});
 
   useEffect(() => {
     const detailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-
-    //api.themoviedb.org/3/tv/{tv_id}?api_key=<<api_key>>
-    
-    //type = movie || tv
-    //const url = `https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.REACT_APP_API_KEY}`
+    console.log(detailsURL)
 
     axios
       .get(detailsURL)
@@ -51,8 +47,8 @@ const DetailHeaderSection = ({ id }) => {
           <div className="container d-flex text-white py-4">
             <div className="left-section ">
               <div className="poster_wrapper ">
-                <div className="poster position-relative ">
-                  <div className="image_content">
+                <div className="poster  ">
+                  <div className="image_content position-relative">
                     <img
                       className="image-hover "
                       src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${currentMovieData.poster_path}`}
@@ -76,7 +72,7 @@ const DetailHeaderSection = ({ id }) => {
                     </div>
                   </div>
 
-                  <WatchProvider id={id} />
+                  <WatchProvider id={id} isMovie="movie" />
                 </div>
               </div>
             </div>
@@ -218,29 +214,6 @@ const DetailHeaderSection = ({ id }) => {
                   <div className="overview">
                     <p>{currentMovieData.overview}</p>
                   </div>
-
-                  {/* <ol className="people_section">
-                    <li className="profile">
-                      <p>
-                        <Link to="/">Adam Berg</Link>
-                      </p>
-                      <p className="character">Director, Screenplay</p>
-                    </li>
-
-                    <li className="profile">
-                      <p>
-                        <Link to="/">Jerker Virdborg</Link>
-                      </p>
-                      <p className="character">Novel</p>
-                    </li>
-
-                    <li className="profile">
-                      <p>
-                        <Link to="/">Pelle Rådström</Link>
-                      </p>
-                      <p className="character">Writer</p>
-                    </li>
-                  </ol> */}
                 </div>
               </div>
             </div>
@@ -251,4 +224,4 @@ const DetailHeaderSection = ({ id }) => {
   );
 };
 
-export default DetailHeaderSection;
+export default MovieDetailHeaderSection;

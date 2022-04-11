@@ -2,13 +2,13 @@ import React,{useState,useEffect} from 'react'
 import axios from "axios";
 import {Link} from "react-router-dom"
 
-const WatchProvider = ({id}) => {
+const WatchProvider = ({id,isMovie}) => {
 
     const [watchProvider, setWatchProvider] = useState({});
 
     useEffect(()=>{
     
-        const watchProvider = `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`;
+        const watchProvider = `https://api.themoviedb.org/3/${isMovie}/${id}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`;
 
           axios
             .get(watchProvider)

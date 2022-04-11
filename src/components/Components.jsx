@@ -9,4 +9,6 @@ export { default as CategorySection } from "./CategorySection/CategorySection";
 export { default as Login } from "./Login/Login";
 export { default as Signup } from "./Signup/Signup";
 export { default as FullReview } from "./FullReview/FullReview";
+export { default as TvDetail } from "./TvDetail/TvDetail";
+export { default as FullSeason } from "./FullSeason/FullSeason";
 export { default as Dummy } from "./Dummy/Dummy";
