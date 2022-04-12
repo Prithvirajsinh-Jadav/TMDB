@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import TvReviewHeading from "../TvReviewHeading/TvReviewHeading";
 import "./FullSeason.css";
-import defaultPosterImage from "./../../assets/images/fallback-poster-image.svg"
+import defaultPosterImage from "./../../assets/images/fallback-poster-image_1.svg"
 
 const FullSeason = () => {
   const params = useParams();
@@ -32,7 +32,7 @@ const FullSeason = () => {
           return (
             <div className="season-card container-fluid p-0" key={seasons.id}>
               <div className="container season-content py-4 d-flex">
-                <div className="season-image-container">
+                <div className="season-image-container d-flex align-items-center">
                   <img
                     className="season-image"
                     src={
@@ -40,7 +40,8 @@ const FullSeason = () => {
                         ? `https://www.themoviedb.org/t/p/w130_and_h195_bestv2${seasons.poster_path}`
                         : defaultPosterImage
                     }
-                    alt={seasons.name}  
+                   
+                    alt={seasons.name}
                   />
                 </div>
                 <div className="current-season-content ps-4 pt-0 d-flex flex-column justify-content-center">

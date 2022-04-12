@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import CastCard from "../CastCard/CastCard";  
-import RecommendationCard from "../RecommendationCard/RecommendationCard";
+import MovieRecommendationCard from "../MovieRecommendationCard/MovieRecommendationCard";
 import ReviewSection from "../ReviewSection/ReviewSection";
 import MovieDetailHeaderSection from "../MovieDetailHeaderSection/MovieDetailHeaderSection";
 import MovieDetailRightSection from "../MovieDetailRightSection/MovieDetailRightSection";
@@ -16,9 +16,9 @@ const MovieDetail = () => {
 
       <div className="movie-detail-wrapper container p-0">
         <div className="movie-detail-left-section">
-          <CastCard id={params.id} isMovie="movie"/>
+          <CastCard id={params.id} isMovie="movie" />
           <ReviewSection id={params.id} isMovie="movie" />
-          <RecommendationCard id={params.id} isMovie="movie" />
+          <MovieRecommendationCard id={params.id} />
         </div>
 
         <div className="movie-detail-right-section">

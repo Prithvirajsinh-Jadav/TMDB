@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const RecommendationCard = ({ id, isMovie }) => {
+const MovieRecommendationCard = ({ id }) => {
   const [recommendationData, setRecommendationData] = useState([]);
 
   useEffect(() => {
-    const recommendationURL = `https://api.themoviedb.org/3/${isMovie}/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`;
+    const recommendationURL = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`;
 
     axios
       .get(recommendationURL)
@@ -33,10 +33,8 @@ const RecommendationCard = ({ id, isMovie }) => {
                     >
                       <div className="image_content ">
                         <Link
-                          to="/"
-                          title={
-                            recommendationMovie.title
-                          }
+                          to={`movie/details/${id}`}
+                          title={recommendationMovie.title}
                           alt={recommendationMovie.title}
                         >
                           <img
@@ -95,13 +93,11 @@ const RecommendationCard = ({ id, isMovie }) => {
                       <p className="movie-heading d-flex justify-content-between">
                         <Link
                           className="title"
-                          to={`/details/${id}`}
+                          to={`movie/details/${id}`}
                           title={recommendationMovie.title}
                           alt={recommendationMovie.title}
                         >
-                          <bdi>
-                            {recommendationMovie.title }
-                          </bdi>
+                          <bdi>{recommendationMovie.title}</bdi>
                         </Link>
                         <span className="vote_average">
                           {Math.floor(recommendationMovie.vote_average * 10)}%
@@ -124,4 +120,4 @@ const RecommendationCard = ({ id, isMovie }) => {
   );
 };
 
-export default RecommendationCard;
+export default MovieRecommendationCard;

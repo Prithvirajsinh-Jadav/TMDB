@@ -1,50 +1,41 @@
 import React, { useState, useEffect } from "react";
 import "./CategorySection.css";
-import HomePageCard from "../HomePageCard/HomePageCard";
+import "react-datepicker/dist/react-datepicker.css";
+
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import DatePicker from "react-datepicker";
 import { languages } from "../language";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { country } from "../country";
+
+import MovieCategoryRightSection from "../MovieCategoryRightSection/MovieCategoryRightSection";
+import CategoryWatchProvider from "../CategoryWatchProvider/CategoryWatchProvider";
+import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSection";
 
 const CategorySection = () => {
-  const [categoryData, setCategoryData] = useState([]);
-  // const [allCountries, setAllCountries] = useState([]);
-
   const [genreList, setGenreList] = useState([]);
 
-  const [watchProvider, setWatchProvider] = useState([]);
+  const params = useParams();
 
   useEffect(() => {
     const API_KEY = process.env.REACT_APP_API_KEY;
 
-    const categoryURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
-
-    // const allCountriesURL = `https://api.themoviedb.org/3/watch/providers/regions?api_key=${API_KEY}`;
-
     const genreKeywordURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
-
-    const watchProviderURL = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}&watch_region=in`;
-
-    axios
-      .get(categoryURL)
-      .then((response) => setCategoryData(response.data.results));
-
-    // axios
-    //   .get(allCountriesURL)
-    //   .then((response) => setAllCountries(response.data.results));
 
     axios
       .get(genreKeywordURL)
       .then((response) => setGenreList(response.data.genres));
-
-    axios
-      .get(watchProviderURL)
-      .then((response) => setWatchProvider(response.data.results));
   }, []);
 
   const [showSortPanel, setShowSortPanel] = useState(false);
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [showWatchPanel, setShowWatchPanel] = useState(false);
+  const [sortValue, setSortValue] = useState("popularity.desc");
+  const [currentSearchCountry, setCurrentSearchCountry] = useState("IN");
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
+  const [currentWatchCountry, setCurrentWatchCountry] = useState("IN");
+  const [activeGenreList, setActiveGenreList] = useState([28,12])
 
   const filterPanelHandler = (event) => {
     if (event.target.id === "sort") {
@@ -56,11 +47,62 @@ const CategorySection = () => {
     }
   };
 
-  const checkBoxHandler = () => {
-    console.log("hello world");
+  //  console.log(watchProvider);
+  // const [showAvailibility, setShowAvailibility] = useState(false);
+  // const [availibilityChecked, setAvailibilityChecked] = useState(true);
+  // const [streamChecked, setStreamChecked] = useState(true);
+  // const [freeChecked, setFreeChecked] = useState(true);
+  // const [adsChecked, setAdsChecked] = useState(true);
+  // const [rentChecked, setRentChecked] = useState(true);
+  // const [buyChecked, setBuyChecked] = useState(true);
+
+  const initialState = {
+    all_availabilities: true,
+    stream: true,
+    free: true,
+    ads: true,
+    rent: true,
+    buy: true,
+    release: true,
+    countries: true,
+    premiere: true,
+    theatrical: true,
+    theatricalLimited: true,
+    digital: true,
+    physical: true,
+    tv: true,
   };
 
-  //  console.log(watchProvider);
+  const [isChecked, setIsChecked] = useState(initialState);
+
+  const sortHandler = (e) => {
+    setSortValue(e.target.value);
+  };
+
+  const checkBoxHandler = (e) => {
+    const { name } = e.target;
+    setIsChecked((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name],
+    }));
+  };
+
+  const searchCountryHandler = (e) => {
+    setCurrentSearchCountry(e.target.value);
+  };
+
+  const watchCountryHandler = (e) => {
+    setCurrentWatchCountry(e.target.value);
+  };
+
+  const keywordsHandler = (e) => {
+    console.log("i m exe");
+    console.log(e.target.id);
+    e.target.classList.toggle("keyword-active");
+    if(activeGenreList.includes(e.target.id)){
+      console.log("yes its exists and removed");
+    }
+  }
 
   return (
     <div className="category-wrapper container d-flex p-0 my-4 flex-column">
@@ -93,6 +135,7 @@ const CategorySection = () => {
                       id="sort_by"
                       name="sort_by"
                       className="filter-dropdown w-100"
+                      onChange={sortHandler}
                     >
                       <option value="popularity.desc">
                         Popularity Descending
@@ -110,8 +153,8 @@ const CategorySection = () => {
                       <option value="primary_release_date.asc">
                         Release Date Ascending
                       </option>
-                      <option value="title.asc">Title (A-Z)</option>
-                      <option value="title.desc">Title (Z-A)</option>
+                      <option value="original_title.asc">Title (A-Z)</option>
+                      <option value="original_title.desc">Title (Z-A)</option>
                     </select>
                   </span>
                 </div>
@@ -144,6 +187,8 @@ const CategorySection = () => {
                       type="checkbox"
                       className="checkbox-input me-1"
                       name="all_availabilities"
+                      onChange={checkBoxHandler}
+                      checked={isChecked.all_availabilities}
                     />
                     <label
                       htmlFor="all_availabilities"
@@ -153,13 +198,20 @@ const CategorySection = () => {
                     </label>
                   </label>
 
-                  <div className="d-none availabilities-hidden-section">
+                  <div
+                    className={
+                      "availabilities-hidden-section " +
+                      (isChecked.all_availabilities ? "d-none" : "")
+                    }
+                  >
                     <label className="w-100 d-inline-flex align-items-center">
                       <input
                         id="stream"
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="stream"
+                        onChange={checkBoxHandler}
+                        checked={isChecked.stream}
                       />
                       <label htmlFor="stream" className="stream">
                         Stream
@@ -171,6 +223,8 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="free"
+                        onChange={checkBoxHandler}
+                        checked={isChecked.free}
                       />
                       <label htmlFor="free" className="free">
                         Free
@@ -182,6 +236,8 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="ads"
+                        onChange={checkBoxHandler}
+                        checked={isChecked.ads}
                       />
                       <label htmlFor="ads" className="ads">
                         Ads
@@ -193,6 +249,8 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="rent"
+                        onChange={checkBoxHandler}
+                        checked={isChecked.rent}
                       />
                       <label htmlFor="rent" className="rent">
                         Rent
@@ -204,6 +262,8 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="buy"
+                        onChange={checkBoxHandler}
+                        checked={isChecked.buy}
                       />
                       <label htmlFor="buy" className="buy">
                         Buy
@@ -221,13 +281,20 @@ const CategorySection = () => {
                       type="checkbox"
                       className="checkbox-input me-1"
                       name="release"
+                      checked={isChecked.release}
+                      onChange={checkBoxHandler}
                     />
                     <label htmlFor="release" className="release-checkbox">
                       Search all releases?
                     </label>
                   </label>
 
-                  <div className="releases-hidden-section">
+                  <div
+                    className={
+                      "releases-hidden-section " +
+                      (isChecked.release ? "d-none" : "")
+                    }
+                  >
                     <div className="release-country-section">
                       <label className="w-100 d-inline-flex align-items-center">
                         <input
@@ -235,14 +302,40 @@ const CategorySection = () => {
                           type="checkbox"
                           className="checkbox-input me-1"
                           name="countries"
+                          checked={isChecked.countries}
+                          onChange={checkBoxHandler}
                         />
                         <label htmlFor="countries" className="countries">
                           Search all countries?
                         </label>
                       </label>
 
-                      <div className="countries-input-section">
-                        {/* <img src="https://flagcdn.com/w20/in.png" alt="india" /> */}
+                      <div
+                        className={
+                          "countries-input-section py-2 " +
+                          (isChecked.countries ? "d-none" : "")
+                        }
+                      >
+                        <span>
+                          <select
+                            id="searchCountries"
+                            name="searchCountries"
+                            className="filter-dropdown w-100"
+                            onChange={searchCountryHandler}
+                            value={currentSearchCountry}
+                          >
+                            {country.map((currentLanguage) => {
+                              return (
+                                <option
+                                  key={currentLanguage.iso_3166_1}
+                                  value={currentLanguage.iso_3166_1}
+                                >
+                                  {currentLanguage.english_name}{" "}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </span>
                       </div>
                     </div>
                     <div className="watch-provider-section">
@@ -252,6 +345,8 @@ const CategorySection = () => {
                           type="checkbox"
                           className="checkbox-input me-1"
                           name="premiere"
+                          checked={isChecked.premiere}
+                          onChange={checkBoxHandler}
                         />
                         <label htmlFor="premiere" className="premiere">
                           Premiere
@@ -262,7 +357,9 @@ const CategorySection = () => {
                           id="theatrical-limited"
                           type="checkbox"
                           className="checkbox-input me-1"
-                          name="theatrical-limited"
+                          name="theatricalLimited"
+                          checked={isChecked.theatricalLimited}
+                          onChange={checkBoxHandler}
                         />
                         <label
                           htmlFor="theatrical-limited"
@@ -277,6 +374,8 @@ const CategorySection = () => {
                           type="checkbox"
                           className="checkbox-input me-1"
                           name="theatrical"
+                          checked={isChecked.theatrical}
+                          onChange={checkBoxHandler}
                         />
                         <label htmlFor="theatrical" className="theatrical">
                           Theatrical
@@ -288,6 +387,8 @@ const CategorySection = () => {
                           type="checkbox"
                           className="checkbox-input me-1"
                           name="digital"
+                          checked={isChecked.digital}
+                          onChange={checkBoxHandler}
                         />
                         <label htmlFor="digital" className="digital">
                           Digital
@@ -299,6 +400,8 @@ const CategorySection = () => {
                           type="checkbox"
                           className="checkbox-input me-1"
                           name="physical"
+                          checked={isChecked.physical}
+                          onChange={checkBoxHandler}
                         />
                         <label htmlFor="physical" className="physical">
                           Physical
@@ -310,6 +413,8 @@ const CategorySection = () => {
                           type="checkbox"
                           className="checkbox-input me-1"
                           name="tv"
+                          checked={isChecked.tv}
+                          onChange={checkBoxHandler}
                         />
                         <label htmlFor="tv" className="tv">
                           TV
@@ -317,9 +422,30 @@ const CategorySection = () => {
                       </label>
                     </div>
 
-                    <div className="date-picker-section d-none">
-                      <div className="from-section">from</div>
-                      <div className="to-section">to</div>
+                    <div className="date-picker-section">
+                      <div className="from-section d-flex justify-content-between">
+                        <div>
+                          <span>from</span>
+                        </div>
+
+                        <div className="date-picker-container d-flex justify-content-end">
+                          <DatePicker
+                            selected={fromDate}
+                            onChange={(date) => setFromDate(date)}
+                          />
+                        </div>
+                      </div>
+                      <div className="to-section d-flex justify-content-between mt-2">
+                        <div>
+                          <span>to</span>
+                        </div>
+                        <div className="date-picker-container d-flex justify-content-end">
+                          <DatePicker
+                            selected={toDate}
+                            onChange={(date) => setToDate(date)}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -331,8 +457,8 @@ const CategorySection = () => {
                     <ul>
                       {genreList.map((keyword) => {
                         return (
-                          <li key={keyword.id}>
-                            <Link to="/">{keyword.name}</Link>
+                          <li key={keyword.id} id={keyword.id} onClick={keywordsHandler}>
+                            {keyword.name}
                           </li>
                         );
                       })}
@@ -344,15 +470,9 @@ const CategorySection = () => {
                   <h3>Certification</h3>
                   <div className="certificate-wrapper">
                     <ul>
-                      <li>
-                        <Link to="/">U</Link>
-                      </li>
-                      <li>
-                        <Link to="/">UA</Link>
-                      </li>
-                      <li>
-                        <Link to="/">A</Link>
-                      </li>
+                      <li>U</li>
+                      <li>UA</li>
+                      <li>A</li>
                     </ul>
                   </div>
                 </div>
@@ -372,7 +492,6 @@ const CategorySection = () => {
                               key={currentLanguage.iso_639_1}
                               value={currentLanguage.iso_639_1}
                             >
-                             
                               {currentLanguage.english_name}{" "}
                             </option>
                           );
@@ -418,40 +537,30 @@ const CategorySection = () => {
                 }
               >
                 <div className="country-section">
-                  <h6>country section</h6>
-
-                  <div className="ott-provider-wrapper">
-                    <ul className="ott-provider ">
-                      {watchProvider.map((currentWatchProvider) => {
+                  <span>
+                    <select
+                      id="country"
+                      name="countries"
+                      className="filter-dropdown w-100"
+                      onChange={watchCountryHandler}
+                      value={currentWatchCountry}
+                    >
+                      {country.map((currentLanguage) => {
                         return (
-                          <OverlayTrigger
-                            placement="top"
-                            key={currentWatchProvider.provider_id}
-                            overlay={
-                              <Tooltip id={`tooltip`}>
-                                {currentWatchProvider.provider_name}
-                              </Tooltip>
-                            }
+                          <option
+                            key={currentLanguage.iso_3166_1}
+                            value={currentLanguage.iso_3166_1}
                           >
-                            <li>
-                              <Link to="/" className="position-relative">
-                                <img
-                                  src={`https://www.themoviedb.org/t/p/original/t/p/original${currentWatchProvider.logo_path}`}
-                                  width="50"
-                                  height="50"
-                                  alt={currentWatchProvider.provider_name}
-                                />
-
-                                <div>
-                                  <span className="white-check check"></span>
-                                </div>
-                              </Link>
-                            </li>
-                          </OverlayTrigger>
+                            {currentLanguage.english_name}{" "}
+                          </option>
                         );
                       })}
-                    </ul>
-                  </div>
+                    </select>
+                  </span>
+
+                  <CategoryWatchProvider
+                    currentWatchCountry={currentWatchCountry}
+                  />
                 </div>
               </div>
             </div>
@@ -462,20 +571,12 @@ const CategorySection = () => {
           </div>
         </div>
 
-        <div className="right-category-section w-80 d-flex flex-wrap justify-content-center ">
-          {categoryData.map((categoryObj) => {
-            return (
-              <HomePageCard
-                id={categoryObj.id}
-                key={categoryObj.id}
-                poster_path={`https://www.themoviedb.org/t/p/w220_and_h330_face/${categoryObj.poster_path}`}
-                title={categoryObj.title}
-                release_date={categoryObj.release_date}
-                popularity={categoryObj.vote_average * 10}
-                className={true}
-              />
-            );
-          })}
+        <div className="right-category-section w-80 d-flex flex-wrap justify-content-center h-100">
+          {params.isMovie === "movie" ? (
+            <MovieCategoryRightSection category={params.category} />
+          ) : (
+            <TvCategoryRightSection category={params.category} />
+          )}
 
           <div className="load-more-btn-section  w-100 mx-4">
             <button className="btn btn-custom btn-load w-100">Load More</button>

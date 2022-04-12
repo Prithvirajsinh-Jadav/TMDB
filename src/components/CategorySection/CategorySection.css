@@ -194,21 +194,17 @@
 
 }
 
-.keyword-wrapper a,
-.certificate-wrapper  a{
-  color: #000;
-}
-
 .keyword-wrapper li:hover,
 .certificate-wrapper li:hover{
   background-color: rgb(1,180,228) ;
   border-color: rgb(1,180,228);
-  /* background-color: red;  */
+  color: #fff;
 }
 
-.keyword-wrapper li:hover a ,
-.certificate-wrapper li:hover a {
-color: #fff;
+.keyword-active{
+  background-color: rgb(1,180,228) ;
+  border-color: rgb(1,180,228) !important;
+  color: #fff;
 }
 
 .ott-provider{
@@ -265,3 +261,4 @@ color: #fff;
   font-weight: 700 !important;
   border-radius: 0.25rem !important;
 }
+

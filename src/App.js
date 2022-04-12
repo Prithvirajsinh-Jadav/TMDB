@@ -50,7 +50,7 @@ const App = () => {
             element={<FullSeason />}
           />
 
-          <Route path="/movie/:category" element={<CategorySection />} />
+          <Route path="/:isMovie/:category" element={<CategorySection />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
         </Routes>

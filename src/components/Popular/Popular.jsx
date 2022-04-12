@@ -18,11 +18,7 @@ const Popular = () => {
   const [selectedTab, setSelectedTab] = useState("movie");
 
   const scrollHandler = (e) => {
-    if (e.target.scrollLeft < 200) {
-      setIsScroll(false);
-    } else {
-      setIsScroll(true);
-    }
+    setIsScroll(e.target.scrollLeft < 200);
   };
 
   return (
@@ -37,9 +33,7 @@ const Popular = () => {
               setSelectedTab={setSelectedTab}
             />
             <div
-              className={
-                "movie_content " + (isScroll ? "" : "should_fade")
-              }
+              className={"movie_content " + (isScroll ? "" : "should_fade")}
               onScroll={scrollHandler}
             >
               <div className="scroll_content">
@@ -51,7 +45,6 @@ const Popular = () => {
           </div>
         </section>
       </div>
-
     </>
   );
 };

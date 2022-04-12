@@ -1,11 +1,11 @@
 import React from "react";
 import {Link, useParams } from "react-router-dom";
-import RecommendationCard from "../RecommendationCard/RecommendationCard";
 import ReviewSection from "../ReviewSection/ReviewSection";
 import CastCard from "../CastCard/CastCard";
 import CurrentSeasonCard from "../CurrentSeasonCard/CurrentSeasonCard";
 import TvDetailHeaderSection from "../TvDetailHeaderSection/TvDetailHeaderSection";
 import TvDetailRightSection from "../TvDetailRightSection/TvDetailRightSection";
+import TvRecommendationCard from "../TvRecommendationCard/TvRecommendationCard";
 
 const TvDetail = () => {
   const params = useParams();
@@ -27,7 +27,7 @@ const TvDetail = () => {
             </div>
           </div>
           <ReviewSection id={params.id} isMovie="tv" />
-          <RecommendationCard id={params.id} isMovie="tv" />
+          <TvRecommendationCard id={params.id}  />
         </div>
 
         <div className="movie-detail-right-section">

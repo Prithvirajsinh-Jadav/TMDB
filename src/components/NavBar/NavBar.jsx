@@ -6,7 +6,6 @@ const NavBar = () => {
   return (
     <>
       <div className=" customNavBar darkBlue d-flex  ">
-
         <div className="container p-0">
           <div className="subMedia">
             <nav className="navbar navbar-expand-lg   ">
@@ -38,28 +37,31 @@ const NavBar = () => {
                 <div>
                   <ul className="navbar-nav mr-auto  ">
                     <li className="nav-item nav-movies ">
-                      <Link className="nav-link  " to="/">
+                      <Link className="nav-link  " to="/movie/popular">
                         Movies
                       </Link>
                       <div className="movie-items ">
                         <ul className="navbar-nav">
                           <li className="nav-item ">
-                            <Link className="nav-link  " to="/">
+                            <Link className="nav-link  " to="/movie/popular">
                               Popular
                             </Link>
                           </li>
                           <li>
-                            <Link className="nav-link  " to="/">
+                            <Link
+                              className="nav-link  "
+                              to="/movie/now_playing"
+                            >
                               Now Playing
                             </Link>
                           </li>
                           <li>
-                            <Link className="nav-link  " to="/">
+                            <Link className="nav-link  " to="/movie/upcoming">
                               Upcoming
                             </Link>
                           </li>
                           <li>
-                            <Link className="nav-link  " to="/">
+                            <Link className="nav-link  " to="/movie/top_rated">
                               Top Rated
                             </Link>
                           </li>
@@ -67,29 +69,29 @@ const NavBar = () => {
                       </div>
                     </li>
                     <li className="nav-item nav-tv">
-                      <Link className="nav-link  " to="/">
+                      <Link className="nav-link  " to="/tv/popular">
                         TV Shows
                       </Link>
 
                       <div className="tv-items ">
                         <ul className="navbar-nav ">
                           <li className="nav-item ">
-                            <Link className="nav-link  " to="/">
+                            <Link className="nav-link  " to="/tv/popular">
                               Popular
                             </Link>
                           </li>
                           <li>
-                            <Link className="nav-link  " to="/">
-                              Now Playing
+                            <Link className="nav-link  " to="/tv/airing_today">
+                             Airing Today
                             </Link>
                           </li>
                           <li>
-                            <Link className="nav-link  " to="/">
-                              Upcoming
+                            <Link className="nav-link  " to="/tv/on_the_air">
+                              On TV
                             </Link>
                           </li>
                           <li>
-                            <Link className="nav-link  " to="/">
+                            <Link className="nav-link  " to="/tv/top_rated">
                               Top Rated
                             </Link>
                           </li>
@@ -133,8 +135,6 @@ const NavBar = () => {
                     <li className="nav-item">
                       <Link className="nav-link  nav-mag" to="/">
                         <i className="fa-solid fa-magnifying-glass"></i>
-
-                        {/* https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-28-search-blue-177462d06db81ff2a02aa022c1c0be5ba4200d7bd3f51091ed9298980e3a26a1.svg */}
                       </Link>
                     </li>
                   </ul>

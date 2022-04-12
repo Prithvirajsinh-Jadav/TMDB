@@ -24,7 +24,7 @@ const ReviewSection = ({ id, isMovie }) => {
               <ul>
                 <li className="social-menu-active">
                   <Link id="reviews" className="media_panel" to="/">
-                    Reviews <span>1</span>
+                    Reviews <span>{reviewData.length}</span>
                   </Link>
                 </li>
                 <li className="">
