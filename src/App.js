@@ -14,12 +14,11 @@ import {
   TvDetail,
   FullSeason,
 } from "./components/Components.jsx";
-import { BrowserRouter as Router, Route,Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 
 const App = () => {
-  
   return (
     <>
       <Router>
@@ -44,11 +43,7 @@ const App = () => {
             path="/:isMovie/reviews/:reviewID"
             element={<FullReview />}
           />
-          <Route
-            exact
-            path="/tv/seasons/:id"
-            element={<FullSeason />}
-          />
+          <Route exact path="/tv/seasons/:id" element={<FullSeason />} />
 
           <Route path="/:isMovie/:category" element={<CategorySection />} />
           <Route exact path="/login" element={<Login />} />

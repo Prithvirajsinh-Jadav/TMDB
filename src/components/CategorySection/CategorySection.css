@@ -269,3 +269,10 @@
   border-radius: 0.25rem !important;
 }
 
+.infinite-class{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  height: 100%;
+}

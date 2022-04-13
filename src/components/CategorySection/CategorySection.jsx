@@ -11,6 +11,11 @@ import { country } from "../country";
 import MovieCategoryRightSection from "../MovieCategoryRightSection/MovieCategoryRightSection";
 import CategoryWatchProvider from "../CategoryWatchProvider/CategoryWatchProvider";
 import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSection";
+import SingleSliderRangeInput from "../SingleSliderRangeInput/SingleSliderRangeInput";
+import { DualSliderRangeInput } from "../DualSliderRangeInput/DualSliderRangeInput";
+
+import Slider from "@mui/material/Slider";
+
 
 const CategorySection = () => {
   const [genreList, setGenreList] = useState([]);
@@ -37,16 +42,13 @@ const CategorySection = () => {
   const [currentWatchCountry, setCurrentWatchCountry] = useState("IN");
   const [activeGenreList, setActiveGenreList] = useState([]);
   const [activeCategoryWatchProvider, setActiveCategoryWatchProvider] = useState([])
+  const [userScoreValue, setUserScoreValue] = useState([0, 10]);
+  const [minimumUserVotes, setMinimumUserVotes] = useState(0);
+  const [runtimeUser, setRuntimeUser] = useState([0,400])
 
-  const filterPanelHandler = (event) => {
-    if (event.target.id === "sort") {
-      setShowSortPanel((prevState) => !prevState);
-    } else if (event.target.id === "filters") {
-      setShowFilterPanel((prevState) => !prevState);
-    } else if (event.target.id === "watch") {
-      setShowWatchPanel((prevState) => !prevState);
-    }
-  };
+  // let activeCategoryWatchProvider = [8,"8"]
+
+ 
 
   //  console.log(watchProvider);
   // const [showAvailibility, setShowAvailibility] = useState(false);
@@ -75,6 +77,19 @@ const CategorySection = () => {
   };
 
   const [isChecked, setIsChecked] = useState(initialState);
+
+  console.log(sortValue + ": " );
+
+
+   const filterPanelHandler = (event) => {
+     if (event.target.id === "sort") {
+       setShowSortPanel((prevState) => !prevState);
+     } else if (event.target.id === "filters") {
+       setShowFilterPanel((prevState) => !prevState);
+     } else if (event.target.id === "watch") {
+       setShowWatchPanel((prevState) => !prevState);
+     }
+   };
 
   const sortHandler = (e) => {
     setSortValue(e.target.value);
@@ -105,6 +120,70 @@ const CategorySection = () => {
       setActiveGenreList((prevState) => ([...prevState , `${id}`]))
     }
   }
+
+
+  const userScoreMarks = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 5,
+      label: "5",
+    },
+    {
+      value: 10,
+      label: "10",
+    },
+
+  ];
+
+
+  const minimumUserVotesMarks = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 100,
+      label: "100",
+    },
+    {
+      value: 200,
+      label: "200",
+    },
+    {
+      value: 300,
+      label: "300",
+    },
+    {
+      value: 400,
+      label: "400",
+    },
+    {
+      value: 500,
+      label: "500",
+    },
+  ];
+
+  const runtimeUserMarks = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 120,
+      label: "120",
+    },
+    {
+      value: 240,
+      label: "240",
+    },
+    {
+      value: 360,
+      label: "360",
+    },
+  ];
 
   return (
     <div className="category-wrapper container d-flex p-0 my-4 flex-column">
@@ -459,7 +538,11 @@ const CategorySection = () => {
                     <ul>
                       {genreList.map((keyword) => {
                         return (
-                          <li key={keyword.id} id={keyword.id} onClick={keywordsHandler}>
+                          <li
+                            key={keyword.id}
+                            id={keyword.id}
+                            onClick={keywordsHandler}
+                          >
                             {keyword.name}
                           </li>
                         );
@@ -505,14 +588,46 @@ const CategorySection = () => {
 
                 <div className="user-score-section">
                   <h3>User Score</h3>
+                  <Slider
+                    value={userScoreValue}
+                    onChange={(event, newValue) => {
+                      setUserScoreValue(newValue);
+                    }}
+                    min={0}
+                    max={10}
+                    step={1}
+                    marks={userScoreMarks}
+                    valueLabelDisplay="auto"
+                  />
                 </div>
 
                 <div className="votes-section">
                   <h3>Minimum User Score</h3>
+                  <Slider
+                    aria-label="Always visible"
+                    defaultValue={10}
+                    valueLabelDisplay="auto"
+                    min={0}
+                    max={500}
+                    step={50}
+                    marks={minimumUserVotesMarks}
+                    getAriaValueText={(value) => `${value}m`}
+                    onChange={(e) => setMinimumUserVotes(e.target.value)}
+                  />
                 </div>
-
                 <div className="runtime-section">
                   <h3>Runtime</h3>
+                  <Slider
+                    value={runtimeUser}
+                    onChange={(event, newValue) => {
+                      setRuntimeUser(newValue);
+                    }}
+                    min={0}
+                    max={400}
+                    step={15}
+                    marks={runtimeUserMarks}
+                    valueLabelDisplay="auto"
+                  />
                 </div>
 
                 {/* <div className="keyword-search-section">
@@ -563,7 +678,9 @@ const CategorySection = () => {
                   <CategoryWatchProvider
                     currentWatchCountry={currentWatchCountry}
                     activeCategoryWatchProvider={activeCategoryWatchProvider}
-                    setActiveCategoryWatchProvider={setActiveCategoryWatchProvider}
+                    setActiveCategoryWatchProvider={
+                      setActiveCategoryWatchProvider
+                    }
                   />
                 </div>
               </div>
@@ -575,14 +692,16 @@ const CategorySection = () => {
           </div>
         </div>
 
-        <div className="right-category-section w-80 d-flex flex-wrap justify-content-center h-100">
+        <div className="right-category-section w-80 h-100">
           {params.isMovie === "movie" ? (
             <MovieCategoryRightSection category={params.category} />
           ) : (
             <TvCategoryRightSection category={params.category} />
           )}
 
-          <div className="load-more-btn-section  w-100 mx-4">
+          
+
+          <div className="load-more-btn-section  w-100 m-4">
             <button className="btn btn-custom btn-load w-100">Load More</button>
           </div>
         </div>
