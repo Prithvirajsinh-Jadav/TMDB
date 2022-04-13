@@ -12,7 +12,6 @@ const MovieDetailHeaderSection = ({ id }) => {
 
   useEffect(() => {
     const detailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-    console.log(detailsURL)
 
     axios
       .get(detailsURL)

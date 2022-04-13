@@ -218,25 +218,32 @@
   border-radius: 8px;
 }
 
-.ott-provider div{
+.hover-div{
   display: inline-flex;
     align-items: center;
     justify-content: center;
     align-content: center;
     position: absolute;
+    top: 0;
     left: 0;
     width: 50px;
     height: 50px;
-    background: rgba(1,180,228,0.9);
+    background: rgba(1,180,228,0.9) !important;
     z-index: 2;
     border-radius: 8px;
     font-size: 2em;
     visibility: hidden;
+    /* opacity: 0; */
     /* transition: all 0.3s ease; */
 }
 
-.ott-provider a:hover > div{
+.hover-li:hover .hover-div{
  visibility: visible;
+ /* opacity: 1; */
+}
+
+.active-icon-class{
+  visibility: visible;
 }
 
 .ott-provider .check{

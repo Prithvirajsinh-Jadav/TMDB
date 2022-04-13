@@ -35,7 +35,8 @@ const CategorySection = () => {
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [currentWatchCountry, setCurrentWatchCountry] = useState("IN");
-  const [activeGenreList, setActiveGenreList] = useState([28,12])
+  const [activeGenreList, setActiveGenreList] = useState([]);
+  const [activeCategoryWatchProvider, setActiveCategoryWatchProvider] = useState([])
 
   const filterPanelHandler = (event) => {
     if (event.target.id === "sort") {
@@ -96,11 +97,12 @@ const CategorySection = () => {
   };
 
   const keywordsHandler = (e) => {
-    console.log("i m exe");
-    console.log(e.target.id);
-    e.target.classList.toggle("keyword-active");
-    if(activeGenreList.includes(e.target.id)){
-      console.log("yes its exists and removed");
+    const {id,classList} = e.target;
+    classList.toggle("keyword-active");
+    if(activeGenreList.includes(`${id}`)){
+      setActiveGenreList(activeGenreList.filter(item => item !== id))
+    }else{
+      setActiveGenreList((prevState) => ([...prevState , `${id}`]))
     }
   }
 
@@ -560,6 +562,8 @@ const CategorySection = () => {
 
                   <CategoryWatchProvider
                     currentWatchCountry={currentWatchCountry}
+                    activeCategoryWatchProvider={activeCategoryWatchProvider}
+                    setActiveCategoryWatchProvider={setActiveCategoryWatchProvider}
                   />
                 </div>
               </div>
