@@ -11,17 +11,12 @@ import { country } from "../country";
 import MovieCategoryRightSection from "../MovieCategoryRightSection/MovieCategoryRightSection";
 import CategoryWatchProvider from "../CategoryWatchProvider/CategoryWatchProvider";
 import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSection";
-import SingleSliderRangeInput from "../SingleSliderRangeInput/SingleSliderRangeInput";
-import { DualSliderRangeInput } from "../DualSliderRangeInput/DualSliderRangeInput";
 
 import Slider from "@mui/material/Slider";
 
-
 const CategorySection = () => {
-  const [genreList, setGenreList] = useState([]);
-
   const params = useParams();
-
+  
   useEffect(() => {
     const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -35,29 +30,21 @@ const CategorySection = () => {
   const [showSortPanel, setShowSortPanel] = useState(false);
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [showWatchPanel, setShowWatchPanel] = useState(false);
+  const [genreList, setGenreList] = useState([]);
   const [sortValue, setSortValue] = useState("popularity.desc");
+  const [monetizationTypes, setMonetizationTypes] = useState([]);
+  const [releaseType, setReleaseType] = useState([]);
   const [currentSearchCountry, setCurrentSearchCountry] = useState("IN");
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [currentWatchCountry, setCurrentWatchCountry] = useState("IN");
   const [activeGenreList, setActiveGenreList] = useState([]);
-  const [activeCategoryWatchProvider, setActiveCategoryWatchProvider] = useState([])
+  const [activeCategoryWatchProvider, setActiveCategoryWatchProvider] =
+    useState([]);
   const [userScoreValue, setUserScoreValue] = useState([0, 10]);
   const [minimumUserVotes, setMinimumUserVotes] = useState(0);
-  const [runtimeUser, setRuntimeUser] = useState([0,400])
-
-  // let activeCategoryWatchProvider = [8,"8"]
-
- 
-
-  //  console.log(watchProvider);
-  // const [showAvailibility, setShowAvailibility] = useState(false);
-  // const [availibilityChecked, setAvailibilityChecked] = useState(true);
-  // const [streamChecked, setStreamChecked] = useState(true);
-  // const [freeChecked, setFreeChecked] = useState(true);
-  // const [adsChecked, setAdsChecked] = useState(true);
-  // const [rentChecked, setRentChecked] = useState(true);
-  // const [buyChecked, setBuyChecked] = useState(true);
+  const [runtimeUser, setRuntimeUser] = useState([0, 400]);
+  const [currentLanguage, setCurrentLanguage] = useState("en");
 
   const initialState = {
     all_availabilities: true,
@@ -78,18 +65,155 @@ const CategorySection = () => {
 
   const [isChecked, setIsChecked] = useState(initialState);
 
-  console.log(sortValue + ": " );
+  useEffect(() => {
+    if (isChecked.all_availabilities === true) {
+      setMonetizationTypes([]);
+    } else {
+      if (isChecked.stream === true) {
+        if (!monetizationTypes.includes("flatrate")) {
+          setMonetizationTypes((prevState) => [...prevState, "flatrate"]);
+        }
+      } else {
+        if (monetizationTypes.includes("flatrate")) {
+          setMonetizationTypes(
+            monetizationTypes.filter((item) => item !== "flatrate")
+          );
+        }
+      }
+      if (isChecked.ads === true) {
+        if (!monetizationTypes.includes("ads")) {
+          setMonetizationTypes((prevState) => [...prevState, "ads"]);
+        }
+      } else {
+        if (monetizationTypes.includes("ads")) {
+          setMonetizationTypes(
+            monetizationTypes.filter((item) => item !== "ads")
+          );
+        }
+      }
+      if (isChecked.free === true) {
+        if (!monetizationTypes.includes("free")) {
+          setMonetizationTypes((prevState) => [...prevState, "free"]);
+        }
+      } else {
+        if (monetizationTypes.includes("free")) {
+          setMonetizationTypes(
+            monetizationTypes.filter((item) => item !== "free")
+          );
+        }
+      }
+      if (isChecked.buy === true) {
+        if (!monetizationTypes.includes("buy")) {
+          setMonetizationTypes((prevState) => [...prevState, "buy"]);
+        }
+      } else {
+        if (monetizationTypes.includes("buy")) {
+          setMonetizationTypes(
+            monetizationTypes.filter((item) => item !== "buy")
+          );
+        }
+      }
+      if (isChecked.rent === true) {
+        if (!monetizationTypes.includes("rent")) {
+          setMonetizationTypes((prevState) => [...prevState, "rent"]);
+        }
+      } else {
+        if (monetizationTypes.includes("rent")) {
+          setMonetizationTypes(
+            monetizationTypes.filter((item) => item !== "rent")
+          );
+        }
+      }
 
+      console.log(isChecked);
+    }
+  }, [
+    isChecked.all_availabilities,
+    isChecked.buy,
+    isChecked.stream,
+    isChecked.free,
+    isChecked.ads,
+    isChecked.rent,
+  ]);
 
-   const filterPanelHandler = (event) => {
-     if (event.target.id === "sort") {
-       setShowSortPanel((prevState) => !prevState);
-     } else if (event.target.id === "filters") {
-       setShowFilterPanel((prevState) => !prevState);
-     } else if (event.target.id === "watch") {
-       setShowWatchPanel((prevState) => !prevState);
-     }
-   };
+  useEffect(() => {
+    if (isChecked.release === true) {
+      setReleaseType([]);
+    } else {
+      if (isChecked.premiere === true) {
+        if (!releaseType.includes(1)) {
+          setReleaseType((prevState) => [...prevState, 1]);
+        }
+      } else {
+        if (releaseType.includes(1)) {
+          setReleaseType(releaseType.filter((item) => item !== 1));
+        }
+      }
+      if (isChecked.theatricalLimited === true) {
+        if (!releaseType.includes(2)) {
+          setReleaseType((prevState) => [...prevState, 2]);
+        }
+      } else {
+        if (releaseType.includes(2)) {
+          setReleaseType(releaseType.filter((item) => item !== 2));
+        }
+      }
+      if (isChecked.theatrical === true) {
+        if (!releaseType.includes(3)) {
+          setReleaseType((prevState) => [...prevState, 3]);
+        }
+      } else {
+        if (releaseType.includes(3)) {
+          setReleaseType(releaseType.filter((item) => item !== 3));
+        }
+      }
+      if (isChecked.digital === true) {
+        if (!releaseType.includes(4)) {
+          setReleaseType((prevState) => [...prevState, 4]);
+        }
+      } else {
+        if (releaseType.includes(4)) {
+          setReleaseType(releaseType.filter((item) => item !== 4));
+        }
+      }
+      if (isChecked.physical === true) {
+        if (!releaseType.includes(5)) {
+          setReleaseType((prevState) => [...prevState, 5]);
+        }
+      } else {
+        if (releaseType.includes(5)) {
+          setReleaseType(releaseType.filter((item) => item !== 5));
+        }
+      }
+      if (isChecked.tv === true) {
+        if (!releaseType.includes(6)) {
+          setReleaseType((prevState) => [...prevState, 6]);
+        }
+      } else {
+        if (releaseType.includes(6)) {
+          setReleaseType(releaseType.filter((item) => item !== 6));
+        }
+      }
+    }
+  }, [
+    isChecked.release,
+    isChecked.premiere,
+    isChecked.theatrical,
+    isChecked.theatricalLimited,
+    isChecked.digital,
+    isChecked.physical,
+    isChecked.tv,
+  ]);
+
+  const filterPanelHandler = (event) => {
+    if (event.target.id === "sort") {
+      setShowSortPanel((prevState) => !prevState);
+    } else if (event.target.id === "filters") {
+      setShowFilterPanel((prevState) => !prevState);
+    } else if (event.target.id === "watch") {
+      setShowWatchPanel((prevState) => !prevState);
+    }
+  };
 
   const sortHandler = (e) => {
     setSortValue(e.target.value);
@@ -112,15 +236,61 @@ const CategorySection = () => {
   };
 
   const keywordsHandler = (e) => {
-    const {id,classList} = e.target;
+    const { id, classList } = e.target;
     classList.toggle("keyword-active");
-    if(activeGenreList.includes(`${id}`)){
-      setActiveGenreList(activeGenreList.filter(item => item !== id))
-    }else{
-      setActiveGenreList((prevState) => ([...prevState , `${id}`]))
+    if (activeGenreList.includes(id)) {
+      setActiveGenreList(activeGenreList.filter((item) => item !== id));
+    } else {
+      setActiveGenreList((prevState) => [...prevState, id]);
     }
-  }
+  };
 
+  const languageHandler = (e) => {
+    setCurrentLanguage(e.target.value);
+  };
+
+  const searchBtnHandler = () => {
+    console.log("i m exe");
+    const myCurrentURL = `https://api.themoviedb.org/3/discover/movie?api_key=${
+      process.env.REACT_APP_API_KEY
+    }&sort_by=${sortValue}&release_date.gte=${fromDate.toLocaleDateString(
+      "en-CA"
+    )}&release_date.lte=${toDate.toLocaleDateString(
+      "en-CA"
+    )}&with_genres=${activeGenreList.join(
+      ","
+    )}&with_watch_monetization_types=${activeCategoryWatchProvider.join(
+      "|"
+    )}&with_release_type=${releaseType.join(
+      "|"
+    )}&with_original_language=${currentLanguage}&vote_average.gte=${
+      userScoreValue[0]
+    }&vote_average.lte=${
+      userScoreValue[1]
+    }&vote_count.gte=${minimumUserVotes}&with_runtime.gte=${
+      runtimeUser[0]
+    }&with_runtime.lte=${
+      runtimeUser[1]
+    }&with_ott_providers=${activeCategoryWatchProvider.join("|")}
+`;
+
+    // console.log(sortValue);
+    // console.log(monetizationTypes); // with_watch_monetization_types
+    // console.log(fromDate.toLocaleDateString("en-CA"));
+    // console.log(toDate.toLocaleDateString("en-CA"));
+    // console.log(currentSearchCountry); //region
+    // console.log(releaseType); // with_release_type
+    // console.log(currentLanguage); //  with_original_language
+    // console.log(userScoreValue[0]);
+    // console.log(userScoreValue[1]);
+    // console.log(minimumUserVotes);
+    // console.log(runtimeUser[0]);
+    // console.log(runtimeUser[1]);
+    // console.log(activeGenreList.join(","));
+    // console.log(activeCategoryWatchProvider.join("|"));
+
+    console.log(myCurrentURL);
+  };
 
   const userScoreMarks = [
     {
@@ -135,9 +305,7 @@ const CategorySection = () => {
       value: 10,
       label: "10",
     },
-
   ];
-
 
   const minimumUserVotesMarks = [
     {
@@ -570,6 +738,8 @@ const CategorySection = () => {
                         id="languages"
                         name="languages"
                         className="filter-dropdown w-100"
+                        onChange={languageHandler}
+                        value={currentLanguage}
                       >
                         {languages.map((currentLanguage) => {
                           return (
@@ -687,7 +857,12 @@ const CategorySection = () => {
             </div>
 
             <div className="search-btn-section mt-3">
-              <button className="btn btn-custom w-100">Search</button>
+              <button
+                className="btn btn-custom w-100"
+                onClick={searchBtnHandler}
+              >
+                Search
+              </button>
             </div>
           </div>
         </div>
@@ -698,8 +873,6 @@ const CategorySection = () => {
           ) : (
             <TvCategoryRightSection category={params.category} />
           )}
-
-          
 
           <div className="load-more-btn-section  w-100 m-4">
             <button className="btn btn-custom btn-load w-100">Load More</button>

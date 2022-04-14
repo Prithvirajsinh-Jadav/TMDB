@@ -8,8 +8,10 @@ import MovieDetailRightSection from "../MovieDetailRightSection/MovieDetailRight
 import "./MovieDetail.css";
 
 const MovieDetail = () => {
-  const params = useParams();
-
+  const params = useParams(); 
+  // { id : 565655}
+  // params.id
+  
   return (
     <>
       <MovieDetailHeaderSection id={params.id} />

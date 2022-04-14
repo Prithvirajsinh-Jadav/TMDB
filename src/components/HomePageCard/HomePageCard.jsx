@@ -92,7 +92,11 @@ const HomePageCard = ({
                 </div>
               )}
             </div>
-            <Link to={`/${isMovie}/details/${id}`} className="image" title={title}>
+            <Link
+              to={`/${isMovie}/details/${id}`}
+              className="image"
+              title={title}
+            >
               <img
                 className="poster-image"
                 src={poster_path}
@@ -120,7 +124,7 @@ const HomePageCard = ({
 
           <div className="movie-title">
             <h2>
-              <Link to="/movie-detail" title={title}>
+              <Link to={`/${isMovie}/details/${id}`} title={title}>
                 {title}
               </Link>
             </h2>

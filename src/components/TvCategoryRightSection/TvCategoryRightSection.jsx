@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import HomePageCard from "../HomePageCard/HomePageCard";
+import InfiniteScroll from "react-infinite-scroller";
+
 const TvCategoryRightSection = ({category}) => {
 
     const [categoryData, setCategoryData] = useState([]);
@@ -13,6 +15,20 @@ const TvCategoryRightSection = ({category}) => {
         .get(categoryURL)
         .then((response) => setCategoryData(response.data.results));
     }, [category]);
+
+    const fetchData = (page) => {
+      const categoryURL = `https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`;
+
+      axios
+        .get(categoryURL)
+        .then((response) =>
+          setCategoryData((prevState) => [
+            ...prevState,
+            ...response.data.results,
+          ])
+        );
+    };
+
   return (
     <>
     

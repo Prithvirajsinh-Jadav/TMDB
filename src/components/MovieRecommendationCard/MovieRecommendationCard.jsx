@@ -33,7 +33,7 @@ const MovieRecommendationCard = ({ id }) => {
                     >
                       <div className="image_content ">
                         <Link
-                          to={`movie/details/${id}`}
+                          to={`/movie/details/${recommendationMovie.id}`}
                           title={recommendationMovie.title}
                           alt={recommendationMovie.title}
                         >
