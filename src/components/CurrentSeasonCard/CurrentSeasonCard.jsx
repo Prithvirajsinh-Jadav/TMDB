@@ -11,7 +11,7 @@ const CurrentSeasonCard = ({ id }) => {
     axios.get(detailsURL).then((response) => setTvDetail(response.data));
   }, []);
 
-  console.log(tvDetail);
+
 
   return (
     <div className="current-season-card card flex flex-row ">
@@ -26,7 +26,7 @@ const CurrentSeasonCard = ({ id }) => {
       <div className="current-season-content d-flex align-items-center">
         <div>
           <h2>
-            <Link to="/tv/52814-halo/season/1">
+            <Link to="/">
               {tvDetail.seasons && tvDetail.seasons.slice(-1)[0].name}
             </Link>
           </h2>

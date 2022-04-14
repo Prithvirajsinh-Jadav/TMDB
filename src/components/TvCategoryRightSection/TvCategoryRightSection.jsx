@@ -3,36 +3,36 @@ import React, { useState, useEffect } from "react";
 import HomePageCard from "../HomePageCard/HomePageCard";
 import InfiniteScroll from "react-infinite-scroller";
 
-const TvCategoryRightSection = ({category}) => {
+const TvCategoryRightSection = ({ category }) => {
+  const [categoryData, setCategoryData] = useState([]);
 
-    const [categoryData, setCategoryData] = useState([]);
+  useEffect(() => {
+    const categoryURL = `https://api.themoviedb.org/3/tv/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=1`;
 
-    useEffect(() => {
-      const categoryURL = `https://api.themoviedb.org/3/tv/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=1`;
+    setCategoryData([]);
+    axios
+      .get(categoryURL)
+      .then((response) => setCategoryData(response.data.results));
+  }, [category]);
 
-        setCategoryData([])
-      axios
-        .get(categoryURL)
-        .then((response) => setCategoryData(response.data.results));
-    }, [category]);
+  const fetchData = (page) => {
+    const categoryURL = `https://api.themoviedb.org/3/tv/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`;
 
-    const fetchData = (page) => {
-      const categoryURL = `https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`;
-
-      axios
-        .get(categoryURL)
-        .then((response) =>
-          setCategoryData((prevState) => [
-            ...prevState,
-            ...response.data.results,
-          ])
-        );
-    };
+    axios
+      .get(categoryURL)
+      .then((response) =>
+        setCategoryData((prevState) => [...prevState, ...response.data.results])
+      );
+  };
 
   return (
     <>
-    
-      <>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={fetchData}
+        hasMore={true}
+        className="infinite-class"
+      >
         {categoryData.map((categoryObj) => {
           return (
             <HomePageCard
@@ -46,7 +46,7 @@ const TvCategoryRightSection = ({category}) => {
             />
           );
         })}
-      </>
+      </InfiniteScroll>
     </>
   );
 };

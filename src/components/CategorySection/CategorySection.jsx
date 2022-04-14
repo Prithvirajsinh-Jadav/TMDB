@@ -11,12 +11,13 @@ import { country } from "../country";
 import MovieCategoryRightSection from "../MovieCategoryRightSection/MovieCategoryRightSection";
 import CategoryWatchProvider from "../CategoryWatchProvider/CategoryWatchProvider";
 import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSection";
+import SearchRightSection from "../SearchRightSection/SearchRightSection";
 
 import Slider from "@mui/material/Slider";
 
 const CategorySection = () => {
   const params = useParams();
-  
+
   useEffect(() => {
     const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -45,6 +46,7 @@ const CategorySection = () => {
   const [minimumUserVotes, setMinimumUserVotes] = useState(0);
   const [runtimeUser, setRuntimeUser] = useState([0, 400]);
   const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [url, setUrl] = useState("")
 
   const initialState = {
     all_availabilities: true,
@@ -251,9 +253,7 @@ const CategorySection = () => {
 
   const searchBtnHandler = () => {
     console.log("i m exe");
-    const myCurrentURL = `https://api.themoviedb.org/3/discover/movie?api_key=${
-      process.env.REACT_APP_API_KEY
-    }&sort_by=${sortValue}&release_date.gte=${fromDate.toLocaleDateString(
+    const myCurrentURL = `&sort_by=${sortValue}&release_date.gte=${fromDate.toLocaleDateString(
       "en-CA"
     )}&release_date.lte=${toDate.toLocaleDateString(
       "en-CA"
@@ -273,6 +273,8 @@ const CategorySection = () => {
       runtimeUser[1]
     }&with_ott_providers=${activeCategoryWatchProvider.join("|")}
 `;
+
+    setUrl(myCurrentURL)
 
     // console.log(sortValue);
     // console.log(monetizationTypes); // with_watch_monetization_types
@@ -868,11 +870,17 @@ const CategorySection = () => {
         </div>
 
         <div className="right-category-section w-80 h-100">
-          {params.isMovie === "movie" ? (
-            <MovieCategoryRightSection category={params.category} />
+          { params.isMovie === "movie" ? (
+            <MovieCategoryRightSection category={params.category} url={url} />
           ) : (
-            <TvCategoryRightSection category={params.category} />
+            <TvCategoryRightSection category={params.category} url={url} />
           )}
+
+          {/* {
+            url && <SearchRightSection url={url} category={params.category} isMovie={params.isMovie} />
+          } */}
+
+
 
           <div className="load-more-btn-section  w-100 m-4">
             <button className="btn btn-custom btn-load w-100">Load More</button>

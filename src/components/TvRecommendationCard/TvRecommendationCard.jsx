@@ -95,7 +95,7 @@ const TvRecommendationCard = ({id}) => {
                       <p className="movie-heading d-flex justify-content-between">
                         <Link
                           className="title"
-                          to={`tv/details/${id}`}
+                          to={`/tv/details/${id}`}
                           title={recommendationMovie.name}
                           alt={recommendationMovie.name}
                         >
