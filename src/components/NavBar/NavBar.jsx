@@ -112,7 +112,7 @@ const NavBar = () => {
                 </div>
                 <div>
                   <ul className="navbar-nav mr-auto  ">
-                    <li className="nav-item active">
+                    <li className="nav-item ">
                       <Link className="nav-link  " to="/">
                         <i className="fa-solid fa-plus "></i>
                       </Link>

@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import HomePageCard from "../HomePageCard/HomePageCard";
-import axios from "axios";
+import { GetTrendingData } from "../../api";
 
 const TrendingDay = () => {
   const [trendingData, setTrendingData] = useState([]);
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}`;
 
-    axios
-      .get(url)
-      .then((response) => response.data.results)
+    GetTrendingData("day").then((response) => response.data.results)
       .then((data) => {
         setTrendingData(data);
       });

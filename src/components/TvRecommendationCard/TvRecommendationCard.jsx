@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { GetRecommendations } from "../../api";
 
 
 
@@ -9,12 +9,10 @@ const TvRecommendationCard = ({id}) => {
      const [recommendationData, setRecommendationData] = useState([]);
 
      useEffect(() => {
-       const recommendationURL = `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`;
-
-       axios
-         .get(recommendationURL)
-         .then((response) => setRecommendationData(response.data.results));
-     }, []);
+        GetRecommendations(id,"tv").then((response) =>
+          setRecommendationData(response.data.results)
+        );
+     }, [id]);
 
   return (
     <div className="recommendation-section container p-0">
@@ -35,7 +33,7 @@ const TvRecommendationCard = ({id}) => {
                     >
                       <div className="image_content ">
                         <Link
-                          to={`tv/details/${id}`}
+                          to={`/tv/details/${recommendationMovie.id}`}
                           title={recommendationMovie.name}
                           alt={recommendationMovie.name}
                         >
@@ -95,7 +93,7 @@ const TvRecommendationCard = ({id}) => {
                       <p className="movie-heading d-flex justify-content-between">
                         <Link
                           className="title"
-                          to={`/tv/details/${id}`}
+                          to={`/tv/details/${recommendationMovie.id}`}
                           title={recommendationMovie.name}
                           alt={recommendationMovie.name}
                         >

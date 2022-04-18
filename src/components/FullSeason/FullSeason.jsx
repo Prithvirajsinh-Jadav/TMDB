@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import TvReviewHeading from "../TvReviewHeading/TvReviewHeading";
 import "./FullSeason.css";
 import defaultPosterImage from "./../../assets/images/fallback-poster-image_1.svg"
+import { GetDetails } from "../../api";
 
 const FullSeason = () => {
   const params = useParams();
@@ -11,14 +11,10 @@ const FullSeason = () => {
   const [currentTvData, setCurrentTvData] = useState({});
 
   useEffect(() => {
-    const detailsURL = `https://api.themoviedb.org/3/tv/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`;
 
-    axios
-      .get(detailsURL)
-      .then((response) => setCurrentTvData(response.data));
-  }, []);
+    GetDetails("tv",params.id).then((response) => setCurrentTvData(response.data));
+  }, [params.id]);
 
-  console.log(currentTvData.seasons);
   return (
     <>
       <div className="container-fluid poster-section p-0">
@@ -47,8 +43,9 @@ const FullSeason = () => {
                 <div className="current-season-content ps-4 pt-0 d-flex flex-column justify-content-center">
                   <div className="d-flex align-items-center">
                     <h2>
-                      <Link to="/tv/52814-halo/season/1">
+                      <Link to="/">
                         {seasons && seasons.name}
+                       
                       </Link>
                     </h2>
                     <h4 className="d-flex align-self-end m-2">

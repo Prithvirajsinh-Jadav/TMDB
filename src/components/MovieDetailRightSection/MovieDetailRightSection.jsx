@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { GetDetails } from '../../api';
 import MovieKeywordComponent from "../MovieKeywordComponent/MovieKeywordComponent";
 
 
@@ -9,12 +9,8 @@ const MovieDetailRightSection = ({id}) => {
       const [currentMovieData, setCurrentMovieData] = useState({});
 
         useEffect(() => {
-          const detailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-
-          axios
-            .get(detailsURL)
-            .then((response) => setCurrentMovieData(response.data));
-        }, []);
+          GetDetails("movie",id).then((response) => setCurrentMovieData(response.data));
+        }, [id]);
 
 
   return (

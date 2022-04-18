@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import HomePageCard from "../HomePageCard/HomePageCard";
+import { GetCategoryData } from "../../api";
 
 const PopularMovie = () => {
   const [popularMovieData, setPopularMovieData] = useState([]);
 
   useEffect(() => {
-    const url =
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`;
-
-    axios
-      .get(url)
-      .then((response) =>setPopularMovieData(response.data.results));
+      GetCategoryData("movie","popular",1).then((response) =>setPopularMovieData(response.data.results));
   }, []);
   return (
     <>
       {popularMovieData.map((movie) => {
-        // console.log(movie); this will tells us that the media_type does not always comes
-
         return (
           <HomePageCard
             key={movie.id}

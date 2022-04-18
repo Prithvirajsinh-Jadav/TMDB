@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./CategorySection.css";
 import "react-datepicker/dist/react-datepicker.css";
-
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { languages } from "../language";
 import { country } from "../country";
-
 import MovieCategoryRightSection from "../MovieCategoryRightSection/MovieCategoryRightSection";
 import CategoryWatchProvider from "../CategoryWatchProvider/CategoryWatchProvider";
 import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSection";
 import SearchRightSection from "../SearchRightSection/SearchRightSection";
-
 import Slider from "@mui/material/Slider";
+// import defaultImage from "./../../assets/images/fallback-poster-image.svg"
 
 const CategorySection = () => {
   const params = useParams();
@@ -36,7 +34,7 @@ const CategorySection = () => {
   const [monetizationTypes, setMonetizationTypes] = useState([]);
   const [releaseType, setReleaseType] = useState([]);
   const [currentSearchCountry, setCurrentSearchCountry] = useState("IN");
-  const [fromDate, setFromDate] = useState(new Date());
+  const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState(new Date());
   const [currentWatchCountry, setCurrentWatchCountry] = useState("IN");
   const [activeGenreList, setActiveGenreList] = useState([]);
@@ -46,7 +44,8 @@ const CategorySection = () => {
   const [minimumUserVotes, setMinimumUserVotes] = useState(0);
   const [runtimeUser, setRuntimeUser] = useState([0, 400]);
   const [currentLanguage, setCurrentLanguage] = useState("en");
-  const [url, setUrl] = useState("")
+  const [url, setUrl] = useState("");
+  const [showSearchSection, setShowSearchSection] = useState(false)
 
   const initialState = {
     all_availabilities: true,
@@ -252,10 +251,10 @@ const CategorySection = () => {
   };
 
   const searchBtnHandler = () => {
-    console.log("i m exe");
-    const myCurrentURL = `&sort_by=${sortValue}&release_date.gte=${fromDate.toLocaleDateString(
+
+    const myCurrentURL = `&sort_by=${sortValue}&release_date.gte=${fromDate ? fromDate.toLocaleDateString(
       "en-CA"
-    )}&release_date.lte=${toDate.toLocaleDateString(
+    ) : ""}&release_date.lte=${toDate.toLocaleDateString(
       "en-CA"
     )}&with_genres=${activeGenreList.join(
       ","
@@ -275,21 +274,7 @@ const CategorySection = () => {
 `;
 
     setUrl(myCurrentURL)
-
-    // console.log(sortValue);
-    // console.log(monetizationTypes); // with_watch_monetization_types
-    // console.log(fromDate.toLocaleDateString("en-CA"));
-    // console.log(toDate.toLocaleDateString("en-CA"));
-    // console.log(currentSearchCountry); //region
-    // console.log(releaseType); // with_release_type
-    // console.log(currentLanguage); //  with_original_language
-    // console.log(userScoreValue[0]);
-    // console.log(userScoreValue[1]);
-    // console.log(minimumUserVotes);
-    // console.log(runtimeUser[0]);
-    // console.log(runtimeUser[1]);
-    // console.log(activeGenreList.join(","));
-    // console.log(activeCategoryWatchProvider.join("|"));
+    setShowSearchSection(true);
 
     console.log(myCurrentURL);
   };
@@ -672,30 +657,30 @@ const CategorySection = () => {
                         </label>
                       </label>
                     </div>
+                  </div>
 
-                    <div className="date-picker-section">
-                      <div className="from-section d-flex justify-content-between">
-                        <div>
-                          <span>from</span>
-                        </div>
-
-                        <div className="date-picker-container d-flex justify-content-end">
-                          <DatePicker
-                            selected={fromDate}
-                            onChange={(date) => setFromDate(date)}
-                          />
-                        </div>
+                  <div className="date-picker-section">
+                    <div className="from-section d-flex justify-content-between">
+                      <div>
+                        <span>from</span>
                       </div>
-                      <div className="to-section d-flex justify-content-between mt-2">
-                        <div>
-                          <span>to</span>
-                        </div>
-                        <div className="date-picker-container d-flex justify-content-end">
-                          <DatePicker
-                            selected={toDate}
-                            onChange={(date) => setToDate(date)}
-                          />
-                        </div>
+
+                      <div className="date-picker-container d-flex justify-content-end">
+                        <DatePicker
+                          selected={fromDate}
+                          onChange={(date) => setFromDate(date)}
+                        />
+                      </div>
+                    </div>
+                    <div className="to-section d-flex justify-content-between mt-2">
+                      <div>
+                        <span>to</span>
+                      </div>
+                      <div className="date-picker-container d-flex justify-content-end">
+                        <DatePicker
+                          selected={toDate}
+                          onChange={(date) => setToDate(date)}
+                        />
                       </div>
                     </div>
                   </div>
@@ -870,17 +855,18 @@ const CategorySection = () => {
         </div>
 
         <div className="right-category-section w-80 h-100">
-          { params.isMovie === "movie" ? (
-            <MovieCategoryRightSection category={params.category} url={url} />
+          {!showSearchSection ? (
+            params.isMovie === "movie" ? (
+              <MovieCategoryRightSection category={params.category} url={url} />
+            ) : (
+              <TvCategoryRightSection category={params.category} url={url} />
+            )
           ) : (
-            <TvCategoryRightSection category={params.category} url={url} />
+            <SearchRightSection
+              url={url}
+              isMovie={params.isMovie}
+            />
           )}
-
-          {/* {
-            url && <SearchRightSection url={url} category={params.category} isMovie={params.isMovie} />
-          } */}
-
-
 
           <div className="load-more-btn-section  w-100 m-4">
             <button className="btn btn-custom btn-load w-100">Load More</button>

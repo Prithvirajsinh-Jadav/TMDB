@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import WatchProvider from "../WatchProvider/WatchProvider";
 import { Link } from "react-router-dom";
@@ -6,17 +5,15 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
+import { GetDetails } from "../../api";
 
 const TvDetailHeaderSection = ({ id }) => {
 
     const [currentTvDetail, setCurrentTvDetail] = useState({});
 
      useEffect(() => {
-       const detailsURL = `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-       axios
-         .get(detailsURL)
-         .then((response) => setCurrentTvDetail(response.data));
-     }, []);
+       GetDetails("tv",id).then((response) => setCurrentTvDetail(response.data));
+     }, [id]);
 
 
       const pColor =

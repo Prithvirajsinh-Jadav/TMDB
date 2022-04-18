@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import HomePageCard from "../HomePageCard/HomePageCard";
+import { GetCategoryData } from "../../api";
 
 const PopularTV = () => {
   const [popularMovieData, setPopularMovieData] = useState([]);
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY}`;
 
-    axios
-      .get(url)
-      .then((response) => setPopularMovieData(response.data.results))
+    GetCategoryData("tv","popular",1).then((response) => setPopularMovieData(response.data.results))
 
   }, []);
   return (

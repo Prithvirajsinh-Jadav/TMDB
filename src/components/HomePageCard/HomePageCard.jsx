@@ -56,7 +56,7 @@ const HomePageCard = ({
         className={"card homepage-card " + (className ? "category-card" : "")}
       >
         <div className="image">
-          <div className="wrapper">
+          <div className={"wrapper"}>
             <div className="circle-more-icon">
               <img
                 src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-947-circle-more-white-4c440dfc1b0e626c70f4853dbbce9c4d1f2c5d8f3e05a7d3df47881cbd816adf.svg"
@@ -97,11 +97,7 @@ const HomePageCard = ({
               className="image"
               title={title}
             >
-              <img
-                className="poster-image"
-                src={poster_path}
-                alt="Error occur"
-              />
+              <img className="poster-image" src={poster_path} alt="..." />
             </Link>
           </div>
         </div>
@@ -116,8 +112,8 @@ const HomePageCard = ({
               })}
             >
               <div className="circular_progress_bar_data d-flex">
-                <span>{popularity}</span>
-                <sup className="d-flex align-items-center">%</sup>
+                <span>{popularity>0  ? popularity : "NR" }</span>
+                <sup className="d-flex align-items-center">{popularity>0  ? "%" : "" }</sup>
               </div>
             </CircularProgressbarWithChildren>
           </div>

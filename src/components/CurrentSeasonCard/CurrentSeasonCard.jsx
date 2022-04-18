@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./CurrentSeasonCard.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { GetDetails } from "../../api";
 
 const CurrentSeasonCard = ({ id }) => {
   const [tvDetail, setTvDetail] = useState([]);
 
   useEffect(() => {
-    const detailsURL = `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-    axios.get(detailsURL).then((response) => setTvDetail(response.data));
-  }, []);
+    GetDetails("tv",id).then((response) => setTvDetail(response.data));
+  }, [id]);
 
+  console.log(tvDetail)
 
 
   return (
@@ -18,8 +18,8 @@ const CurrentSeasonCard = ({ id }) => {
       <Link to="/">
         <img
           className="season-image ng-warning"
-          src="https://www.themoviedb.org/t/p/w130_and_h195_bestv2/t/p/w130_and_h195_bestv2/nJUHX3XL1jMkk8honUZnUmudFb9.jpg"
-          alt="Halo"
+          src={`https://www.themoviedb.org/t/p/w130_and_h195_bestv2/t/p/w130_and_h195_bestv2${tvDetail.seasons && tvDetail.seasons.slice(-1)[0].poster_path}`}
+          alt={`${tvDetail.title}`}
         />
       </Link>
 
@@ -27,7 +27,7 @@ const CurrentSeasonCard = ({ id }) => {
         <div>
           <h2>
             <Link to="/">
-              {tvDetail.seasons && tvDetail.seasons.slice(-1)[0].name}
+              {tvDetail.type}
             </Link>
           </h2>
           <h4>

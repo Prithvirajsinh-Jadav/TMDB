@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import defaultImage from "./../../assets/images/defaultReviewImage.jpg";
+import { GetReview } from "../../api";
 
 const ReviewSection = ({ id, isMovie }) => {
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
-    const reviewURL = `https://api.themoviedb.org/3/${isMovie}/${id}/reviews?api_key=${process.env.REACT_APP_API_KEY}`;
-    axios
-      .get(reviewURL)
-      .then((response) => setReviewData(response.data.results));
-  }, []);
+    GetReview(id,isMovie).then((response) => setReviewData(response.data.results));
+  }, [id, isMovie]);
 
   return (
     <>

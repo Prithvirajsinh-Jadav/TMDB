@@ -9,9 +9,7 @@ import "./MovieDetail.css";
 
 const MovieDetail = () => {
   const params = useParams(); 
-  // { id : 565655}
-  // params.id
-  
+ 
   return (
     <>
       <MovieDetailHeaderSection id={params.id} />

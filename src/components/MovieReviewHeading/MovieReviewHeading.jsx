@@ -1,20 +1,15 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { GetDetails } from "../../api";
 
-const MovieReviewHeading = ({id}) => {
+const MovieReviewHeading = ({ id }) => {
+  const [currentMovieData, setCurrentMovieData] = useState([]);
 
-    const [currentMovieData, setCurrentMovieData] = useState([]);
-
-    useEffect(() => {
-          const detailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-
-          axios
-            .get(detailsURL)
-            .then((response) => setCurrentMovieData(response.data));
-
-    
-    }, [])
+  useEffect(() => {
+    GetDetails("movie", id).then((response) =>
+      setCurrentMovieData(response.data)
+    );
+  }, [id]);
 
   return (
     <div className="poster-section-wrapper d-flex container py-3">

@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { GetCategoryWatchProvider } from "../../api";
 
 const CategoryWatchProvider = ({
   currentWatchCountry,
@@ -10,13 +10,12 @@ const CategoryWatchProvider = ({
   const [categoryWatchProvider, setCategoryWatchProvider] = useState([]);
 
   useEffect(() => {
-    const categoryWatchProviderURL = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${process.env.REACT_APP_API_KEY}&watch_region=${currentWatchCountry}`;
     setCategoryWatchProvider([]);
     setActiveCategoryWatchProvider([]);
 
-    axios
-      .get(categoryWatchProviderURL)
-      .then((response) => setCategoryWatchProvider(response.data.results));
+    GetCategoryWatchProvider(currentWatchCountry).then((response) =>
+      setCategoryWatchProvider(response.data.results)
+    );
   }, [currentWatchCountry]);
 
   const activeCategoryWatchProviderHandler = (provider_id) => {

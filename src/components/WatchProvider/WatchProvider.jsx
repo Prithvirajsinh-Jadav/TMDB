@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
-import axios from "axios";
 import {Link} from "react-router-dom"
+import { GetWatchProvider } from '../../api';
 
 const WatchProvider = ({id,isMovie}) => {
 
@@ -8,11 +8,8 @@ const WatchProvider = ({id,isMovie}) => {
 
     useEffect(()=>{
     
-        const watchProvider = `https://api.themoviedb.org/3/${isMovie}/${id}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`;
 
-          axios
-            .get(watchProvider)
-            .then((response) => {
+        GetWatchProvider(id,isMovie).then((response) => {
               return response.data.results["IN"];
             })
             .then((data) => {

@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { GetKeywords } from "../../api";
 
 const MovieKeywordComponent = ({ id }) => {
   const [keywords, setKeywords] = useState([]);
 
   useEffect(() => {
-    const keywordURL = `https://api.themoviedb.org/3/movie/${id}/keywords?api_key=${process.env.REACT_APP_API_KEY}`;
-
-    axios
-      .get(keywordURL)
-      .then((response) => setKeywords(response.data.keywords));
+     GetKeywords("movie",id).then((response) => setKeywords(response.data.keywords));
   }, []);
   return (
     <>

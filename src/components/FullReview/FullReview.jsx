@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {  useParams } from "react-router-dom";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import defaultImage from "./../../assets/images/defaultReviewImage.jpg";
 import "./FullReview.css";
 import MovieReviewHeading from "../MovieReviewHeading/MovieReviewHeading";
 import TvReviewHeading from "../TvReviewHeading/TvReviewHeading";
+import { GetReview } from "../../api";
 
 const FullReview = () => {
   const params = useParams();
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
-    const reviewURL = `https://api.themoviedb.org/3/${params.isMovie}/${params.reviewID}/reviews?api_key=${process.env.REACT_APP_API_KEY}`;
-    axios
-      .get(reviewURL)
-      .then((response) => setReviewData(response.data.results));
-
-   
-  }, []);
+    GetReview(params.reviewID, params.isMovie).then((response) =>
+      setReviewData(response.data.results)
+    );
+  }, [params.reviewID, params.isMovie]);
 
   return (
     <div className="fullreview-wrapper">

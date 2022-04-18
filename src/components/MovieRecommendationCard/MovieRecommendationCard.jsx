@@ -1,17 +1,16 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { GetRecommendations } from "../../api";
 
 const MovieRecommendationCard = ({ id }) => {
   const [recommendationData, setRecommendationData] = useState([]);
 
   useEffect(() => {
-    const recommendationURL = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`;
 
-    axios
-      .get(recommendationURL)
-      .then((response) => setRecommendationData(response.data.results));
-  }, []);
+    GetRecommendations(id, "movie").then((response) =>
+      setRecommendationData(response.data.results)
+    );
+  }, [id]);
 
 
   return (

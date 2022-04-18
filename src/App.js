@@ -17,6 +17,7 @@ import {
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
+import SearchShowResult from "./components/SearchShowResult/SearchShowResult.jsx";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/:isMovie/:category" element={<CategorySection />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/search" element={<SearchShowResult />} />
         </Routes>
         <Footer />
       </Router>

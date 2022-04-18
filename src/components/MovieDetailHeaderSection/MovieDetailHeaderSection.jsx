@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import WatchProvider from "../WatchProvider/WatchProvider";
 import { Link } from "react-router-dom";
@@ -6,17 +5,15 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
+import { GetDetails } from "../../api";
 
 const MovieDetailHeaderSection = ({ id }) => {
   const [currentMovieData, setCurrentMovieData] = useState({});
 
   useEffect(() => {
-    const detailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
 
-    axios
-      .get(detailsURL)
-      .then((response) => setCurrentMovieData(response.data));
-  }, []);
+    GetDetails("movie",id).then((response) => setCurrentMovieData(response.data));
+  }, [id]);
 
   const pColor =
     currentMovieData.popularity >= 70

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import MaleCastImage from "./../../assets/images/male-cast.svg";
 import FemaleCastImage from "./../../assets/images/female-cast.svg";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { GetCredits } from "./../../api";
 
 const CastCard = ({ id, isMovie }) => {
   const [castData, setCastData] = useState([]);
   useEffect(() => {
-    const castURL = `https://api.themoviedb.org/3/${isMovie}/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}`;
-    axios.get(castURL).then((response) => setCastData(response.data.cast));
-  }, []);
+    GetCredits(id, isMovie).then((response) => setCastData(response.data.cast));
+  }, [id, isMovie]);
 
   return (
     <>

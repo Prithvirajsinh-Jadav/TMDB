@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { GetKeywords } from "../../api";
 
 const TvKeywordComponent = ({ id }) => {
   const [keywords, setKeywords] = useState([]);
 
   useEffect(() => {
-    const keywordURL = `https://api.themoviedb.org/3/tv/${id}/keywords?api_key=${process.env.REACT_APP_API_KEY}`;
-
-    axios
-      .get(keywordURL)
-      .then((response) => setKeywords(response.data.results));
-  }, []);
+    GetKeywords("tv",id).then((response) => setKeywords(response.data.results));
+  }, [id]);
   return (
     <>
       <div className="keyword-container">
         <h4>Keywords</h4>
+        {keywords.length !== 0 ?
         <ul>
           {keywords.map((keywordObj) => {
             return (
@@ -25,6 +22,7 @@ const TvKeywordComponent = ({ id }) => {
             );
           })}
         </ul>
+        : "No keywords have been added. "}
       </div>
     </>
   );

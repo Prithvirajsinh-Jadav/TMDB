@@ -1,31 +1,27 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import HomePageCard from "../HomePageCard/HomePageCard";
 import InfiniteScroll from "react-infinite-scroller";
+import defaultImage from "./../../assets/images/fallback-poster-image_6.svg";
+import { GetCategoryData } from "../../api";
 
 const MovieCategoryRightSection = ({ category  }) => {
   const [categoryData, setCategoryData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    const categoryURL = `https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=1`;
-
     setCategoryData([]);
-
-    axios
-      .get(categoryURL)
-      .then((response) => setCategoryData(response.data.results));
+    GetCategoryData("movie",category,1).then((response) => setCategoryData(response.data.results));
   }, [category]);
 
 
 const fetchData = (page) => {
 
-  const categoryURL = `https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`;
-
-    axios
-      .get(categoryURL)
-      .then((response) =>
-        setCategoryData((prevState) => [...prevState, ...response.data.results])
-      );
+ GetCategoryData("movie",category, page).then((response) =>
+   setCategoryData((prevState) => {
+     response.data.results.length >= 20 ? setHasMore(true) : setHasMore(false);
+     return [...prevState, ...response.data.results];
+   })
+ );
 }
 
 
@@ -36,7 +32,7 @@ const fetchData = (page) => {
       <InfiniteScroll
         pageStart={1}
         loadMore={fetchData}
-        hasMore={true}
+        hasMore={hasMore}
         className="infinite-class"
       >
         {categoryData.map((categoryObj) => {
@@ -44,11 +40,12 @@ const fetchData = (page) => {
             <HomePageCard
               id={categoryObj.id}
               key={categoryObj.id}
-              poster_path={`https://www.themoviedb.org/t/p/w220_and_h330_face/${categoryObj.poster_path}`}
-              title={categoryObj.title}
+              poster_path={ categoryObj.poster_path ? `https://www.themoviedb.org/t/p/w220_and_h330_face/${categoryObj.poster_path}` : defaultImage}
+              title={categoryObj.title }
               release_date={categoryObj.release_date}
               popularity={categoryObj.vote_average * 10}
               className={true}
+              isMovie="movie"
             />
           );
         })}

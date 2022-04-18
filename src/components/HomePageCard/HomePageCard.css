@@ -1,10 +1,10 @@
 /* @import  url("../../assets/fonts/consensus/otf/Consensus-Bold.otf"); */
 
 @font-face {
-    font-family: Consensus;
-    src: url("../../assets/fonts/consensus/otf/Consensus-SemiBold.otf") format("opentype");
+  font-family: Consensus;
+  src: url("../../assets/fonts/consensus/otf/Consensus-SemiBold.otf")
+    format("opentype");
 }
-
 
 
 
@@ -15,7 +15,7 @@
   /* height: 350px; */
   border: none !important;
   background-color: transparent !important;
-  
+
   box-shadow: none;
   margin-top: 0;
   overflow: visible;
@@ -28,17 +28,18 @@
 
 .homepage-card img {
   height: 225px;
+ 
   border: none;
   border-radius: 8px;
 }
 
-.circle-more-icon img{
+.circle-more-icon img {
   width: 20px;
   height: 20px;
-  opacity: .7;
+  opacity: 0.7;
 }
 
-.homepage-card  h2 {
+.homepage-card h2 {
   font-size: 1em;
   margin: 0;
   width: 100%;
@@ -47,7 +48,7 @@
 }
 
 .homepage-card h2 a {
-        font-weight: 700;
+  font-weight: 700;
   color: #000000 !important;
 }
 
@@ -63,30 +64,48 @@
 }
 /* #666666 */
 
-.circular_progress_bar{
-    height: 35px;
-    width:35px;
-    position: absolute;
-    margin-left: .6rem;
-    margin-top: -1.2rem;
+/* .wrapper {
+  background: #dbdbdb;
+    width: 180px;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.wrapper {
+  background-color: #dbdbdb;
+  border-radius:0.25em !important;
 }
-.circular_progress_bar div div svg+div{
+
+/* .poster-image{
+  background-color: #dbdbdb;
+} */
+
+.circular_progress_bar {
+  height: 35px;
+  width: 35px;
+  position: absolute;
+  margin-left: 0.6rem;
+  margin-top: -1.2rem;
+}
+.circular_progress_bar div div svg + div {
   margin-top: -95% !important;
 }
 .circular_progress_bar_data span {
   color: #ffffff;
   font-family: "Consensus";
-  font-size: .65rem;
+  font-size: 0.65rem;
 }
 .circular_progress_bar_data sup {
   color: #ffffff;
-  font-size:.5rem
+  font-size: 0.5rem;
 }
 
-.CircularProgressbar{
-    background:#081c22 !important;
-    border-radius: 50%;
-    padding: 2px;
+.CircularProgressbar {
+  background: #081c22 !important;
+  border-radius: 50%;
+  padding: 2px;
 }
 
 /* .CircularProgressbar div{
@@ -94,72 +113,70 @@
 } */
 
 .CircularProgressbar .CircularProgressbar-text {
-    fill:#fff !important;
-    font-size: 2.5rem  !important;
+  fill: #fff !important;
+  font-size: 2.5rem !important;
 }
 
-
-
-.movie-title{
-    margin-top:1.5rem;
-    margin-left: .6rem;
+.movie-title {
+  margin-top: 1.5rem;
+  margin-left: 0.6rem;
 }
 
-.setting_content{
+.setting_content {
   background-color: white;
   position: absolute;
   border-radius: 3px;
   top: 35px;
-  left :-10px;
+  left: -10px;
   z-index: 5;
   width: 300px;
   /* height: 150px; */
 }
 
-.group{
+.group {
   padding: 4px 0;
-      border-top: 1px solid rgba(33,37,41,0.15);
+  border-top: 1px solid rgba(33, 37, 41, 0.15);
 }
 
 .group p {
-    padding: 6px 20px;
-    /* padding: 0px 10px; */
-    font-size: 0.9em;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    margin-bottom: 0 !important;
+  padding: 6px 20px;
+  /* padding: 0px 10px; */
+  font-size: 0.9em;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 0 !important;
 }
-.group .no_hover{
-      background-color: transparent;
-    color: #000;
-    font-weight: 600;
+.group .no_hover {
+  background-color: transparent;
+  color: #000;
+  font-weight: 600;
 }
 
 .group a {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 600;
-    color: rgba(0,0,0,0.6);
-    background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: transparent;
 }
 
-.fa-angle-right{
+.fa-angle-right {
   margin-left: 10px;
   font-weight: 900;
 }
-.fa-circle-ellipsis{
-  background-color:red;
+.fa-circle-ellipsis {
+  background-color: red;
   height: 2rem;
   width: 2rem;
 }
 
-.show{
+.show {
   visibility: visible;
 }
 
-.circle-more-icon{
+.circle-more-icon {
   /* background: green; */
   position: absolute;
   right: 8px;
@@ -167,16 +184,15 @@
   display: flex;
   border-radius: 50%;
   /* background-color: rgba(211, 211, 211, 0.897); */
-
 }
 
-.circle-more-icon img{
+.circle-more-icon img {
   margin: 0;
   padding: 0;
-  height:1.6rem;
-  width:1.6rem;
+  height: 1.6rem;
+  width: 1.6rem;
   font-size: 1.6rem;
-  cursor: pointer;  
+  cursor: pointer;
   border-radius: 50%;
 }
 

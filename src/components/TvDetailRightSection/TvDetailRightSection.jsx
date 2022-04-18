@@ -1,16 +1,14 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { GetDetails } from "../../api";
 import TvKeywordComponent from "../TvKeywordComponent/TvKeywordComponent";
 
 const TvDetailRightSection = ({ id }) => {
   const [currentTvData, setCurrentTvData] = useState({});
 
   useEffect(() => {
-    const detailsURL = `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-    console.log(detailsURL);
-    axios.get(detailsURL).then((response) => setCurrentTvData(response.data));
-  }, []);
+    GetDetails("tv",id).then((response) => setCurrentTvData(response.data));
+  }, [id]);
 
 
   return (

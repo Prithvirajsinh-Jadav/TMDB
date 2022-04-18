@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { GetDetails } from "../../api";
 
 const TvReviewHeading = ({ id }) => {
   const [currentTvDetail, setCurrentTvDetail] = useState([]);
 
   useEffect(() => {
-    const detailsURL = `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
 
-    axios.get(detailsURL).then((response) => setCurrentTvDetail(response.data));
-  }, []);
+    GetDetails("tv", id).then((response) => setCurrentTvDetail(response.data));
+  }, [id]);
 
   return (
     <div className="poster-section-wrapper d-flex container py-3 px-0">
