@@ -19,7 +19,7 @@ const Poster = () => {
               <div className="search ">
                 <form
                   id="inner_search_form"
-                  action="/search"
+                  action="/search/movie"
                   method="get"
                 >
                  

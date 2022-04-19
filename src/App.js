@@ -49,7 +49,7 @@ const App = () => {
           <Route path="/:isMovie/:category" element={<CategorySection />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/search" element={<SearchShowResult />} />
+          <Route exact path="/search/:currentSearchTab" element={<SearchShowResult />} />
         </Routes>
         <Footer />
       </Router>

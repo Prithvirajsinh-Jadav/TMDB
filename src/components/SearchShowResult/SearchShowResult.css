@@ -62,6 +62,12 @@
   border-radius: 8px;
 }
 
+.search-image {
+  height: 141px;
+  width: 94px;
+  background: #dbdbdb;
+}
+
 .search-box-section-wrapper {
   border-bottom: 1px solid rgba(227, 227, 227, 1) !important;
   /* background-color:red; */
@@ -131,8 +137,73 @@
   margin: 0;
 }
 
-.search-right-section-wrapper{
+.search-right-section-content-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.page-container {
+  color: #000;
+  /* background-color: red; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 500px;
+}
+
+.page-container a {
+  font-weight: 600;
+  margin: 0 4px;
+}
+
+.previous-page,
+.next-page {
+  color: #000 !important;
+}
+
+.active-page {
+  border: 1px solid #000;
+  padding: 2px 8px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.disable-page {
+  display: none;
+}
+
+.person-image-container {
+  width: 70px;
+  min-width: 70px;
+  height: 70px;
+}
+
+.person-image {
+  width: 100%;
+  height: 100%;
+  background-color: #dbdbdb;
+  border-radius: 0.5em !important;
+}
+
+.person-card {
+  border: none !important;
+}
+
+.search-person-name {
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.2em;
+}
+
+.search-sub {
+  font-weight: 400;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

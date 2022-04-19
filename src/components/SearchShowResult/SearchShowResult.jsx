@@ -1,18 +1,106 @@
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSearchParams, Link, useParams } from "react-router-dom";
+import { GetSearchQueryData } from "../../api";
+import SearchShowResultDataCard from "./SearchShowResultDataCard/SearchShowResultDataCard";
 import "./SearchShowResult.css";
+import ReactPaginate from "react-paginate";
+import SearchShowPeopleDataCard from "./SearchShowPeopleDataCard/SearchShowPeopleDataCard";
 
 const SearchShowResult = () => {
   const [searchParams] = useSearchParams();
   const [inputBox, setInputBox] = useState("");
-  console.log(searchParams.get("query"));
+  const query = searchParams.get("query");
+  // const page = searchParams.get("page");
+  const [searchMovieData, setSearchMovieData] = useState([]);
+  const [searchTvData, setSearchTvData] = useState([]);
+  const [searchCollectionData, setSearchCollectionData] = useState([]);
+  const [searchPersonData, setSearchPersonData] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const params = useParams();
+
+  useEffect(() => {
+    GetSearchQueryData("movie", query, 1).then((response) =>
+      setSearchMovieData(response.data)
+    );
+    GetSearchQueryData("tv", query, 1).then((response) =>
+      setSearchTvData(response.data)
+    );
+
+    GetSearchQueryData("collection", query, 1).then((response) =>
+      setSearchCollectionData(response.data)
+    );
+
+    GetSearchQueryData("person", query, 1).then((response) =>
+      setSearchPersonData(response.data)
+    );
+  }, [query]);
+
+  useEffect(() => {
+    setPageNumber(0);
+
+    getSearchData(params.currentSearchTab, 0);
+  }, [params.currentSearchTab]);
+
+  const getSearchData = (currentSearchTab, selected) => {
+    switch (currentSearchTab) {
+      case "movie":
+        GetSearchQueryData("movie", query, selected + 1).then((response) =>
+          setSearchMovieData(response.data)
+        );
+        break;
+      case "tv":
+        GetSearchQueryData("tv", query, selected + 1).then((response) =>
+          setSearchTvData(response.data)
+        );
+
+        break;
+      case "collection":
+        GetSearchQueryData("collection", query, selected + 1).then((response) =>
+          setSearchCollectionData(response.data)
+        );
+        break;
+      case "people":
+        GetSearchQueryData("person", query, selected + 1).then((response) =>
+          setSearchPersonData(response.data)
+        );
+        console.log(searchPersonData);
+        break;
+      default:
+        GetSearchQueryData("movie", query, selected + 1).then((response) =>
+          setSearchMovieData(response.data)
+        );
+    }
+  };
+
+  const pageChangeHandler = ({ selected }) => {
+    setPageNumber(selected);
+    getSearchData(params.currentSearchTab, selected);
+  };
+
+  // console.log(searchMovieData);
+  // console.log(searchTvData);
+  console.log(searchPersonData);
+  // console.log(searchCollectionData);
+
+  const pageCount =
+    params.currentSearchTab === "movie"
+      ? searchMovieData.total_pages
+      : params.currentSearchTab === "tv"
+      ? searchTvData.total_pages
+      : params.currentSearchTab === "collection"
+      ? searchCollectionData.total_pages
+      : searchPersonData.total_pages;
+
+  // console.log(pageCount)
+
   return (
     <div className="search-section">
       <div className="search-box-section-wrapper container-fluid p-0">
         <div className="search-box-section container p-0">
           <form
             id="search-form"
-            action="/search"
+            action="/search/movie"
             method="get"
             className="d-flex"
           >
@@ -35,95 +123,74 @@ const SearchShowResult = () => {
             <h3 className="search-heading">Search Results</h3>
             <div id="search_menu_scroller" className="search-panel-container">
               <ul className="search-panel">
-                <li className="selected">
-                  <a
+                <li
+                  className={
+                    "" + (params.currentSearchTab === "movie" ? "selected" : "")
+                  }
+                >
+                  <Link
                     id="movie"
-                    href="/search/movie?query=the batman"
+                    to={`/search/movie?query=${query}`}
                     className="search_tab"
                     title="Movies"
                     alt="Movies"
                   >
                     Movies
-                  </a>
-                  <span>0</span>
+                  </Link>
+                  <span>{searchMovieData.total_results}</span>
                 </li>
 
-                <li className="">
-                  <a
+                <li
+                  className={
+                    "" + (params.currentSearchTab === "tv" ? "selected" : "")
+                  }
+                >
+                  <Link
                     id="tv"
-                    href="/search/tv?query=the batman"
+                    to={`/search/tv?query=${query}`}
                     className="search_tab "
                     title="TV Shows"
                     alt="TV Shows"
                   >
                     TV Shows
-                  </a>
-                  <span>0</span>
+                  </Link>
+                  <span>{searchTvData.total_results}</span>
                 </li>
 
-                <li className="">
-                  <a
+                <li
+                  className={
+                    "" +
+                    (params.currentSearchTab === "collection" ? "selected" : "")
+                  }
+                >
+                  <Link
                     id="collection"
-                    href="/search/collection?query=the batman"
+                    to={`/search/collection?query=${query}`}
                     className="search_tab "
                     title="Collections"
                     alt="Collections"
                   >
                     Collections
-                  </a>
-                  <span>0</span>
+                  </Link>
+                  <span>{searchCollectionData.total_results}</span>
                 </li>
 
-                <li className="">
-                  <a
-                    id="keyword"
-                    href="/search/keyword?query=the batman"
-                    className="search_tab "
-                    title="Keywords"
-                    alt="Keywords"
-                  >
-                    Keywords
-                  </a>
-                  <span>0</span>
-                </li>
-
-                <li className="">
-                  <a
+                <li
+                  className={
+                    "" +
+                    (params.currentSearchTab === "people" ? "selected" : "")
+                  }
+                >
+                  <Link
                     id="person"
-                    href="/search/person?query=the batman"
+                    to={`/search/people?query=${query}`}
                     className="search_tab "
                     title="People"
                     alt="People"
                   >
                     People
-                  </a>
-                  <span>0</span>
-                </li>
-
-                <li className="">
-                  <a
-                    id="company"
-                    href="/search/company?query=the batman"
-                    className="search_tab "
-                    title="Companies"
-                    alt="Companies"
-                  >
-                    Companies
-                  </a>
-                  <span>0</span>
-                </li>
-
-                <li className="">
-                  <a
-                    id="network"
-                    href="/search/network?query=the batman"
-                    className="search_tab "
-                    title="Networks"
-                    alt="Networks"
-                  >
-                    Networks
-                  </a>
-                  <span>0</span>
+                  </Link>
+                  <span>{searchPersonData.total_results}</span>
                 </li>
               </ul>
             </div>
@@ -131,62 +198,85 @@ const SearchShowResult = () => {
         </div>
         <div className="search-right-section ms-4 w-100">
           <div className="search-right-section-wrapper">
-            <div className="card search-content-card d-flex flex-row">
-              <div className="image-container">
-                <img
-                  className="search-image"
-                  src="https://www.themoviedb.org/t/p/w94_and_h141_bestv2/74xTEgt7R36Fpooo50r9T25onhq.jpg"
-                  alt="The Batman"
-                />
-              </div>
-              <div className="search-detail d-flex justify-content-center flex-column">
-                <div className="search-detail-wrapper">
-                  <div className="search-detail-container">
-                    <h2>The Batman</h2>
-                    <span className="release-date">March 1, 2022</span>
-                  </div>
-                </div>
+            <div className="search-right-section-content-wrapper">
+              {params.currentSearchTab === "movie" &&
+                searchMovieData.results &&
+                searchMovieData.results.map((currentSearchMovieData) => (
+                  <SearchShowResultDataCard
+                    key={currentSearchMovieData.id}
+                    poster_path={currentSearchMovieData.poster_path}
+                    title={currentSearchMovieData.title}
+                    release_date={currentSearchMovieData.release_date}
+                    overview={currentSearchMovieData.overview}
+                  />
+                ))}
 
-                <div className="overview">
-                  <p>
-                    In his second year of fighting crime In his second year of
-                    fighting crime, Batman uncovers corruption in Gotham City
-                    that connects to his own family while facing a serial killer
-                    known as the Riddler.In his second year of fighting crime,
-                    Batman uncovers corruption in Gotham City that connects to
-                    his own family while facing a serial killer known as the
-                    Riddler.,
-                  </p>
-                </div>
-              </div>
+              {params.currentSearchTab === "tv" &&
+                searchTvData.results &&
+                searchTvData.results.map((currentSearchTvData) => (
+                  <SearchShowResultDataCard
+                    key={currentSearchTvData.id}
+                    poster_path={currentSearchTvData.poster_path}
+                    title={currentSearchTvData.name}
+                    release_date={currentSearchTvData.first_air_date}
+                    overview={currentSearchTvData.overview}
+                  />
+                ))}
+
+              {params.currentSearchTab === "collection" &&
+                searchCollectionData.results &&
+                searchCollectionData.results.map(
+                  (currentSearchCollectionData) => (
+                    <SearchShowResultDataCard
+                      key={currentSearchCollectionData.id}
+                      poster_path={currentSearchCollectionData.poster_path}
+                      title={currentSearchCollectionData.name}
+                      release_date=""
+                      overview={currentSearchCollectionData.overview}
+                    />
+                  )
+                )}
+
+              {params.currentSearchTab === "people" &&
+                searchPersonData.results &&
+                searchPersonData.results.map((currentSearchPeopleData) => (
+                  <SearchShowPeopleDataCard
+                    key={currentSearchPeopleData.id}
+                    profile_path={currentSearchPeopleData.profile_path}
+                    name={currentSearchPeopleData.name}
+                    department={currentSearchPeopleData.known_for_department}
+                    known_for_array={currentSearchPeopleData.known_for}
+                  />
+                ))}
             </div>
-            <div className="card search-content-card d-flex flex-row">
-              <div className="image-container">
-                <img
-                  className="search-image"
-                  src="https://www.themoviedb.org/t/p/w94_and_h141_bestv2/74xTEgt7R36Fpooo50r9T25onhq.jpg"
-                  alt="The Batman"
+            <div className="pagination-wrapper">
+              <div
+                className={
+                  "pagination d-flex justify-content-center mt-4 " +
+                  (pageCount <= 1 ? "d-none" : "")
+                }
+              >
+                <ReactPaginate
+                  previousLabel="< Previous"
+                  nextLabel="Next >"
+                  pageCount={
+                    params.currentSearchTab === "movie"
+                      ? searchMovieData.total_pages
+                      : params.currentSearchTab === "tv"
+                      ? searchTvData.total_pages
+                      : params.currentSearchTab === "collection"
+                      ? searchCollectionData.total_pages
+                      : searchPersonData.total_pages
+                  }
+                  onPageChange={pageChangeHandler}
+                  pageRangeDisplayed={7}
+                  activeClassName={"active-page "}
+                  disabledClassName={"disable-page "}
+                  previousLinkClassName="previous-page"
+                  nextLinkClassName="next-page"
+                  containerClassName="page-container"
+                  forcePage={pageNumber}
                 />
-              </div>
-              <div className="search-detail d-flex justify-content-center flex-column">
-                <div className="search-detail-wrapper">
-                  <div className="search-detail-container">
-                    <h2>The Batman</h2>
-                    <span className="release-date">March 1, 2022</span>
-                  </div>
-                </div>
-
-                <div className="overview">
-                  <p>
-                    In his second year of fighting crime In his second year of
-                    fighting crime, Batman uncovers corruption in Gotham City
-                    that connects to his own family while facing a serial killer
-                    known as the Riddler.In his second year of fighting crime,
-                    Batman uncovers corruption in Gotham City that connects to
-                    his own family while facing a serial killer known as the
-                    Riddler.,
-                  </p>
-                </div>
               </div>
             </div>
           </div>

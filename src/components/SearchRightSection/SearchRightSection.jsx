@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import HomePageCard from "../HomePageCard/HomePageCard";
 import InfiniteScroll from "react-infinite-scroller";
 import defaultImage from "./../../assets/images/fallback-poster-image_6.svg";
+import { GetDiscoverData } from "../../api";
 
 
 const SearchRightSection = ({ isMovie, url }) => {
@@ -12,27 +12,21 @@ const SearchRightSection = ({ isMovie, url }) => {
   
 
   useEffect(() => {
-    const categoryURL = `https://api.themoviedb.org/3/discover/${isMovie}?api_key=${process.env.REACT_APP_API_KEY}&${url}&page=1`;
 
-    console.log(url)
     setCategoryData([]);
 
-    console.log(categoryURL);
-    axios
-      .get(categoryURL)
-      .then((response) => setCategoryData(response.data.results));
+    GetDiscoverData(isMovie,url,1).then((response) => setCategoryData(response.data.results));
   }, [isMovie,url]);
 
   const fetchData = (page) => {
-    const categoryURL = `https://api.themoviedb.org/3/discover/${isMovie}?api_key=${process.env.REACT_APP_API_KEY}&${url}&page=${page}`;
-    console.log(categoryURL);
-    axios
-      .get(categoryURL)
-      .then((response) =>
-        setCategoryData((prevState) => {
-          response.data.results.length >= 20 ? setHasMore(true) : setHasMore(false);
-         return [...prevState, ...response.data.results]})
-      );
+   GetDiscoverData(isMovie, url, page).then((response) =>
+     setCategoryData((prevState) => {
+       response.data.results.length >= 20
+         ? setHasMore(true)
+         : setHasMore(false);
+       return [...prevState, ...response.data.results];
+     })
+   );
   };
 
   return (

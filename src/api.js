@@ -43,5 +43,15 @@ export const GetTrendingData = (isWeek) => {
 
 export const GetWatchProvider = (id, isMovie) => {
   const watchProvider = `https://api.themoviedb.org/3/${isMovie}/${id}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`;
-  return axios.get(watchProvider)
+  return axios.get(watchProvider);
+};
+
+export const GetDiscoverData = (isMovie, url, page) => {
+  const categoryURL = `https://api.themoviedb.org/3/discover/${isMovie}?api_key=${process.env.REACT_APP_API_KEY}&${url}&page=${page}`;
+  return axios.get(categoryURL);
+};
+
+export const GetSearchQueryData = (currentSearchTab, query,page) => {
+  const searchQueryUrl = `https://api.themoviedb.org/3/search/${currentSearchTab}?api_key=${process.env.REACT_APP_API_KEY}&query=${query}&page=${page}`;
+  return axios.get(searchQueryUrl);
 };
