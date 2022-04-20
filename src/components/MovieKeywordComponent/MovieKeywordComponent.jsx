@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { GetKeywords } from "../../api";
 
 const MovieKeywordComponent = ({ id }) => {
@@ -16,7 +15,7 @@ const MovieKeywordComponent = ({ id }) => {
           {keywords.map((keywordObj) => {
             return (
               <li key={keywordObj.id}>
-                <Link to="/">{keywordObj.name}</Link>
+                <span to="/">{keywordObj.name}</span>
               </li>
             );
           })}

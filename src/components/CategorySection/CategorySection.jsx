@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CategorySection.css";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { languages } from "../language";
 import { country } from "../country";
@@ -11,7 +11,7 @@ import CategoryWatchProvider from "../CategoryWatchProvider/CategoryWatchProvide
 import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSection";
 import SearchRightSection from "../SearchRightSection/SearchRightSection";
 import Slider from "@mui/material/Slider";
-// import defaultImage from "./../../assets/images/fallback-poster-image.svg"
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const CategorySection = () => {
   const params = useParams();
@@ -45,7 +45,7 @@ const CategorySection = () => {
   const [runtimeUser, setRuntimeUser] = useState([0, 400]);
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const [url, setUrl] = useState("");
-  const [showSearchSection, setShowSearchSection] = useState(false)
+  const [showSearchSection, setShowSearchSection] = useState(false);
 
   const initialState = {
     all_availabilities: true,
@@ -251,10 +251,9 @@ const CategorySection = () => {
   };
 
   const searchBtnHandler = () => {
-
-    const myCurrentURL = `&sort_by=${sortValue}&release_date.gte=${fromDate ? fromDate.toLocaleDateString(
-      "en-CA"
-    ) : ""}&release_date.lte=${toDate.toLocaleDateString(
+    const myCurrentURL = `&sort_by=${sortValue}&release_date.gte=${
+      fromDate ? fromDate.toLocaleDateString("en-CA") : ""
+    }&release_date.lte=${toDate.toLocaleDateString(
       "en-CA"
     )}&with_genres=${activeGenreList.join(
       ","
@@ -273,7 +272,7 @@ const CategorySection = () => {
     }&with_ott_providers=${activeCategoryWatchProvider.join("|")}
 `;
 
-    setUrl(myCurrentURL)
+    setUrl(myCurrentURL);
     setShowSearchSection(true);
 
     console.log(myCurrentURL);
@@ -340,6 +339,14 @@ const CategorySection = () => {
     },
   ];
 
+  const myTheme = createTheme({
+    palette: {
+      primary: {
+        main: "rgb(1, 180, 228)",
+      },
+    },
+  });
+
   return (
     <div className="category-wrapper container d-flex p-0 my-4 flex-column">
       <div className="category-title mt-2">
@@ -348,13 +355,15 @@ const CategorySection = () => {
       <div className="d-flex mt-2">
         <div className="left-category-section w-20 ">
           <div className="filter-section">
-            <div className="filter-panel" onClick={filterPanelHandler}>
+            <div className="filter-panel">
               <div
-                className="filter-name d-flex align-self-center w-100 justify-content-between flex-nowrap"
+                className="filter-name d-flex align-self-center w-100 justify-content-between flex-nowrap "
                 id="sort"
+                onClick={(e) => filterPanelHandler(e)}
               >
-                <h2>Sort</h2>
+                <h2 id="sort">Sort</h2>
                 <span
+                  id="sort"
                   className={"chevron-right " + (showSortPanel ? "rotate" : "")}
                 ></span>
               </div>
@@ -371,7 +380,7 @@ const CategorySection = () => {
                       id="sort_by"
                       name="sort_by"
                       className="filter-dropdown w-100"
-                      onChange={sortHandler}
+                      onChange={(e) => sortHandler(e)}
                     >
                       <option value="popularity.desc">
                         Popularity Descending
@@ -396,13 +405,15 @@ const CategorySection = () => {
                 </div>
               </div>
             </div>
-            <div className="filter-panel my-3" onClick={filterPanelHandler}>
+            <div className="filter-panel my-3">
               <div
                 className="filter-name d-flex align-self-center w-100 justify-content-between flex-nowrap"
                 id="filters"
+                onClick={(e) => filterPanelHandler(e)}
               >
-                <h2>Filters</h2>
+                <h2 id="filters">Filters</h2>
                 <span
+                  id="filters"
                   className={
                     "chevron-right " + (showFilterPanel ? "rotate" : "")
                   }
@@ -446,7 +457,7 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="stream"
-                        onChange={checkBoxHandler}
+                        onChange={(e) => checkBoxHandler(e)}
                         checked={isChecked.stream}
                       />
                       <label htmlFor="stream" className="stream">
@@ -459,7 +470,7 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="free"
-                        onChange={checkBoxHandler}
+                        onChange={(e) => checkBoxHandler(e)}
                         checked={isChecked.free}
                       />
                       <label htmlFor="free" className="free">
@@ -472,7 +483,7 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="ads"
-                        onChange={checkBoxHandler}
+                        onChange={(e) => checkBoxHandler(e)}
                         checked={isChecked.ads}
                       />
                       <label htmlFor="ads" className="ads">
@@ -485,7 +496,7 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="rent"
-                        onChange={checkBoxHandler}
+                        onChange={(e) => checkBoxHandler(e)}
                         checked={isChecked.rent}
                       />
                       <label htmlFor="rent" className="rent">
@@ -498,7 +509,7 @@ const CategorySection = () => {
                         type="checkbox"
                         className="checkbox-input me-1"
                         name="buy"
-                        onChange={checkBoxHandler}
+                        onChange={(e) => checkBoxHandler(e)}
                         checked={isChecked.buy}
                       />
                       <label htmlFor="buy" className="buy">
@@ -518,7 +529,7 @@ const CategorySection = () => {
                       className="checkbox-input me-1"
                       name="release"
                       checked={isChecked.release}
-                      onChange={checkBoxHandler}
+                      onChange={(e) => checkBoxHandler(e)}
                     />
                     <label htmlFor="release" className="release-checkbox">
                       Search all releases?
@@ -539,7 +550,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="countries"
                           checked={isChecked.countries}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label htmlFor="countries" className="countries">
                           Search all countries?
@@ -557,7 +568,7 @@ const CategorySection = () => {
                             id="searchCountries"
                             name="searchCountries"
                             className="filter-dropdown w-100"
-                            onChange={searchCountryHandler}
+                            onChange={(e) => searchCountryHandler(e)}
                             value={currentSearchCountry}
                           >
                             {country.map((currentLanguage) => {
@@ -582,7 +593,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="premiere"
                           checked={isChecked.premiere}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label htmlFor="premiere" className="premiere">
                           Premiere
@@ -595,7 +606,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="theatricalLimited"
                           checked={isChecked.theatricalLimited}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label
                           htmlFor="theatrical-limited"
@@ -611,7 +622,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="theatrical"
                           checked={isChecked.theatrical}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label htmlFor="theatrical" className="theatrical">
                           Theatrical
@@ -624,7 +635,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="digital"
                           checked={isChecked.digital}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label htmlFor="digital" className="digital">
                           Digital
@@ -637,7 +648,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="physical"
                           checked={isChecked.physical}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label htmlFor="physical" className="physical">
                           Physical
@@ -650,7 +661,7 @@ const CategorySection = () => {
                           className="checkbox-input me-1"
                           name="tv"
                           checked={isChecked.tv}
-                          onChange={checkBoxHandler}
+                          onChange={(e) => checkBoxHandler(e)}
                         />
                         <label htmlFor="tv" className="tv">
                           TV
@@ -696,7 +707,7 @@ const CategorySection = () => {
                           <li
                             key={keyword.id}
                             id={keyword.id}
-                            onClick={keywordsHandler}
+                            onClick={(e) => keywordsHandler(e)}
                           >
                             {keyword.name}
                           </li>
@@ -725,7 +736,7 @@ const CategorySection = () => {
                         id="languages"
                         name="languages"
                         className="filter-dropdown w-100"
-                        onChange={languageHandler}
+                        onChange={(e) => languageHandler(e)}
                         value={currentLanguage}
                       >
                         {languages.map((currentLanguage) => {
@@ -745,60 +756,64 @@ const CategorySection = () => {
 
                 <div className="user-score-section">
                   <h3>User Score</h3>
-                  <Slider
-                    value={userScoreValue}
-                    onChange={(event, newValue) => {
-                      setUserScoreValue(newValue);
-                    }}
-                    min={0}
-                    max={10}
-                    step={1}
-                    marks={userScoreMarks}
-                    valueLabelDisplay="auto"
-                  />
+                  <ThemeProvider theme={myTheme}>
+                    <Slider
+                      value={userScoreValue}
+                      onChange={(event, newValue) => {
+                        setUserScoreValue(newValue);
+                      }}
+                      min={0}
+                      max={10}
+                      step={1}
+                      marks={userScoreMarks}
+                      valueLabelDisplay="auto"
+                    />
+                  </ThemeProvider>
                 </div>
 
                 <div className="votes-section">
                   <h3>Minimum User Score</h3>
-                  <Slider
-                    aria-label="Always visible"
-                    defaultValue={10}
-                    valueLabelDisplay="auto"
-                    min={0}
-                    max={500}
-                    step={50}
-                    marks={minimumUserVotesMarks}
-                    getAriaValueText={(value) => `${value}m`}
-                    onChange={(e) => setMinimumUserVotes(e.target.value)}
-                  />
+                  <ThemeProvider theme={myTheme}>
+                    <Slider
+                      aria-label="Always visible"
+                      defaultValue={10}
+                      valueLabelDisplay="auto"
+                      min={0}
+                      max={500}
+                      step={50}
+                      marks={minimumUserVotesMarks}
+                      getAriaValueText={(value) => `${value}m`}
+                      onChange={(e) => setMinimumUserVotes(e.target.value)}
+                    />
+                  </ThemeProvider>
                 </div>
                 <div className="runtime-section">
                   <h3>Runtime</h3>
-                  <Slider
-                    value={runtimeUser}
-                    onChange={(event, newValue) => {
-                      setRuntimeUser(newValue);
-                    }}
-                    min={0}
-                    max={400}
-                    step={15}
-                    marks={runtimeUserMarks}
-                    valueLabelDisplay="auto"
-                  />
+                  <ThemeProvider theme={myTheme}>
+                    <Slider
+                      value={runtimeUser}
+                      onChange={(event, newValue) => {
+                        setRuntimeUser(newValue);
+                      }}
+                      min={0}
+                      max={400}
+                      step={15}
+                      marks={runtimeUserMarks}
+                      valueLabelDisplay="auto"
+                    />
+                  </ThemeProvider>
                 </div>
-
-                {/* <div className="keyword-search-section">
-                  <h3>Keywords</h3>
-                </div> */}
               </div>
             </div>
-            <div className="filter-panel" onClick={filterPanelHandler}>
+            <div className="filter-panel">
               <div
                 className="filter-name d-flex align-self-center w-100 justify-content-between flex-nowrap"
                 id="watch"
+                onClick={(e) => filterPanelHandler(e)}
               >
-                <h2>Where to Watch</h2>
+                <h2 id="watch">Where to Watch</h2>
                 <span
+                  id="watch"
                   className={
                     "chevron-right " + (showWatchPanel ? "rotate" : "")
                   }
@@ -816,7 +831,7 @@ const CategorySection = () => {
                       id="country"
                       name="countries"
                       className="filter-dropdown w-100"
-                      onChange={watchCountryHandler}
+                      onChange={(e) => watchCountryHandler(e)}
                       value={currentWatchCountry}
                     >
                       {country.map((currentLanguage) => {
@@ -862,10 +877,7 @@ const CategorySection = () => {
               <TvCategoryRightSection category={params.category} url={url} />
             )
           ) : (
-            <SearchRightSection
-              url={url}
-              isMovie={params.isMovie}
-            />
+            <SearchRightSection url={url} isMovie={params.isMovie} />
           )}
 
           <div className="load-more-btn-section  w-100 m-4">

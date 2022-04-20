@@ -3,8 +3,8 @@
 }
 * {
   box-sizing: border-box;
-  padding: 0 ;
-  margin: 0 ;
+  padding: 0;
+  margin: 0;
 }
 a {
   text-decoration: none !important;
@@ -12,12 +12,13 @@ a {
 ol,
 ul {
   list-style: none !important;
- 
+
   list-style-type: none;
 }
 
-body{
-  font-family: 'Source Sans Pro', Arial, sans-serif !important;
+body {
+  font-family: "Source Sans Pro", Arial, sans-serif !important;
+  display: flex !important;
 }
 
 .darkBlue {
@@ -35,4 +36,20 @@ body{
 *::-webkit-scrollbar-thumb {
   background: #dbdbdb;
   border-radius: 10px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+  border-color: rgba(1,180,228,1) !important;
+}
+
+.btn:focus {
+     box-shadow: none !important;
+
 }

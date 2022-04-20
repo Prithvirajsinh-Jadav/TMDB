@@ -7,20 +7,11 @@ const SearchShowPeopleDataCard = ({
   department,
   known_for_array,
 }) => {
-    console.log(known_for_array)
-
-    // const [showKnownFor, setShowKnownFor] = useState([])
-
-    
-
-    // known_for_array.map((currentKnown)=>setShowKnownFor((prevState)=> [...prevState, currentKnown.name || currentKnown.title]))
-
-    let known_for_string = known_for_array.map((currentKnown)=>{
-
-      
-        return (currentKnown.name || currentKnown.title);
-        
-    }).join(", ")
+  let known_for_string = known_for_array
+    .map((currentKnown) => {
+      return currentKnown.name || currentKnown.title;
+    })
+    .join(", ");
 
   return (
     <div className="card person-card  d-flex flex-row">

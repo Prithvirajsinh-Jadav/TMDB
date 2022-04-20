@@ -26,7 +26,7 @@ const Community = () => {
                   </p>
                   <p className="button">
                     <Link
-                      to="/"
+                      to="/signup"
                       className="rounded background_color border_color purple"
                     >
                       Sign Up

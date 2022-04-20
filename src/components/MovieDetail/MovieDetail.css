@@ -1,3 +1,12 @@
+.image-absolute{
+      position: absolute;
+    z-index: -9;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    padding: 0px;
+}
+
 .movie-header-section {
   background-position: right top;
   width: 100%;
@@ -5,6 +14,7 @@
   z-index: 1;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color:#dbdbdb;
 }
 
 .movie-header-section .container-fluid {
@@ -20,6 +30,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: #dbdbdb;
 }
 
 .movie-header-section .container {
@@ -241,10 +252,11 @@
   margin-right: 8px;
 }
 
-.play-trailer a {
+.play-trailer {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .play-trailer:hover {
   opacity: 0.8;
@@ -349,12 +361,11 @@
   font-weight: 700;
   line-height: 1;
   margin-bottom: 0;
+  color: #000;
+  cursor: pointer;
 }
 
-.person-name a {
-  color: #000;
-}
-.person-name a:hover {
+.person-name:hover {
   color: rgba(0, 0, 0, 0.5);
 }
 .character-name {
@@ -383,13 +394,14 @@
   border-bottom: 4px solid #000000;
 }
 
-.social-menu ul li a {
+.social-menu ul li span {
   color: #000;
   font-weight: 600;
   font-size: 1.1rem;
+  cursor: pointer;
 }
 
-.social-menu ul li a span {
+.social-menu ul li span > span {
   font-size: 1rem;
   font-weight: 400;
   opacity: 0.6;
@@ -404,22 +416,21 @@
 }
 
 .rating {
-    padding: 1px 8px;
-    margin-left: 14px;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    background-color: #000;
-    border-color: #000;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: 400;
+  padding: 1px 8px;
+  margin-left: 14px;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background-color: #000;
+  border-color: #000;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 400;
 }
 
-
-.star{
+.star {
   background-image: url("./../../assets/images/star.svg");
   width: 1rem;
   height: 1rem;
@@ -465,7 +476,6 @@
 .review-bottom-section {
   padding-left: 5rem;
 }
-
 
 .underline {
   color: #000000;
@@ -646,7 +656,7 @@
   white-space: nowrap;
 }
 
-.keyword-container ul li a {
+.keyword-container ul li span {
   background-color: rgba(0, 0, 0, 0.1);
   border: 1px solid #d7d7d7;
   color: #000;

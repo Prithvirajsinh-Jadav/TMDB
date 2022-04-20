@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TrendingDay from "./TrendingDay";
 import TrendingWeek from "./TrendingWeek";
-// import HomePageCard from "../HomePageCard/HomePageCard";
 import SectionHeading from "../SectionHeading/SectionHeading";
 
 import "./Trending.css";
@@ -14,22 +13,10 @@ const Trending = () => {
   const sectionHeading = "Trending";
   const [selectedTab, setSelectedTab] = useState("day");
   const [isScroll, setIsScroll] = useState(false);
-  
 
   const scrollHandler = (e) => {
-
-    if(e.target.scrollLeft < 200){
-
-      setIsScroll(false);
-      
-      // return false;
-    }else{
-     
-      setIsScroll(true);
-      // return true;
-    }
-    
-  }
+   setIsScroll(e.target.scrollLeft < 200);
+  };
 
   return (
     <>
@@ -43,9 +30,7 @@ const Trending = () => {
               setSelectedTab={setSelectedTab}
             />
             <div
-              className={
-                "movie_content " + ( isScroll ? "" : "should_fade")
-              }
+              className={"movie_content " + (isScroll ? "" : "should_fade")}
               onScroll={scrollHandler}
             >
               <div className="scroll_content">

@@ -1,29 +1,25 @@
-import React,{useState,useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import { GetDetails } from '../../api';
+import React, { useState, useEffect } from "react";
+import { GetDetails } from "../../api";
 import MovieKeywordComponent from "../MovieKeywordComponent/MovieKeywordComponent";
 
+const MovieDetailRightSection = ({ id }) => {
+  const [currentMovieData, setCurrentMovieData] = useState({});
 
-
-const MovieDetailRightSection = ({id}) => {
-      const [currentMovieData, setCurrentMovieData] = useState({});
-
-        useEffect(() => {
-          GetDetails("movie",id).then((response) => setCurrentMovieData(response.data));
-        }, [id]);
-
+  useEffect(() => {
+    GetDetails("movie", id).then((response) =>
+      setCurrentMovieData(response.data)
+    );
+  }, [id]);
 
   return (
     <>
       <div className="social-link-container">
         <div>
-          <Link
+          <a
             className="social_link"
-            title="Visit Facebook"
-            to="/"
+            href={currentMovieData.homepage}
             target="_blank"
             rel="noreferrer"
-            data-role="tooltip"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
               <path
@@ -32,17 +28,15 @@ const MovieDetailRightSection = ({id}) => {
                 fill="#262626"
               />
             </svg>
-          </Link>
+          </a>
         </div>
 
         <div>
-          <Link
+          <a
             className="social_link"
-            title="Visit Twitter"
-            to="/"
+            href={currentMovieData.homepage}
             target="_blank"
             rel="noreferrer"
-            data-role="tooltip"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
               <path
@@ -51,17 +45,15 @@ const MovieDetailRightSection = ({id}) => {
                 fill="#262626"
               />
             </svg>
-          </Link>
+          </a>
         </div>
 
         <div>
-          <Link
+          <a
             className="social_link"
-            title="Visit Instagram"
-            to="/"
+            href={currentMovieData.homepage}
             target="_blank"
             rel="noreferrer"
-            data-role="tooltip"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
               <path
@@ -70,30 +62,26 @@ const MovieDetailRightSection = ({id}) => {
                 fill="#262626"
               />
             </svg>
-          </Link>
+          </a>
         </div>
 
         <div className="justwatch-wrapper">
-          <Link
+          <a
             className="social_link just_watch"
-            title=""
-            to="/"
+            href={currentMovieData.homepage}
             target="_blank"
             rel="noreferrer"
-            data-role="tooltip"
           >
             <span className="glyphicons_v2 justwatch"></span>
-          </Link>
+          </a>
         </div>
 
         <div>
-          <Link
+          <a
             className="social_link"
-            title="Visit Homepage"
-            to="/"
+            href={currentMovieData.homepage}
             target="_blank"
             rel="noreferrer"
-            data-role="tooltip"
           >
             <svg
               id="glyphicons-basic"
@@ -105,7 +93,7 @@ const MovieDetailRightSection = ({id}) => {
                 d="M28,13.5v5A4.5,4.5,0,0,1,23.5,23h-7A4.5,4.5,0,0,1,12,18.5V15a1,1,0,0,1,1-1h1a1,1,0,0,1,1,1v3.5A1.5,1.5,0,0,0,16.5,20h7A1.5,1.5,0,0,0,25,18.5v-5A1.5,1.5,0,0,0,23.5,12H21.86035a.49994.49994,0,0,1-.4743-.34186l-.66669-2A.5.5,0,0,1,21.19373,9H23.5A4.5,4.5,0,0,1,28,13.5ZM10.614,20.34186A.49994.49994,0,0,0,10.13965,20H8.5A1.5,1.5,0,0,1,7,18.5v-5A1.5,1.5,0,0,1,8.5,12h7A1.5,1.5,0,0,1,17,13.5V17a1,1,0,0,0,1,1h1a1,1,0,0,0,1-1V13.5A4.5,4.5,0,0,0,15.5,9h-7A4.5,4.5,0,0,0,4,13.5v5A4.5,4.5,0,0,0,8.5,23h2.30627a.5.5,0,0,0,.47437-.65814Z"
               />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -162,6 +150,6 @@ const MovieDetailRightSection = ({id}) => {
       <MovieKeywordComponent id={id} isMovie="movie" />
     </>
   );
-}
+};
 
 export default MovieDetailRightSection;

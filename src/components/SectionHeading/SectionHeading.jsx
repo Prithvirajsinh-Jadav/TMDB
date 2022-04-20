@@ -1,8 +1,6 @@
-import React from 'react'
-import "./SectionHeading.css"
+import React from "react";
+import "./SectionHeading.css";
 import { Link } from "react-router-dom";
-
-
 
 const SectionHeading = ({
   tabData,
@@ -10,14 +8,9 @@ const SectionHeading = ({
   selectedTab,
   setSelectedTab,
 }) => {
-
   const toggleData = (e) => {
     e.preventDefault();
-    // console.log(e.currentTarget.id);
     setSelectedTab(e.currentTarget.id);
-   
-    
-    
   };
   return (
     <>
@@ -25,7 +18,12 @@ const SectionHeading = ({
         <h2 className="section_heading">{sectionHeading} </h2>
         <div className="selector_wrap">
           <div className="selector position-relative">
-            <div className={"is_active " + (selectedTab==="tv" || selectedTab==="week" ? "slider" : "")}></div>
+            <div
+              className={
+                "is_active " +
+                (selectedTab === "tv" || selectedTab === "week" ? "slider" : "")
+              }
+            ></div>
 
             {tabData.map((tab) => {
               return (
@@ -33,9 +31,7 @@ const SectionHeading = ({
                   key={tab.id}
                   className={
                     "anchor " +
-                    (selectedTab === tab.id 
-                      ? "active"
-                      : "non_active")
+                    (selectedTab === tab.id ? "active" : "non_active")
                   }
                   id={tab.id}
                   onClick={toggleData}
@@ -53,4 +49,4 @@ const SectionHeading = ({
   );
 };
 
-export default SectionHeading
+export default SectionHeading;

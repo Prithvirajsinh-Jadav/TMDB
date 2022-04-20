@@ -128,7 +128,7 @@
   border-radius: 3px;
   top: 35px;
   left: -10px;
-  z-index: 5;
+  z-index:999;
   width: 300px;
   /* height: 150px; */
 }

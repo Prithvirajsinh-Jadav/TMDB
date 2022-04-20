@@ -98,44 +98,35 @@ const NavBar = () => {
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item ">
-                      <Link className="nav-link  " to="/">
-                        Popular
-                      </Link>
-                    </li>
-                    <li className="nav-item ">
-                      <Link className="nav-link  " to="/">
-                        More
-                      </Link>
-                    </li>
+                  
                   </ul>
                 </div>
                 <div>
                   <ul className="navbar-nav mr-auto  ">
                     <li className="nav-item ">
-                      <Link className="nav-link  " to="/">
+                      <span className="nav-link  " to="/">
                         <i className="fa-solid fa-plus "></i>
-                      </Link>
+                      </span>
                     </li>
                     <li className="nav-item  nav-lan">
-                      <Link className="nav-link  language" to="/">
+                      <span className="nav-link  language" to="/">
                         EN
-                      </Link>
+                      </span>
                     </li>
                     <li className="nav-item ">
-                      <Link className="nav-link  " to="/">
+                      <span className="nav-link  " to="/">
                         Login
-                      </Link>
+                      </span>
                     </li>
                     <li className="nav-item ">
-                      <Link className="nav-link  " to="/">
+                      <span className="nav-link  " to="/">
                         Join TMDB
-                      </Link>
+                      </span>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link  nav-mag" to="/">
+                      <span className="nav-link  nav-mag" to="/">
                         <i className="fa-solid fa-magnifying-glass"></i>
-                      </Link>
+                      </span>
                     </li>
                   </ul>
                 </div>

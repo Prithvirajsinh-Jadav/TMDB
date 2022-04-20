@@ -26,7 +26,6 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route
-            exact
             path="/"
             element={
               <>
@@ -37,19 +36,18 @@ const App = () => {
               </>
             }
           />
-          <Route exact path="/movie/details/:id" element={<MovieDetail />} />
-          <Route exact path="/tv/details/:id" element={<TvDetail />} />
-          <Route
-            exact
-            path="/:isMovie/reviews/:reviewID"
-            element={<FullReview />}
-          />
-          <Route exact path="/tv/seasons/:id" element={<FullSeason />} />
+          <Route path="/movie/details/:id" element={<MovieDetail />} />
+          <Route path="/tv/details/:id" element={<TvDetail />} />
+          <Route path="/:isMovie/reviews/:reviewID" element={<FullReview />} />
+          <Route path="/tv/seasons/:id" element={<FullSeason />} />
 
           <Route path="/:isMovie/:category" element={<CategorySection />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/search/:currentSearchTab" element={<SearchShowResult />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/search/:currentSearchTab"
+            element={<SearchShowResult />}
+          />
         </Routes>
         <Footer />
       </Router>

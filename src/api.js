@@ -22,7 +22,6 @@ export const GetDetails = (isMovie, id) => {
 
 export const GetReview = (id, isMovie) => {
   const reviewURL = `https://api.themoviedb.org/3/${isMovie}/${id}/reviews?api_key=${process.env.REACT_APP_API_KEY}`;
-  console.log(reviewURL);
   return axios.get(reviewURL);
 };
 

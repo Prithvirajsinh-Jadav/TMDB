@@ -52,20 +52,20 @@ const Signup = () => {
             </p>
             <form>
               <div className="mb-3">
-                <label for="username" className="form-label">
+                <label htmlFor="username" className="form-label">
                   Username
                 </label>
                 <input type="text" className="form-control" id="username" />
               </div>
 
               <div className="mb-3">
-                <label for="password" className="form-label">
+                <label htmlFor="password" className="form-label">
                   Password (4 characters minimum)
                 </label>
                 <input type="password" className="form-control" id="password" />
               </div>
               <div className="mb-3">
-                <label for="confirm-password" className="form-label">
+                <label htmlFor="confirm-password" className="form-label">
                   Password Confirm
                 </label>
                 <input
@@ -76,7 +76,7 @@ const Signup = () => {
               </div>
 
               <div className="mb-3">
-                <label for="email" className="form-label">
+                <label htmlFor="email" className="form-label">
                   Email
                 </label>
                 <input type="email" className="form-control" id="email" />

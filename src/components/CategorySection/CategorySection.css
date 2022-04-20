@@ -44,6 +44,7 @@
 
 .filter-name {
   padding: 14px 16px;
+    cursor: pointer;
 }
 
 .filter-name h2 {
@@ -126,6 +127,8 @@
 /* .label-class{
   background-color: green;
 } */
+
+
 
 .checkbox-input {
   border-radius: 0.25rem;

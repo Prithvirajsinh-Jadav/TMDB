@@ -11,6 +11,8 @@ const ReviewSection = ({ id, isMovie }) => {
     GetReview(id,isMovie).then((response) => setReviewData(response.data.results));
   }, [id, isMovie]);
 
+  // console.log(reviewData)
+
   return (
     <>
       <div className="social-section  ">
@@ -20,24 +22,25 @@ const ReviewSection = ({ id, isMovie }) => {
               <h3 className="pe-4">Social</h3>
               <ul>
                 <li className="social-menu-active">
-                  <Link id="reviews" className="media_panel" to="/">
+                  <span id="reviews" className="media_panel" >
                     Reviews <span>{reviewData.length}</span>
-                  </Link>
+                  </span>
                 </li>
                 <li className="">
-                  <Link id="discussions" className="media_panel" to="/">
+                  <span id="discussions" className="media_panel" >
                     Discussions
-                  </Link>
+                  </span>
                 </li>
               </ul>
             </div>
             <div className="review-section">
               <div className="inner-content">
             
-                {
+                { reviewData &&
                   reviewData.slice(0,1).map((currentReview) => {
                     return (
                       <ReviewCard
+                        key={currentReview.id}
                         author={currentReview.author}
                         authorImage={
                           currentReview.author_details.avatar_path &&
@@ -54,7 +57,6 @@ const ReviewSection = ({ id, isMovie }) => {
                         created_at={currentReview.created_at}
                         content={currentReview.content}
                         url={currentReview.url}
-
                       />
                     ); 
                   })

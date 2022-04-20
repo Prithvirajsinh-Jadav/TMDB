@@ -1,22 +1,29 @@
 import React from "react";
-import { Anchor } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-const ReviewCard = ({ author,authorImage,rating,userLink,created_at,content,url }) => {
-  
+const ReviewCard = ({
+  author,
+  authorImage,
+  rating,
+  userLink,
+  created_at,
+  content,
+  url,
+}) => {
   return (
     <>
       <div className="card mb-4" key={author}>
         <div className="review-top-section">
           <div className="avatar">
-            <Link to="/">
+            <span>
               <img src={authorImage} alt={author} />
-            </Link>
+            </span>
           </div>
 
           <div className="review-info">
             <h3 className="d-flex">
-              <Link to={userLink}>A review by {author}</Link>
+              <a href={userLink} target="_blank" rel="noreferrer">
+                A review by {author}
+              </a>
               {rating && (
                 <div className="rating ms-2">
                   <span className="star"></span>
@@ -27,11 +34,9 @@ const ReviewCard = ({ author,authorImage,rating,userLink,created_at,content,url 
 
             <h5>
               Written by
-              <Link
-                to={userLink}
-              >
+              <a href={userLink} target="_blank" rel="noreferrer">
                 {author}
-              </Link>
+              </a>
               on &nbsp;
               {new Date(created_at).toLocaleDateString("en-US", {
                 month: "short",
@@ -48,13 +53,9 @@ const ReviewCard = ({ author,authorImage,rating,userLink,created_at,content,url 
             {content.length > 600 && (
               <>
                 ...
-                <Anchor
-                  className="underline"
-                  target="_blank"
-                  href={url}
-                >
+                <a className="underline" target="_blank" rel="noreferrer" href={url}>
                   read the rest.
-                </Anchor>
+                </a>
               </>
             )}
           </pre>

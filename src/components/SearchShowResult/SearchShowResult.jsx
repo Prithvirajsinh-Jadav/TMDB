@@ -10,7 +10,6 @@ const SearchShowResult = () => {
   const [searchParams] = useSearchParams();
   const [inputBox, setInputBox] = useState("");
   const query = searchParams.get("query");
-  // const page = searchParams.get("page");
   const [searchMovieData, setSearchMovieData] = useState([]);
   const [searchTvData, setSearchTvData] = useState([]);
   const [searchCollectionData, setSearchCollectionData] = useState([]);
@@ -78,10 +77,6 @@ const SearchShowResult = () => {
     getSearchData(params.currentSearchTab, selected);
   };
 
-  // console.log(searchMovieData);
-  // console.log(searchTvData);
-  console.log(searchPersonData);
-  // console.log(searchCollectionData);
 
   const pageCount =
     params.currentSearchTab === "movie"

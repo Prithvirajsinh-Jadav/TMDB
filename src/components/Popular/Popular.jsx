@@ -14,8 +14,8 @@ const Popular = () => {
     { id: "tv", tabValue: "On TV" },
   ];
 
-  const [isScroll, setIsScroll] = useState(false);
   const [selectedTab, setSelectedTab] = useState("movie");
+  const [isScroll, setIsScroll] = useState(false);
 
   const scrollHandler = (e) => {
     setIsScroll(e.target.scrollLeft < 200);

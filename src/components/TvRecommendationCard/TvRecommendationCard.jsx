@@ -8,6 +8,12 @@ const TvRecommendationCard = ({id}) => {
 
      const [recommendationData, setRecommendationData] = useState([]);
 
+      const [isScroll, setIsScroll] = useState(false);
+
+      const scrollHandler = (e) => {
+        setIsScroll(e.target.scrollLeft < 200);
+      };
+
      useEffect(() => {
         GetRecommendations(id,"tv").then((response) =>
           setRecommendationData(response.data.results)
@@ -22,7 +28,10 @@ const TvRecommendationCard = ({id}) => {
         </div>
 
         <div className="scroll-wrapper position-relative">
-          <div className="scroll-content should_fade">
+          <div
+            className={"scroll-content " + (isScroll ? "" : "should_fade")}
+            onScroll={scrollHandler}
+          >
             <div className="column-content ">
               {recommendationData.length !== 0 ? (
                 recommendationData.map((recommendationMovie) => {

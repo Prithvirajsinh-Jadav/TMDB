@@ -60,8 +60,6 @@ const FullReview = () => {
                   />
                 );
               })}
-              {/* <ReviewCard id={params.reviewID} /> */}
-              {/* author,authorImage,rating,userLink,created_at,content,url */}
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@ footer {
     align-items: center;
     align-content: space-between;
     justify-content: center;
+    margin-top: auto !important;
 }
 
 footer nav{
