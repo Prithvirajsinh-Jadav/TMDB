@@ -16,7 +16,7 @@ const Footer = () => {
             height="94"
           />
 
-          <Link to="/singup">
+          <Link to="/signup">
             Join the Community
           </Link>
         </div>

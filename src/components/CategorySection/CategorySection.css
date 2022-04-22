@@ -236,8 +236,6 @@
     border-radius: 8px;
     font-size: 2em;
     visibility: hidden;
-    /* opacity: 0; */
-    /* transition: all 0.3s ease; */
 }
 
 .hover-li:hover .hover-div{
@@ -278,4 +276,66 @@
   justify-content: center;
   gap: 20px;
   height: 100%;
+}
+.category-wrapper{
+  padding:0 !important;
+}
+
+@media(min-width: 992px) and (max-width:1200px){
+.w-20{
+  width: 30% !important;
+}
+.w-80{
+  width: 70% !important;
+}
+}
+@media(min-width: 1200px) and (max-width:1400px){
+.w-20{
+  width: 25% !important;
+}
+.w-80{
+  width: 75% !important;
+}
+}
+
+@media(max-width: 992px) {
+
+  .category-wrapper{
+    padding:0 2rem !important;
+  }
+  
+.category-responsive{
+  display: flex;
+  flex-direction: column !important;
+}
+
+.w-20{
+  width: 100%;
+}
+
+.w-5{
+  width: 5%;
+}
+
+.date-picker-container{
+  width: 95%;
+}
+.date-picker-container  input{
+  width: 100%;
+}
+
+.right-category-section{
+  margin-top:2rem;
+  width: 100% !important;
+}
+
+.container{
+  max-width: 100vw !important;
+}
+
+
+/* .container{
+  background-color:red;
+} */
+
 }

@@ -348,11 +348,11 @@ const CategorySection = () => {
   });
 
   return (
-    <div className="category-wrapper container d-flex p-0 my-4 flex-column">
+    <div className="category-wrapper container d-flex my-4 flex-column ">
       <div className="category-title mt-2">
         <h2>Popular Movies</h2>
       </div>
-      <div className="d-flex mt-2">
+      <div className="d-flex mt-2 category-responsive">
         <div className="left-category-section w-20 ">
           <div className="filter-section">
             <div className="filter-panel">
@@ -672,7 +672,7 @@ const CategorySection = () => {
 
                   <div className="date-picker-section">
                     <div className="from-section d-flex justify-content-between">
-                      <div>
+                      <div className="w-5">
                         <span>from</span>
                       </div>
 
@@ -684,7 +684,7 @@ const CategorySection = () => {
                       </div>
                     </div>
                     <div className="to-section d-flex justify-content-between mt-2">
-                      <div>
+                      <div className="w-5">
                         <span>to</span>
                       </div>
                       <div className="date-picker-container d-flex justify-content-end">
@@ -880,9 +880,9 @@ const CategorySection = () => {
             <SearchRightSection url={url} isMovie={params.isMovie} />
           )}
 
-          <div className="load-more-btn-section  w-100 m-4">
+          {/* <div className="load-more-btn-section  w-100 m-4">
             <button className="btn btn-custom btn-load w-100">Load More</button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

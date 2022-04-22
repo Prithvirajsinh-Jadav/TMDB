@@ -114,14 +114,14 @@ const NavBar = () => {
                       </span>
                     </li>
                     <li className="nav-item ">
-                      <span className="nav-link  " to="/">
+                      <Link className="nav-link  " to="/login">
                         Login
-                      </span>
+                      </Link>
                     </li>
                     <li className="nav-item ">
-                      <span className="nav-link  " to="/">
+                      <Link className="nav-link  " to="/signup">
                         Join TMDB
-                      </span>
+                      </Link>
                     </li>
                     <li className="nav-item">
                       <span className="nav-link  nav-mag" to="/">
