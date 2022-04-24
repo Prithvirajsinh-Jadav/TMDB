@@ -17,7 +17,7 @@ const MovieRecommendationCard = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="recommendation-section container p-0">
+    <div className="recommendation-section container">
       <section className="recommendation-content">
         <div className="section-heading">
           <h3>Recommendations</h3>

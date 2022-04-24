@@ -6,6 +6,7 @@ import ReviewSection from "../ReviewSection/ReviewSection";
 import MovieDetailHeaderSection from "../MovieDetailHeaderSection/MovieDetailHeaderSection";
 import MovieDetailRightSection from "../MovieDetailRightSection/MovieDetailRightSection";
 import "./MovieDetail.css";
+import "./ResponsiveDetail.css"
 
 const MovieDetail = () => {
   const params = useParams(); 
@@ -14,7 +15,7 @@ const MovieDetail = () => {
     <>
       <MovieDetailHeaderSection id={params.id} />
 
-      <div className="movie-detail-wrapper container p-0">
+      <div className="movie-detail-wrapper container">
         <div className="movie-detail-left-section">
           <CastCard id={params.id} isMovie="movie" />
           <ReviewSection id={params.id} isMovie="movie" />

@@ -23,7 +23,7 @@
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  padding: 30px 40px;
+  padding: 1.25rem 1.5rem;
 }
 
 .column-1 {
@@ -81,4 +81,22 @@
 .column-2 ul li {
     opacity: 0.8;
     margin: 0;
+}
+
+@media (max-width: 768px) {
+  .section_content {
+    flex-direction: column !important;
+  }
+
+  .column-1 {
+    width: 100%;
+  }
+  .community {
+    height:100%;
+  }
+  .column-2 ul {
+    margin-left: 0;
+    margin-bottom: 0 !important;
+    padding-left:1rem !important;
+  }
 }

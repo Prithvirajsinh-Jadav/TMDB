@@ -3,9 +3,9 @@ import "./Signup.css";
 
 const Signup = () => {
   return (
-    <div className="container p-0 my-4 ">
+    <div className="container sign-up ">
       <div className="sign-up-wrapper d-flex ">
-        <div className="sign-up-left-section w-20 me-4">
+        <div className="sign-up-left-section">
           <div className="sign-up-left-section-content-wrapper">
             <h3 className="member-heading">Benefits of being a member</h3>
 
@@ -43,7 +43,7 @@ const Signup = () => {
             </div>
           </div>
         </div>
-        <div className="sign-up-right-section w-80 d-flex ">
+        <div className="sign-up-right-section w-100 ">
           <div className="sign-up-right-content-wrapper w-100">
             <h2 className="signup-heading">Sign up for an account</h2>
             <p>

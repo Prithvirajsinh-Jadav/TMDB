@@ -54,3 +54,9 @@ body {
      box-shadow: none !important;
 
 }
+
+@media (max-width: 1400px) {
+  .poster,.popular,.trending,.community-wrapper{
+    max-width: 100% !important;
+  }
+}

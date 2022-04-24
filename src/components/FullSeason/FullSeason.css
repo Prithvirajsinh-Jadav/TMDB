@@ -1,21 +1,59 @@
-
-.season-card{
-    border-bottom: 1px solid #d7d7d7;
+.season-content {
+  padding: 1.5rem 0 !important;
+}
+.season-card {
+  border-bottom: 1px solid #d7d7d7;
+  padding: 0 !important;
 }
 
-.season-image-container{
-    width: 100px;
-    height: 150px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #dbdbdb;  
-    border: 1px solid #d7d7d7;
+.season-image-container {
+  width: 100px;
+  height: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #dbdbdb;
+  border: 1px solid #d7d7d7;
 }
 
+.season-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
-.season-image{
+.current-season-date {
+  display: flex;
+  align-self: flex-end;
+  margin: 0.5rem ;
+}
+
+.current-season-content-responsive {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 576px) {
+  /* .all-season-wrapper{
+    max-width: 100vw;
+    background-color:red;
+    } */
+
+  .season-card {
+    padding: 0 1.5rem !important;
+  }
+  .current-season-content-responsive {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .current-season-date {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    align-self: flex-start;
+    margin: 0 ;
+  }
+  /* .season-image-container {
+      height: 135px;
+      width: 90px;
+  } */
+  
 }

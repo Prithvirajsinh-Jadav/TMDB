@@ -23,7 +23,7 @@ const App = () => {
   return (
     <>
       <Router>
-        {/* <NavBar /> */}
+        <NavBar />
         <Routes>
           <Route
             path="/"
@@ -49,7 +49,7 @@ const App = () => {
             element={<SearchShowResult />}
           />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </>
   );

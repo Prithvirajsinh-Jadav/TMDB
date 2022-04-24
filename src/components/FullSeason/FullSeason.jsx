@@ -18,7 +18,7 @@ const FullSeason = () => {
 
   return (
     <>
-      <div className="container-fluid poster-section p-0">
+      <div className="container-fluid poster-section">
         <TvReviewHeading id={params.id} />
       </div>
       <div className="all-season-wrapper">
@@ -27,10 +27,10 @@ const FullSeason = () => {
             currentTvData.seasons.map((seasons) => {
               return (
                 <div
-                  className="season-card container-fluid p-0"
+                  className="season-card container-fluid"
                   key={seasons.id}
                 >
-                  <div className="container season-content py-4 p-0 d-flex">
+                  <div className="container season-content d-flex">
                     <div className="season-image-container d-flex align-items-center">
                       <img
                         className="season-image"
@@ -43,9 +43,9 @@ const FullSeason = () => {
                       />
                     </div>
                     <div className="current-season-content ps-4 pt-0 d-flex flex-column justify-content-center">
-                      <div className="d-flex align-items-center">
+                      <div className="current-season-content-responsive">
                         <h2>{seasons && seasons.name}</h2>
-                        <h4 className="d-flex align-self-end m-2">
+                        <h4 className="current-season-date">
                           {seasons.air_date && seasons.air_date.slice(0, 4)} |
                           &nbsp;
                           {seasons && seasons.episode_count} Episodes

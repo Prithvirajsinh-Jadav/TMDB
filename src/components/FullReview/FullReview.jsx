@@ -27,14 +27,14 @@ const FullReview = () => {
         )}
       </div>
 
-      <div className="review-content-wrapper d-flex w-100 container p-4">
-        <div className="review-content-left-section w-20 justify-content-end d-flex me-2 align-items-start">
+      <div className="review-content-wrapper d-flex w-100 container ">
+        <div className="review-content-left-section me-2 ">
           <button className="btn btn-custom btn-review d-flex ">
             <span className="pencil mx-1"></span>
             WRITE REVIEW
           </button>
         </div>
-        <div className="review-content-right-section w-80">
+        <div className="review-content-right-section">
           <div className="review-section">
             <div className="inner-content">
               {reviewData.map((currentReview) => {

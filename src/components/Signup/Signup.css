@@ -18,6 +18,12 @@
   overflow: hidden;
 }
 
+.sign-up-right-content-wrapper{
+
+  width: 100%;
+  padding: 0 0 0 1.5rem;
+}
+
 .member-heading {
   display: flex;
   align-items: center;
@@ -50,4 +56,29 @@
   min-height: 1.5rem;
   position: relative;
  align-self: flex-start;
+}
+
+.sign-up{
+  margin: 1.5rem auto !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 768px){
+.sign-up-wrapper{
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sign-up{
+  min-width: 100%;
+  margin: 0 !important;
+}
+
+.sign-up-left-section-content-wrapper {
+  width: 100%;
+  min-width: 100%;
+  border: none;
+  border-bottom: 1px solid #d7d7d7;
+  border-radius: 0px;
+}
 }

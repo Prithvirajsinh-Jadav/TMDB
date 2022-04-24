@@ -41,7 +41,7 @@ const MovieDetailHeaderSection = ({ id }) => {
               alt=""
               className="image-absolute"
             />
-            <div className="container d-flex text-white py-4">
+            <div className="container d-flex text-white movie-detail-responsive">
               <div className="left-section ">
                 <div className="poster_wrapper ">
                   <div className="poster  ">
@@ -73,7 +73,7 @@ const MovieDetailHeaderSection = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div className="right-section px-5 d-flex align-items-center">
+              <div className="movie-header-right-section  d-flex align-items-center">
                 <div className="movie-title-section">
                   <h2>
                     {currentMovieData.title}{" "}

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Community = () => {
   return (
     <>
-      <div className="container p-0">
+      <div className="container p-0 community-wrapper">
         <div className="community section_wrapper">
           <div className="content_wrapper ">
             <div className="section ">

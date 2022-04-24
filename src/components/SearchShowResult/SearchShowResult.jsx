@@ -112,7 +112,7 @@ const SearchShowResult = () => {
           </form>
         </div>
       </div>
-      <div className="search-section-wrapper container p-0 my-4 d-flex">
+      <div className="search-section-wrapper container ">
         <div className="search-left-section">
           <div className="search-left-section-content ">
             <h3 className="search-heading">Search Results</h3>
@@ -191,7 +191,7 @@ const SearchShowResult = () => {
             </div>
           </div>
         </div>
-        <div className="search-right-section ms-4 w-100">
+        <div className="search-right-section">
           <div className="search-right-section-wrapper">
             <div className="search-right-section-content-wrapper">
               {params.currentSearchTab === "movie" &&

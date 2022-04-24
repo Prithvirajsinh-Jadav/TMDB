@@ -16,3 +16,10 @@
     color: rgba(1,180,228,1) !important;
     background-color: #fff !important;
 }
+
+/* login-content-wrapper */
+@media(max-width: 576px) {
+.login-content-wrapper{
+    padding: 1.5rem;
+}
+}

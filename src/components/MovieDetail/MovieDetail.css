@@ -1,3 +1,8 @@
+.movie-detail-responsive{
+  padding: 1.5rem 0 !important;
+  justify-content:center;
+}
+
 .image-absolute{
       position: absolute;
     z-index: -9;
@@ -121,9 +126,9 @@
   width: 20%;
 }
 
-.right-section {
+.movie-header-right-section{
   width: 100%;
-  /* background-color: red; */
+  padding: 0 3rem;
 }
 
 .movie-title-section {
@@ -184,10 +189,10 @@
   margin: 20px 0;
   padding: 0;
   width: 100%;
-  /* height: 68px; */
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .actions .chart {
@@ -308,7 +313,7 @@
 .movie-detail-wrapper {
   display: flex;
   margin-top: 30px;
-  padding: 0;
+  padding: 0 !important;
 }
 
 .movie-detail-left-section {
@@ -502,7 +507,7 @@
 }
 
 .recommendation-section {
-  padding: 0;
+  padding: 0 !important;
   position: relative;
 }
 
