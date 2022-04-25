@@ -54,3 +54,9 @@ export const GetSearchQueryData = (currentSearchTab, query,page) => {
   const searchQueryUrl = `https://api.themoviedb.org/3/search/${currentSearchTab}?api_key=${process.env.REACT_APP_API_KEY}&query=${query}&page=${page}`;
   return axios.get(searchQueryUrl);
 };
+
+export const GenreKeywordURL = () => {
+   const genreKeywordURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`;
+
+   return axios.get(genreKeywordURL);
+}

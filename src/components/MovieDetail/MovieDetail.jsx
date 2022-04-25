@@ -8,8 +8,12 @@ import MovieDetailRightSection from "../MovieDetailRightSection/MovieDetailRight
 import "./MovieDetail.css";
 import "./ResponsiveDetail.css"
 
+
+
 const MovieDetail = () => {
   const params = useParams(); 
+
+
  
   return (
     <>

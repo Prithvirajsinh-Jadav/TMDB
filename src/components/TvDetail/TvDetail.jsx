@@ -12,10 +12,10 @@ const TvDetail = () => {
   return (
     <>
       <TvDetailHeaderSection id={params.id} />
-      <div className="movie-detail-wrapper container p-0">
+      <div className="movie-detail-wrapper container ">
         <div className="movie-detail-left-section">
           <CastCard id={params.id} isMovie="tv" />
-          <div className="container px-0 current-season mt-5">
+          <div className="container current-season mt-5">
             <div className="current-season-wrapper pt-4">
               <h3>Current Season</h3>
               <CurrentSeasonCard id={params.id} />

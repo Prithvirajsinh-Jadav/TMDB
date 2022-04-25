@@ -11,6 +11,8 @@ const TvDetailHeaderSection = ({ id }) => {
 
   useEffect(() => {
     GetDetails("tv", id).then((response) => setCurrentTvDetail(response.data));
+
+    //  document.title = `${currentTvDetail.name}  - (Tv Series 2022)`;
   }, [id]);
 
   const pColor =
@@ -38,11 +40,11 @@ const TvDetailHeaderSection = ({ id }) => {
               alt=""
               className="image-absolute"
             />
-            <div className="container d-flex text-white py-4">
+            <div className="container d-flex text-white movie-detail-responsive">
               <div className="left-section ">
                 <div className="poster_wrapper ">
                   <div className="poster">
-                    <div className="image_content position-relative">
+                    <div className="detail-image-container position-relative">
                       <img
                         className="image-hover "
                         src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${currentTvDetail.poster_path}`}
@@ -70,7 +72,7 @@ const TvDetailHeaderSection = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div className="right-section px-5 d-flex align-items-center">
+              <div className="movie-header-right-section  d-flex align-items-center">
                 <div className="movie-title-section">
                   <h2>
                     {currentTvDetail.name}{" "}
@@ -84,24 +86,28 @@ const TvDetailHeaderSection = ({ id }) => {
 
                   <div className="facts">
                     <span className="certification">R</span>
+                    {currentTvDetail.genres.length > 0 && (
+                      <span className="genres">
+                        {currentTvDetail.genres &&
+                          currentTvDetail.genres
+                            .map((genreObj) => genreObj.name)
+                            .join(", ")}
+                      </span>
+                    )}
 
-                    <span className="genres">
-                      {currentTvDetail.genres &&
-                        currentTvDetail.genres
-                          .map((genreObj) => genreObj.name)
-                          .join(", ")}
-                    </span>
+                    {currentTvDetail.episode_run_time && (
+                      <span className="runtime">
+                        {currentTvDetail.episode_run_time[0] >= 60
+                          ? Math.floor(
+                              currentTvDetail.episode_run_time[0] / 60
+                            ) + "h "
+                          : ""}
 
-                    <span className="runtime">
-                      {currentTvDetail.episode_run_time >= 60
-                        ? Math.floor(currentTvDetail.episode_run_time / 60) +
-                          "h "
-                        : ""}
-
-                      {currentTvDetail.episode_run_time % 60 < 60
-                        ? (currentTvDetail.episode_run_time % 60) + "m"
-                        : ""}
-                    </span>
+                        {currentTvDetail.episode_run_time[0] % 60 < 60
+                          ? (currentTvDetail.episode_run_time[0] % 60) + "m"
+                          : ""}
+                      </span>
+                    )}
                   </div>
 
                   <ul className="actions">

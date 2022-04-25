@@ -23,7 +23,7 @@ const PopularTV = () => {
                 ? `https://www.themoviedb.org/t/p/w220_and_h330_face${tv.poster_path}`
                 : defaultImage
             }
-            title={tv.original_name}
+            title={tv.name}
             release_date={tv.first_air_date}
             popularity={tv.vote_average * 10}
             isMovie={tv.release_date ? "movie" : "tv"}

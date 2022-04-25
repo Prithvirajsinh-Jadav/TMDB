@@ -28,7 +28,7 @@
 
 .homepage-card img {
   height: 225px;
- 
+  width: 100%;
   border: none;
   border-radius: 8px;
 }

@@ -37,26 +37,30 @@ const SearchRightSection = ({ isMovie, url }) => {
         hasMore={hasMore}
         className="infinite-class"
       >
-        {categoryData.map((categoryObj) => {
-          return (
-            <HomePageCard
-              id={categoryObj.id}
-              key={categoryObj.id}
-              poster_path={
-                categoryObj.poster_path
-                  ? `https://www.themoviedb.org/t/p/w220_and_h330_face/${categoryObj.poster_path}`
-                  : defaultImage
-              }
-              title={categoryObj.name || categoryObj.title}
-              release_date={
-                categoryObj.first_air_date || categoryObj.release_date
-              }
-              popularity={categoryObj.vote_average * 10}
-              className={true}
-              isMovie={categoryObj.first_air_date ? "tv" : "movie"}
-            />
-          );
-        })} 
+        {categoryData.length > 0 ? (
+          categoryData.map((categoryObj) => {
+            return (
+              <HomePageCard
+                id={categoryObj.id}
+                key={categoryObj.id}
+                poster_path={
+                  categoryObj.poster_path
+                    ? `https://www.themoviedb.org/t/p/w220_and_h330_face/${categoryObj.poster_path}`
+                    : defaultImage
+                }
+                title={categoryObj.name || categoryObj.title}
+                release_date={
+                  categoryObj.first_air_date || categoryObj.release_date
+                }
+                popularity={categoryObj.vote_average * 10}
+                className={true}
+                isMovie={categoryObj.first_air_date ? "tv" : "movie"}
+              />
+            );
+          })
+        ) : (
+          <h6   >No results found</h6>
+        )}
       </InfiniteScroll>
     </>
   );

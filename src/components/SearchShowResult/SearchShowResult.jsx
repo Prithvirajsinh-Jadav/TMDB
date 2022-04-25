@@ -77,7 +77,6 @@ const SearchShowResult = () => {
     getSearchData(params.currentSearchTab, selected);
   };
 
-
   const pageCount =
     params.currentSearchTab === "movie"
       ? searchMovieData.total_pages
@@ -207,7 +206,7 @@ const SearchShowResult = () => {
                 ))}
 
               {params.currentSearchTab === "tv" &&
-                searchTvData.results &&
+                searchCollectionData.results &&
                 searchTvData.results.map((currentSearchTvData) => (
                   <SearchShowResultDataCard
                     key={currentSearchTvData.id}
@@ -244,6 +243,17 @@ const SearchShowResult = () => {
                   />
                 ))}
             </div>
+
+            {searchPersonData.results &&
+              searchPersonData.results.length === 0 &&
+              searchCollectionData.results &&
+              searchCollectionData.results.length === 0 &&
+              searchTvData.results &&
+              searchTvData.results.length === 0 &&
+              searchMovieData.results &&
+              searchMovieData.results.length === 0 && (
+                <h6>No results matches your query</h6>
+              )}
             <div className="pagination-wrapper">
               <div
                 className={

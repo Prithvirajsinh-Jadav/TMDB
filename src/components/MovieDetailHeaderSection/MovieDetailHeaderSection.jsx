@@ -5,14 +5,20 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import { GetDetails } from "../../api";
+import defaultImage from "./../../assets/images/fallback-poster-image_6.svg"
 
 const MovieDetailHeaderSection = ({ id }) => {
   const [currentMovieData, setCurrentMovieData] = useState({});
 
   useEffect(() => {
     GetDetails("movie", id).then((response) =>
-      setCurrentMovieData(response.data)
+    setCurrentMovieData(response.data)
     );
+    // document.title = currentMovieData.title
+    //   ? `${currentMovieData.title}  - The Movie Database (TMDB)`
+    //   : "The Movie Database (TMDB)";
+
+    setCurrentMovieData((prevState) => ({...prevState,poster_path : null } ))
   }, [id]);
 
   const pColor =
@@ -33,7 +39,7 @@ const MovieDetailHeaderSection = ({ id }) => {
 
   return (
     <>
-      {currentMovieData.backdrop_path && currentMovieData.poster_path && (
+      {
         <div className="movie-header-section">
           <div className="container-fluid position-relative p-0">
             <img
@@ -45,10 +51,14 @@ const MovieDetailHeaderSection = ({ id }) => {
               <div className="left-section ">
                 <div className="poster_wrapper ">
                   <div className="poster  ">
-                    <div className="image_content position-relative">
+                    <div className="detail-image-container position-relative">
                       <img
-                        className="image-hover "
-                        src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${currentMovieData.poster_path}`}
+                        className="image-hover w-100 h-100"
+                        src={
+                          currentMovieData.poster_path
+                            ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${currentMovieData.poster_path}`
+                            : defaultImage
+                        }
                         alt={currentMovieData.title}
                       />
                       <div className="image-hover-background">
@@ -125,7 +135,10 @@ const MovieDetailHeaderSection = ({ id }) => {
                           })}
                         >
                           <div className="circular_progress_bar_data d-flex">
-                            <span>{currentMovieData.vote_average * 10}</span>
+                            <span>
+                              {currentMovieData.vote_average ? currentMovieData
+                                .vote_average * 10 : 0}
+                            </span>
                             <sup>%</sup>
                           </div>
                         </CircularProgressbarWithChildren>
@@ -207,7 +220,7 @@ const MovieDetailHeaderSection = ({ id }) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </>
   );
 };

@@ -16,6 +16,11 @@ const MovieRecommendationCard = ({ id }) => {
     );
   }, [id]);
 
+   const scrollToTop = () => {
+     window.scrollTo(0, 0);
+   };
+ 
+
   return (
     <div className="recommendation-section container">
       <section className="recommendation-content">
@@ -35,6 +40,7 @@ const MovieRecommendationCard = ({ id }) => {
                     <div
                       className="recommendation-card"
                       key={recommendationMovie.id}
+                      onClick={scrollToTop}
                     >
                       <div className="image_content ">
                         <Link

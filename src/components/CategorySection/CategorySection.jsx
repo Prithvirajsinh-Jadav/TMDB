@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CategorySection.css";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { languages } from "../language";
@@ -12,18 +11,15 @@ import TvCategoryRightSection from "../TvCategoryRightSection/TvCategoryRightSec
 import SearchRightSection from "../SearchRightSection/SearchRightSection";
 import Slider from "@mui/material/Slider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { GenreKeywordURL } from "../../api";
 
 const CategorySection = () => {
   const params = useParams();
 
+  document.title = `${params.category} ${params.isMovie} - The Movie Database (TMDB)`;
+
   useEffect(() => {
-    const API_KEY = process.env.REACT_APP_API_KEY;
-
-    const genreKeywordURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
-
-    axios
-      .get(genreKeywordURL)
-      .then((response) => setGenreList(response.data.genres));
+    GenreKeywordURL().then((response) => setGenreList(response.data.genres));
   }, []);
 
   const [showSortPanel, setShowSortPanel] = useState(false);
@@ -206,6 +202,8 @@ const CategorySection = () => {
     isChecked.tv,
   ]);
 
+
+
   const filterPanelHandler = (event) => {
     if (event.target.id === "sort") {
       setShowSortPanel((prevState) => !prevState);
@@ -275,7 +273,7 @@ const CategorySection = () => {
     setUrl(myCurrentURL);
     setShowSearchSection(true);
 
-    console.log(myCurrentURL);
+  
   };
 
   const userScoreMarks = [
@@ -350,7 +348,9 @@ const CategorySection = () => {
   return (
     <div className="category-wrapper container d-flex my-4 flex-column ">
       <div className="category-title mt-2">
-        <h2>Popular Movies</h2>
+        <h2>
+          {(params.category).toUpperCase()} {(params.isMovie).toUpperCase()}
+        </h2>
       </div>
       <div className="d-flex mt-2 category-responsive">
         <div className="left-category-section w-20 ">
@@ -869,7 +869,7 @@ const CategorySection = () => {
           </div>
         </div>
 
-        <div className="right-category-section w-80 h-100">
+        <div className="right-category-section w-80 h-100 mx-auto">
           {!showSearchSection ? (
             params.isMovie === "movie" ? (
               <MovieCategoryRightSection category={params.category} url={url} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CurrentSeasonCard.css";
 import { GetDetails } from "../../api";
+import defaultImage from "./../../assets/images/fallback-poster-image_6.svg"
 
 const CurrentSeasonCard = ({ id }) => {
   const [tvDetail, setTvDetail] = useState([]);
@@ -17,9 +18,10 @@ const CurrentSeasonCard = ({ id }) => {
           <div className="current-image-container">
             <img
               className="season-image "
-              src={`https://www.themoviedb.org/t/p/w130_and_h195_bestv2/t/p/w130_and_h195_bestv2${
+              src={tvDetail.seasons.slice(-1)[0]
+                .poster_path ? `https://www.themoviedb.org/t/p/w130_and_h195_bestv2/t/p/w130_and_h195_bestv2${
                 tvDetail.seasons.slice(-1)[0].poster_path
-              }`}
+              }` : defaultImage}
               alt={`${tvDetail.title}`}
             />
           </div>
