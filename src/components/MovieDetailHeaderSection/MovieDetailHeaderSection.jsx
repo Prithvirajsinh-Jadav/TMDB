@@ -6,9 +6,11 @@ import {
 } from "react-circular-progressbar";
 import { GetDetails } from "../../api";
 import defaultImage from "./../../assets/images/fallback-poster-image_6.svg"
+import CircularProgress from "@mui/material/CircularProgress";
 
 const MovieDetailHeaderSection = ({ id }) => {
   const [currentMovieData, setCurrentMovieData] = useState({});
+   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     GetDetails("movie", id).then((response) =>
@@ -18,7 +20,8 @@ const MovieDetailHeaderSection = ({ id }) => {
     //   ? `${currentMovieData.title}  - The Movie Database (TMDB)`
     //   : "The Movie Database (TMDB)";
 
-    setCurrentMovieData((prevState) => ({...prevState,poster_path : null } ))
+    // setCurrentMovieData((prevState) => ({...prevState,poster_path : null } ))
+    setIsLoading(false)
   }, [id]);
 
   const pColor =
@@ -37,7 +40,13 @@ const MovieDetailHeaderSection = ({ id }) => {
       ? "#ff000054"
       : "#565a5b";
 
-  return (
+  return isLoading &&
+    !currentMovieData.backdrop_path &&
+    !currentMovieData.poster_path ? (
+    <div className="d-flex align-items-center justify-content-center w-100 h-100 m-5 p-5">
+      <CircularProgress />
+    </div>
+  ) : (
     <>
       {
         <div className="movie-header-section">
@@ -136,8 +145,9 @@ const MovieDetailHeaderSection = ({ id }) => {
                         >
                           <div className="circular_progress_bar_data d-flex">
                             <span>
-                              {currentMovieData.vote_average ? currentMovieData
-                                .vote_average * 10 : 0}
+                              {currentMovieData.vote_average
+                                ? currentMovieData.vote_average * 10
+                                : 0}
                             </span>
                             <sup>%</sup>
                           </div>

@@ -1,5 +1,5 @@
 .customNavBar {
-  height: 64px;
+  height: 60px;
 }
 
 .navbar-brand img {
@@ -92,17 +92,18 @@
   background-color: rgb(227, 227, 227, 0.5);
 }
 
-@media (max-width: 992px) {
- 
-
-  .custom-navbar {
+@media (max-width: 1400px) {
+  .custom-navbar {  
     max-width: 100% !important;
   }
-
   .navbar {
-    padding: 0 1rem !important;
+    padding: 0.5rem 1rem !important;
   }
 
+}
+
+@media (max-width: 992px) {
+ 
   .show {
     display: flex;
     flex-direction: column;
