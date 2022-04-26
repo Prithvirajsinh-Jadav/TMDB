@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { GetDetails } from "../../api";
 import TvKeywordComponent from "../TvKeywordComponent/TvKeywordComponent";
+import ShimmerKeyword from "../ShimmerMovieDetail/ShimmerKeyword";
 
 const TvDetailRightSection = ({ id }) => {
   const [currentTvData, setCurrentTvData] = useState({});
+      const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
-    GetDetails("tv", id).then((response) => setCurrentTvData(response.data));
+    setCurrentTvData({});
+
+     const getData = async () => {
+       await GetDetails("tv", id).then((response) =>
+         setCurrentTvData(response.data)
+       );
+
+       setIsLoading(true);
+     };
+
+     getData();
+     setIsLoading(false);
+
   }, [id]);
 
-  // console.log(currentTvData.network[0].logo_path);
 
-  return (
+  return !isLoading ? (
+    <ShimmerKeyword />
+  ) : (
     <>
       <div className="social-link-container">
         <div>

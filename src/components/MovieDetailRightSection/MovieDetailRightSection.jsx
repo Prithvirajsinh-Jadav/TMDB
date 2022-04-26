@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { GetDetails } from "../../api";
 import MovieKeywordComponent from "../MovieKeywordComponent/MovieKeywordComponent";
-
+import ShimmerKeyword from "../ShimmerMovieDetail/ShimmerKeyword";
 const MovieDetailRightSection = ({ id }) => {
   const [currentMovieData, setCurrentMovieData] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
-    GetDetails("movie", id).then((response) =>
-      setCurrentMovieData(response.data)
-    );
+    setCurrentMovieData({});
+
+     const getData = async () => {
+       await GetDetails("movie", id).then((response) =>
+         setCurrentMovieData(response.data)
+       );
+       setIsLoading(true);
+     };
+
+     getData();
+     setIsLoading(false);
+   
   }, [id]);
 
-  return (
+  return !isLoading ? (
+    <ShimmerKeyword />
+  ) : (
     <>
       <div className="social-link-container">
         <div>

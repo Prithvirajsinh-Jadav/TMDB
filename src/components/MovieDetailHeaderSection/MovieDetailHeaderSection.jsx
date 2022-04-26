@@ -5,23 +5,23 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import { GetDetails } from "../../api";
-import defaultImage from "./../../assets/images/fallback-poster-image_6.svg"
-import CircularProgress from "@mui/material/CircularProgress";
+import defaultImage from "./../../assets/images/fallback-poster-image_6.svg";
+import ShimmerMovieHeaderDetail from "./../ShimmerMovieDetail/ShimmerMovieHeaderDetail";
 
 const MovieDetailHeaderSection = ({ id }) => {
   const [currentMovieData, setCurrentMovieData] = useState({});
-   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    GetDetails("movie", id).then((response) =>
-    setCurrentMovieData(response.data)
-    );
-    // document.title = currentMovieData.title
-    //   ? `${currentMovieData.title}  - The Movie Database (TMDB)`
-    //   : "The Movie Database (TMDB)";
-
-    // setCurrentMovieData((prevState) => ({...prevState,poster_path : null } ))
-    setIsLoading(false)
+    setCurrentMovieData({});
+      const getData = async () => {
+       await GetDetails("movie", id).then((response) =>
+         setCurrentMovieData(response.data)
+       );
+      setIsLoading(true)
+      }
+      getData();
+    setIsLoading(false);
   }, [id]);
 
   const pColor =
@@ -40,19 +40,19 @@ const MovieDetailHeaderSection = ({ id }) => {
       ? "#ff000054"
       : "#565a5b";
 
-  return isLoading &&
-    !currentMovieData.backdrop_path &&
-    !currentMovieData.poster_path ? (
-    <div className="d-flex align-items-center justify-content-center w-100 h-100 m-5 p-5">
-      <CircularProgress />
-    </div>
+  return !isLoading ? (
+    <ShimmerMovieHeaderDetail />
   ) : (
     <>
       {
         <div className="movie-header-section">
           <div className="container-fluid position-relative p-0">
             <img
-              src={`https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${currentMovieData.backdrop_path}`}
+              src={
+                currentMovieData.backdrop_path
+                  ? `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${currentMovieData.backdrop_path}`
+                  : ""
+              }
               alt=""
               className="image-absolute"
             />
@@ -94,9 +94,9 @@ const MovieDetailHeaderSection = ({ id }) => {
               </div>
               <div className="movie-header-right-section  d-flex align-items-center">
                 <div className="movie-title-section">
-                  <h2>
+                  <h2 className="d-flex">
                     {currentMovieData.title}{" "}
-                    <span className="release_year">
+                    <span className="release_year d-flex">
                       (
                       {currentMovieData.release_date &&
                         currentMovieData.release_date.slice(0, 4)}
@@ -108,9 +108,10 @@ const MovieDetailHeaderSection = ({ id }) => {
                     <span className="certification">R</span>
 
                     <span className="release">
-                      {new Date(
-                        currentMovieData.release_date
-                      ).toLocaleDateString("en-IN")}
+                      {currentMovieData.release_date &&
+                        new Date(
+                          currentMovieData.release_date
+                        ).toLocaleDateString("en-IN")}
                       (IN)
                     </span>
 

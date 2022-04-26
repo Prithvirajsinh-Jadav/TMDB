@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
-import {Link} from "react-router-dom"
 import { GetWatchProvider } from '../../api';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const WatchProvider = ({id,isMovie}) => {
 
@@ -32,13 +33,15 @@ const WatchProvider = ({id,isMovie}) => {
 
     },[])
 
-  return (
+  return  (
     <>
       {Object.keys(watchProvider).length !== 0 && (
         <div className="ott_offer">
           <div className="text_wrapper">
             <div className="movie-provider">
+            
               <img
+                className="bg-grey"
                 src={watchProvider.providerLogo}
                 width="36"
                 height="36"
@@ -49,13 +52,13 @@ const WatchProvider = ({id,isMovie}) => {
               <span>
                 <h6 className="now-streaming">{watchProvider.watchText}</h6>
                 <h6 className="watch-now">
-                  <Link
+                  <span
                     className="no_click"
                     to="/"
                     title={`Now streaming on ${watchProvider.providerName}`}
                   >
                     Watch Now
-                  </Link>
+                  </span>
                 </h6>
               </span>
             </div>

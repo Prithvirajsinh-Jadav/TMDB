@@ -5,14 +5,27 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import { GetDetails } from "../../api";
+import ShimmerMovieHeaderDetail from "./../ShimmerMovieDetail/ShimmerMovieHeaderDetail";
+
 
 const TvDetailHeaderSection = ({ id }) => {
   const [currentTvDetail, setCurrentTvDetail] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
-    GetDetails("tv", id).then((response) => setCurrentTvDetail(response.data));
+    setCurrentTvDetail({});
 
-    //  document.title = `${currentTvDetail.name}  - (Tv Series 2022)`;
+      const getData = async () => {
+        await GetDetails("tv", id).then((response) =>
+          setCurrentTvDetail(response.data)
+        );
+        setIsLoading(true);
+      };
+      getData();
+      setIsLoading(false);
+
+
   }, [id]);
 
   const pColor =
@@ -30,7 +43,9 @@ const TvDetailHeaderSection = ({ id }) => {
       : currentTvDetail.popularity !== 0
       ? "#ff000054"
       : "#565a5b";
-  return (
+  return !isLoading ? (
+    <ShimmerMovieHeaderDetail />
+  ) : (
     <>
       {currentTvDetail.backdrop_path && currentTvDetail.poster_path && (
         <div className="movie-header-section">

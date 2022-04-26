@@ -15,7 +15,7 @@ const ReviewCard = ({
         <div className="review-top-section">
           <div className="avatar">
             <span>
-              <img src={authorImage} alt={author} />
+              <img className="bg-grey" src={authorImage} alt={author} />
             </span>
           </div>
 

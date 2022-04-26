@@ -3,7 +3,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import SearchShowResult from "./components/SearchShowResult/SearchShowResult.jsx";
+import SearchShowResult from "./components/SearchShowResult/SearchShowResult";
+import ShimmerKeyword from "./components/ShimmerMovieDetail/ShimmerKeyword";
 
 const NavBar = lazy(() =>
   import("./components/Components.jsx").then((module) => ({
@@ -107,6 +108,7 @@ const App = () => {
             <Route path="/:isMovie/:category" element={<CategorySection />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/shimmer" element={<ShimmerKeyword />} />
             <Route
               path="/search/:currentSearchTab"
               element={<SearchShowResult />}
